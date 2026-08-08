@@ -1,0 +1,740 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../1p.expressSimple/">
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Introducció a ExpressJS - Webservices amb ExpressJS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccio" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Webservices amb ExpressJS" class="md-header__button md-logo" aria-label="Webservices amb ExpressJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Webservices amb ExpressJS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducció a ExpressJS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Webservices amb ExpressJS" class="md-nav__button md-logo" aria-label="Webservices amb ExpressJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Webservices amb ExpressJS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a Express
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a Express
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-protocol-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      El protocol HTTP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El protocol HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missatges-destat-o-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missatges d'estat o error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipus-mime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipus MIME
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-pixen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack PIXEN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p.expressSimple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Servidor web amb Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.ExpressRutas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Express. Adreçament, programari intermedi i API REST
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.MVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MVC del costat del servidor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.Https_JWT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Comunicacions segures. HTTPS i JWT.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.ExpressMongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Accés a BBDD MongoDB. Mongoose.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-protocol-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      El protocol HTTP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El protocol HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missatges-destat-o-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missatges d'estat o error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipus-mime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipus MIME
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-pixen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack PIXEN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>1. Introducció a Express</h1>
+
+<h2 id="introduccio">Introducció</h2>
+<p>En 1989 Tim Berners Lee i Robert Cailiau van idear per al CERN un sistema per a accedir a la seua informació, organitzat en una xarxa de documents enllaçats. Per a això es requeria un sistema de representació aquests documents (el que va donar origen a HTML), i un protocol per a la seua transferència a través de la xarxa (el que va donar origen a HTTP). Dos anys més tard es va fer públic en Internet, i en 1992 ja disposava de 26 servidors estables fora del CERN, xifra que va començar a créixer espectacularment des de llavors.</p>
+<p>En els seus inicis, la web consistia en una col·lecció de documents estàtics enllaçats entre ells, que podíem consultar o descarregar. Posteriorment, els continguts van passar de ser pàgines estàtiques a documents generats dinámicaments, mitjançant llenguatges com PHP, ASP o JSP.</p>
+<p>Un dels enfocaments més populars per al desenvolupament, ja no de llocs web, sinó d'aplicacions web és LAMP, sigles de Linux+Apache+MySQL+PHP, fent referència al sistema operatiu de base (Linux), el servidor web (Apache), la base de dades (MySQL) i el llenguatge de programació (PHP).</p>
+<p>Des dels seus inicis, l'accés tant a llocs com a aplicacions web, requereix d'una aplicació especialitzada: El navegador web, que és l'aplicació encarregada de realitzar les connexions al servidor mitjançant HTTP, i de <em>renderitzar</em> els documents HTML per a la seua correcta visualització.</p>
+<p>L'evolució natural d'aquests sistemes va donar pas a les aplicacions de tipus SPA (Single Page Applicacions), que no requerien tant de processament en el servidor, i que proporcionen una millor experiència d'usuari. Es tracta d'aplicacions que únicament disposen d'una pàgina principal, i carreguen les parts dinàmiques del seu contingut de manera asíncrona. Aquestes parts, generalment suposen informació expressada en llenguatges de marcat com XML o JSON.</p>
+<p>En els últims anys l'aplicació dels principis SOLID d'arquitectura de programari ha incidit en el desenvolupament de sistemes. Concretament el principi de segregació d'interfície (ISP), que promou la creació d'interfícies el més simples possibles, ha facilitat la comunicació amb els servidors web, no només per a navegadors, sinó també per a dispositius mòbils.</p>
+<p>En resum. Actualment, els servidors web, ja no només tenen la funció de <em>servir</em> documents web, sinó que, suposen una forma d'accés a la informació per a tota mena d'aplicacions, ja siguen web o mòbils. L'únic requisit és que siguen capaços de comunicar-se a través del protocol HTTP.</p>
+<h2 id="el-protocol-http">El protocol HTTP</h2>
+<p>El protocol HTTP original escrit per Tim Berners Lee en 1991 és la versió 0.9, en desús actualment. Hui dia estan vigents els protocols HTTP/1.0 (<em>RFC 1945, any 1996), l'HTTP/1.1 (</em>RFC 2616, 1999) i l'HTTP/2 (*RFC 7540, 2015).</p>
+<p>El protocol HTTP és un protocol simple, orientat a la connexió i sense estat:</p>
+<ul>
+<li><strong>Protocol orientat a la connexió</strong>: utilitza TCP per a establir un canal de comunicacions d'extrem a extrem.</li>
+<li><strong>Sense estat</strong>: Cada transferència de dades és una connexió independent de l'anterior, sense cap relació. Per exemple, quan s'envia una pàgina web, la pàgina, les imatges i la resta de components usen diferents connexions. Per a recordar accions anteriors poden usar-se diferents mecanismes com les cookie, sessions o tokens.</li>
+</ul>
+<p>HTTP no xifra el trànsit. HTTPS és HTTP sobre <strong>TLS</strong>, que aporta confidencialitat, integritat i autenticació del servidor mitjançant certificats. El terme SSL és històric: les versions SSL estan obsoletes i no s'han d'usar.</p>
+<p>El funcionament bàsic del protocol HTTP és el següent:</p>
+<ol>
+<li>El client estableix una connexió TCP amb el servidor pel port 80 (generalment).</li>
+<li>El client envia una ordre HTTP de petició d'un recurs, juntament amb capçaleres informatives.</li>
+<li>El servidor respon amb les dades sol·licitades i capçaleres informatives. En HTTP 1.0, es tanca la connexió, mentre que en versions posteriors, es manté oberta per a millorar l'eficiència.</li>
+</ol>
+<p>Les principals operacions que suporta el protocol HTTP són:</p>
+<ul>
+<li><strong>GET</strong>: S'usa per a obtindre recursos del servidor.</li>
+<li><strong>POST</strong>: Envia una representació al servidor perquè la processe, sovint per a crear un recurs subordinat o executar una operació. Les dades solen anar en el cos de la petició.</li>
+<li><strong>HEAD</strong>: Similar a <em>GET</em> però només demana la capçalera de la pàgina. S'usa per a obtindre informació sobre un recurs.</li>
+<li><strong>PUT</strong> i <strong>DELETE</strong> per a crear o eliminar recursos,</li>
+<li><strong>UPDATE</strong> per a actualitzar algun recurs.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Amb les peticions de tipus GET ja ens familiaritzem quan utilitzem la classe URL en la unitat de comunicació entre processos per a descarregar el contingut d'un recurs web. Podem veure aquest tipus de connexions quan fem un monitoratge de les connexions de xarxa en el navegador web.</p>
+</div>
+<p>Vegem un xicotet exemple per a la petició:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>GET https://node-comarques-rest-server-production.up.railway.app/api/provincies
+</span></code></pre></div>
+<ul>
+<li>Capçalera de la sol·licitud:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>GET /api/provincies HTTP/2
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Host: node-comarques-rest-server-production.up.railway.app
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Accept-Language: ca,en-US;q=0.7,en;q=0.3
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Accept-Encoding: gzip, deflate, br
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Connection: keep-alive
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Cookie: ...
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Upgrade-Insecure-Requests: 1
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Sec-Fetch-Dest: document
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Sec-Fetch-Mode: navigate
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Sec-Fetch-Site: cross-site
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Pragma: no-cache
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Cache-Control: no-cache
+</span></code></pre></div>
+<ul>
+<li>Capçalera de la resposta:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HTTP/2 200 OK
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>x-powered-by: Express
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>access-control-allow-origin: *
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>access-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>content-type: application/json; charset=utf-8
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>content-length: 35
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>etag: W/&quot;23-uwAxN9FZw6vTZFUcZAImwH1rv8w&quot;
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>date: Mon, 26 Dec 2022 09:06:02 GMT
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>x-envoy-upstream-service-time: 2
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>server: railway
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>X-Firefox-Spdy: h2
+</span></code></pre></div>
+<ul>
+<li>Resposta:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[&quot;València&quot;,&quot;Alacant&quot;,&quot;Castelló&quot;]
+</span></code></pre></div>
+<h3 id="missatges-destat-o-error">Missatges d'estat o error</h3>
+<p>La primera línia de la resposta HTTP que ens retorna el servidor, a més de la versió, conté el codi d'estat o d'error. Aquests codis s'identifiquen amb números de tres xifres, i es classifiquen en cinc grups:</p>
+<ul>
+<li>Missatges informatius: 1xx</li>
+<li>Missatges d'èxit de la sol·licitud: 2xx</li>
+<li>Missatges per *redirigir la sol·licitud: 3xx</li>
+<li>Missatges d'error generats pel client: 4xx</li>
+<li>Missatges d'error generats al servidor: 5xx</li>
+</ul>
+<h3 id="tipus-mime">Tipus MIME</h3>
+<p>Els tipus MIME, també conegut com a tipus de mitjà o contingut, són estàndard que descriuen com un programa ha de transferir qualsevol arxiu no codificat en ASCII a través d'Internet. Es tracta d'un identificador format per dues parts: el tipus i el subtipus.Encara que HTTP utilitza els <em>tipus MIME</em> en les capçaleres amb diferents finalitats, l'ús que farem d'aquests serà per a conéixer els tipus de dades que està transferint el servidor, mitjançant el camp <code>content-type</code> en la capçalera.</p>
+<p>Podem consultar la <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">llista completa de tipus MIME en la pàgina de desenvolupadors de Mozilla</a>. Alguns dels tipus que més usarem seran:</p>
+<ul>
+<li><code>text/plain</code>, el valor per defecte per als arxius de tipus text pla,</li>
+<li><code>text/html</code>, per a arxius HTML,</li>
+<li><code>application/json</code>, per a format d'arxius JSON,</li>
+<li><code>image/*</code>, per a qualsevol arxiu de tipus imatge,</li>
+</ul>
+<h2 id="stack-pixen">Stack PIXEN</h2>
+<p>Com comentem en la introducció a Javascript, aquest llenguatge ha passat de ser una via per a la validació de formularis a un llenguatge per al desenvolupament de qualsevol mena d'aplicació, portant-lo a totes les capes de desenvolupament, tant del costat del client com del servidor i l'emmagatzematge.</p>
+<p>El conjunt de tecnologies que utilitzen Javcascript parell aquests desenvolupaments <em>fullstack</em> es coneix com MEAN, acrònim de les quatre tecnologies principals: MongoDB, Express, Angular i Node.js:</p>
+<ul>
+<li>
+<p><strong>Node.js</strong>: Com ja sabem, es tracta d'un entorn d'execució d'aplicacions multiplataforma i de codi obert basat en Javascript. Internament utilitza el motor de Javascriot V8 de Google, oferint una arquitectura orientada a esdeveniments i diverses APIs asíncrones, que li proporcionen un alt rendiment i escalabilitat.</p>
+</li>
+<li>
+<p><strong>Express</strong>: Encara que Node.js inclou de manera nativa un mòdul per al protocol HTTP, amb el qual, com ja hem vist podem crear aplicacions client que facen peticions web, però també aplicacions del costat del servidor. No obstant això, es tracta d'un procés una miqueta complex i costós, atés que es tracta d'una funcionalitat de bastant baix nivell. Per al desenvolupament d'aplicacions web de forma relativament fàcil, va nàixer Express, un framework desenvolupat en Javascript per a Node.js que suporta les principals necessitats d'aquesta mena d'aplicacions: gestió de peticions, respostes, capçaleres, rutes o vistes.</p>
+</li>
+<li>
+<p><strong>Angular</strong>: En el costat del client, encara que només podríem funcionar amb HTML, Javascript i CSS, han sorgit multitud de biblioteques i frameworks que agiliten el desenvolupament d'aplicacions. D'entre totes elles, potser una de les més populars ha sigut Angular, que trasllada el patró de disseny MVC al desenvolupament front-end.</p>
+</li>
+<li>
+<p><strong>MongoDB</strong>: Encara que l'emmagatzematge de dades tradicionalment s'ha realitzat mitjançant bases de dades relacionals, el tipus d'informació que solen requerir les aplicacions web requereixen d'una major flexibilitat i escalabilitat. Com a resposta a aquestes demandes va sorgir el moviment NoSQL. Encara que el terme NoSQL abasta diversos tipus de tecnologies, en molts casos s'usa Javascript, o concretament la notació JSON tant per a l'emmagatzematge com per a l'intercanvi d'informació. El cas més destacat en aquest grup és MongoDB.</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

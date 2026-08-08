@@ -1,0 +1,139 @@
+:root{
+    --md-default-fg-color--lighter: #d1e0ff !important; /* Blau clar */
+    --md-primaty-fg-color: #d1e0ff !important;
+    --md-accent-fg-color:  #5c6bc0; /* Índigo mitjà */
+
+    /* Personalitzats */ 
+
+    --text-defecte-color: #283593; /* Índigo fosc */
+    --fons-clar: #e9e8f6; /* Blanc amb to índigo */
+    --text-mitja:  #5c6bc0; /* Índigo mitjà */
+    --text-fosc: #1a237e; /* Índigo intens */
+    --text-amber: #ffb300; /* Àmbar viu */
+    /*--fons-amber: #e8eaf6; /* Fons àmbar clar */
+}
+
+body {
+    font-family: "Lato", Trebuchet MS, Arial, Helvetica, sans-serif;
+    color: var(--text-defecte-color);
+    text-align: justify;
+}
+
+/*Capçalera, titols, barra de cerca */
+
+.md-header {
+    margin: 0px;
+    height: 100px !important;
+    flex: 0 1 100%;
+    padding: 1em;
+    background-color: var(--fons-clar) !important;
+    background-image: url(bgmaterial.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    /*border-bottom: 1px solid var(--text-mitja) !important;*/
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0.2rem, rgba(0, 0, 0, 0.2) 0px 0.2rem 0.4rem;
+    color: var(--text-fosc);
+    font-family: 'Lato';
+}
+
+.md-header h1 {
+    text-transform: capitalize;
+    margin: 25px;
+    border-bottom: none;
+}
+
+/* Quadre de búsqueda */
+
+.md-search {
+    border-radius: 15px !important;
+    background: transparent;
+}
+
+.md-search__input {
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 15px !important;
+    border: 1px solid var(--text-mitja);
+    color: var(--text-mitja);
+}
+
+.md-search__icon svg {
+    fill: var(--text-mitja);
+}
+
+.md-search__input::placeholder {
+    color: var(--text-mitja) !important;
+}
+
+.md-search__form {
+    background-color: transparent;
+}
+
+/* Barres de navegació */ 
+
+.md-sidebar {
+    text-align: left !important;
+    /*background-color: var(--fons-car) !important; /* Fons àmbar clar */
+}
+
+/* Barra esquerra */
+
+.md-nav--primary .md-nav__item {
+    background-color: var(--fons-clar); /* Fons àmbar clar */
+    color: #283593; /* Índigo fosc */
+    background-size: contain;
+    border-color: #ffffff;
+    display: block;
+    padding: 8px 10px 8px 20px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+}
+
+
+a:hover {
+    color: var(--text-fosc) !important; /* Àmbar viu */
+}
+
+.md-nav__item--active {
+    border-left: 5px solid var(--text-fosc) !important; /* Àmbar viu */
+    font-weight: bold;
+    /*background-image: url(bgbutton.png);
+    background-repeat: no-repeat;*/
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__link--active {
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__title {
+    box-shadow: none !important;
+    color: var(--text-fosc);
+    font-size: 1.5em;
+}
+
+.md-sidebar__scrollwrap {
+    scrollbar-color: var(--text-fosc) !important;
+}
+
+.md-sidebar__scrollwrap:hover {
+    scrollbar-color: var(--text-fosc) !important;
+}
+
+/* Imatges centrades */
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Cambiar color solo al enlace del Índex Curs */
+.md-nav__link[href="https://jbonache.github.io/EDD/"] {
+  color:  mediumvioletred !important;       /* texto */
+/*  font-weight: bold; */
+}
+
+.md-nav__link[href="https://jbonache.github.io/EDD/"]:hover {
+  color: deepPink !important;
+

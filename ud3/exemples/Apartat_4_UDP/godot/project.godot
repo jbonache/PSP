@@ -1,0 +1,10 @@
+; Projecte mínim per validar i reutilitzar el client UDP amb Godot 4.
+config_version=5
+
+[application]
+
+config/name="Exemple UDP PSP"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"

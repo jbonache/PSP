@@ -1,0 +1,55 @@
+Indica la afirmación que es FALSA
+{
+    ~OutputStream getOutputStream() devuelve el flujo de salida conectado a la entrada estándard del proceso.
+    ~InputStream getInputStream() devuelve el flujo de entrada conectado a la salida estándar del proceso.
+    ~InputStream getErrorStream() devuelve el flujo de entrada conectado a la salida de error del proceso.
+    =OutputStream getErrorStream() devuelve el flujo de entrada conectado a la salida de error del proceso.
+}
+
+::Siendo p un proceso obtenido tras ejecutar el método start() de ProcessBuilder...::
+Mediante p.getInputStream(); obtenemos un stream del que podemos leer directamene las líneas de la salida{F}
+
+::Siendo p un proceso obtenido tras ejecutar el método start() de ProcessBuilder...::
+Mediante p.getInputStream(); obtenemos un stream de bytes conectado a la salida estándar del proceso{T}
+
+::Siendo p un proceso obtenido tras ejecutar el método start() de ProcessBuilder...::
+La clase InputStreamReader permite leer los bytes de un InputStream en líneas que podemos leer directamente.{F}
+
+::Siendo p un proceso obtenido tras ejecutar el método start() de ProcessBuilder...::
+La clase InputStreamReader permite leer los bytes de un InputStream, codificándolos como caracteres{T}
+
+::Siendo p un proceso obtenido tras ejecutar el método start() de ProcessBuilder...::
+La clase BufferedReader recubre a InputStreamReader, ofreciendo el método readLine() para  leer líneas completas{T}.
+
+¿Qué deberíamos hacer si queremos enviar la salida de un proceso a un fichero a través de los streams?
+{
+    =Crear un objeto de tipo File, y utilizar los decoradores FileWriter y BufferedWriter para escribir en él las líneas que obtenemos de la salida del proceso.
+    ~Debemos indicar que p.OutputStream=new File(“nombre Fichero”) 
+    ~Crear un objeto de tipo File, y utilizar los decoradores FileReader y BufferedReader para redirigir las líneas que obtenemos de la salida del proceso.
+    ~Invocar el programa en Java y utilizar una redirección > del sistema 
+    ~No es posible volcar la salida de un proceso a un fichero.
+}
+
+::Respecto a los valores que puede tomar ProcessBuilder.Redirect para redirigir las salidas y entradas de ProcessBuilder...::
+ProcessBuilder.Redirect.PIPE conecta la E/S con el proceso Java actual mediante un fichero.{F}
+
+::Respecto a los valores que puede tomar ProcessBuilder.Redirect para redirigir las salidas y entradas de ProcessBuilder...::
+ProcessBuilder.Redirect.INHERIT indica que el subproceso de E/S tendrá los mismos flujos que E/S que el proceso actual{T}
+
+::Respecto a los valores que puede tomar ProcessBuilder.Redirect para redirigir las salidas y entradas de ProcessBuilder...::
+ProcessBuilder.Redirect.DISCARD envía la salida del proceso a /tmp.{F}
+
+::Respecto a los valores que puede tomar ProcessBuilder.Redirect para redirigir las salidas y entradas de ProcessBuilder...::
+Mediante Redirect.to() podemos enviar la salida directamente a un fichero{T}
+
+::Respecto a los valores que puede tomar ProcessBuilder.Redirect para redirigir las salidas y entradas de ProcessBuilder...::
+Mediante Redirect.from() podemos redirigir la entrada desde cualquier otra fuente{F}
+
+¿Qué instrucción utilizaremos para añadir al final de un archivo la salida de un proceso?
+{
+    ~pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);  
+    ~pb.redirectOutput(ProcessBuilder.Redirect.to(fichero));
+    =pb.redirectOutput(ProcessBuilder.Redirect.appendTo(fichero));
+    ~pb.redirectOutput(ProcessBuilder.Redirect.FILE;  
+    ~pb.redirectOutput(ProcessBuilder.Redirect.PIPE(fichero);  
+}

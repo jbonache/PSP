@@ -1,0 +1,706 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../2.IntroJS/">
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Introducció a Node.js - Programació concurrent amb NodeJS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccio" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Programació concurrent amb NodeJS" class="md-header__button md-logo" aria-label="Programació concurrent amb NodeJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programació concurrent amb NodeJS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducció a Node.js
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Programació concurrent amb NodeJS" class="md-nav__button md-logo" aria-label="Programació concurrent amb NodeJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Programació concurrent amb NodeJS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a Node.js
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a Node.js
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducció">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evolucio-de-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evolució de Javascript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteristiques-principals-de-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Característiques principals de Nodejs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-podem-trobar-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      On podem trobar Node.js?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primers-passos-amb-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primers passos amb Node.js
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Primers passos amb Node.js">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instal·lació
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hola-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hola Node
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.IntroJS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. El llenguatge JavaScript
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.PrgAsinc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Programació asíncrona
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.HTTP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. HTTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducció">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evolucio-de-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evolució de Javascript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteristiques-principals-de-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Característiques principals de Nodejs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-podem-trobar-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      On podem trobar Node.js?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primers-passos-amb-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primers passos amb Node.js
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Primers passos amb Node.js">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instal·lació
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hola-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hola Node
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>1. Introducció a Node.js</h1>
+
+<h2 id="introduccio">Introducció</h2>
+<p>Nodejs és un runtime o entorn a execució construït sobre el motor Javascript V8 de Google Chrome, i que ens permet fer ús d'aquest llenguatge per a desenvolupar qualsevol tipus d'aplicació, constituyendose com un entorn fullstack (<em>frontend</em> i <em>backend</em>) complet. A més, en tractar-se d'un llenguatge lligat inicialment al món web, tenim la possibilitat de crear aplicacions d'escriptori o mòbils usant tecnologíes com HTML5 i CSS.</p>
+<p>Al lloc Octoverse (https://octoverse.github.com/) creat per Github, es mostra un informe anual de les tendències quant a desenvolupament de programari lliure, realitzat a través dels milions de projectes que s'allotgen en aquest portal. En aquest informe, podem veure com Javascript és des de lluny el llenguatge que més projectes de programari lliure utilitzen, seguit de Python en segon lloc i de Java en tercer.</p>
+<p><a class="glightbox" href="../img/github_trends.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Tendències en llenguatges de programació" src="../img/github_trends.png" width="400px" /></a></p>
+<div class="admonition note">
+<p class="admonition-title">Documentació oficial</p>
+<p>Lloc web oficial amb la documentació de Node.js: <a href="https://Node.js.org/en/docs/">https://Node.js.org/en/docs/</a></p>
+</div>
+<h3 id="evolucio-de-javascript">Evolució de Javascript</h3>
+<p>La primera versió de Javascript va ser dissenyada el 1995 per Netscape, amb la intenció de donar inicialment capacitat als navegadors per a la validació de formularis, sense necessitat d'enviar les dades al servidor per a ser validades en temps on la velocitat en les comunicacions era molt limitada. Aquesta primera versió, inicialment anomenada LiveScript, va passar a nomenar-se javaScript per pur màrqueting (java estava de moda en l'època).</p>
+<p>L'any 1997 s'estandaritza el llenguatge, donant lloc a la norma ECMA-262 ( European Computer Manufacturers Association), conegut com ECMAScript. L'ISO va adoptar l'ECMA-262 donant lloc a l'estàndard ISO/IEC-16262.</p>
+<p>Des de llavors, el llenguatge ha anat evolucionant i guanyant en capacitat, sent la versió ES6 (EcmaScript 2015) la que majors canvis va suposar, amb la introducció d'àmbits per a les variables, string templates, funciones fletxa, desestructuració, i sobredo, les classes i les promeses.</p>
+<h3 id="caracteristiques-principals-de-nodejs">Característiques principals de Nodejs</h3>
+<p>Entre les característiques de Node.js, podríem destacar:</p>
+<ul>
+<li>Ofereix un paradigma de <strong>programació basada en esdeveniments</strong>, a través d'una <strong>API asíncrona</strong> que no bloqueja el programa principal mentre espera una resposta, sinò que segueix l'execució principal fins que es rep la resposta.</li>
+<li>L'execució de codi és molt ràpida,</li>
+<li>Es basa en un <strong>model monohilo molt escalable</strong>: Únicament hi ha un fil d'execució atenent peticions, però que gràcies a l'API asíncrona i dirigida per esdeveniments, es poden atendre múltiples peticions per aquest fil, arribant a consumir molts menys recursos que un sistema multifil.</li>
+<li>Com que l'execució no es realitza dins del navegador, s'elimina la necessitat de desenvolupar codi compatible amb cada navegador.</li>
+</ul>
+<h3 id="on-podem-trobar-nodejs">On podem trobar Node.js?</h3>
+<p>Nodejs es troba segurament en més llocs dels que podem imaginar. Veiem una llista d'aplicacions on s'utilitza Node.js, tant des del costat de servidor com d'aplicacions d'escriptori i mòbils. Vegem alguns exemples:</p>
+<ul>
+<li>Entorns de servidor (backend): Netflix, Paypal, LinkedIn, Ebay, NASA, Mozilla, Uber, Yahoo, Groupon (https://www.hackaboss.com/blog/5-mejores-ejemplos-de-aplicaciones-node-js-para-empresas),</li>
+<li>Aplicacions d'escriptori:<ul>
+<li>Aplicacions d'escriptori basades en Electron (https://electronjs.org/apps): Skype, Whatsapp, Slack, Atom, Visual Studio Code, Github Desktop</li>
+<li>Aplicacions basades en nwjs (https://github.com/nwjs/nw.js/wiki/list-of-apps-and-companies-using-nw.js): Haroopad, Reditr, TweetDeck, Kindle Cloud Reader.</li>
+</ul>
+</li>
+<li>Aplicacions mòbils amb Ionic/Capacitor: MarketWatch, Sanvello, Calla (https://mdevelopers.com/blog/14-best-ionic-apps-of-2022)</li>
+</ul>
+<h2 id="primers-passos-amb-nodejs">Primers passos amb Node.js</h2>
+<h3 id="installacio">Instal·lació</h3>
+<p>No hem de pressuposar que Ubuntu inclou una versió concreta de Node.js ni que aquesta siga adequada per al curs. En agost de 2026, <strong>Node.js 24 és la versió LTS més recent</strong> i Node.js 22 continua en manteniment LTS; Node.js 20 i versions anteriors ja han arribat al final de vida. Per als exercicis i per a producció utilitzarem una versió LTS compatible, preferentment Node.js 24.</p>
+<p>La pàgina oficial de <a href="https://nodejs.org/en/download">descàrrega de Node.js</a> mostra els mètodes d'instal·lació disponibles. Un gestor de versions permet instal·lar diverses versions sense modificar manualment els fitxers del sistema. Per exemple, amb <code>nvm</code> (eina comunitària) podem fer:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>nvm<span class="w"> </span>install<span class="w"> </span>--lts
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">$ </span>nvm<span class="w"> </span>use<span class="w"> </span>--lts
+</span></code></pre></div>
+<p>En un projecte compartit convé declarar també la versió mínima en <code>package.json</code>, per exemple amb <code>"engines": { "node": "&gt;=24" }</code>, i conservar <code>package-lock.json</code> perquè les instal·lacions siguen reproduïbles.</p>
+<p>El que ens ofereix aquest paquet, tant el que tenim preinstal·lat al sistema com si l'instal·lem de nou és el propi <code>node</code> (o el seu àlies <code>Node.js</code>) i el gestor de paquets de Node.js, denominat <code>npm</code> (<em>Node Package Manager</em>).</p>
+<h3 id="hola-node">Hola Node</h3>
+<p>Node.js pot llançar-se des de la pròpia terminal, amb l'ordre <code>node</code> o la seua àlias <code>Node.js</code></p>
+<p>Per a comprovar la versió de node que tenim, farem ús de <code>node -v</code> o <code>node --version</code>:</p>
+<p><div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>node<span class="w"> </span>-v
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">v24.18.0</span>
+</span></code></pre></div>
+Node.js admet dues formes de treball: mitjançant la consola interactiva i l'execució directa de scripts.</p>
+<h4 id="la-consola-interactiva">La consola interactiva</h4>
+<p>Nodejs disposa d'una consola interactiva, a la qual podem accedir simplement amb <code>node</code> i llançar directament ordres:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span>node
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt;<span class="w"> </span>console.log<span class="o">(</span><span class="s2">&quot;Hola Node&quot;</span><span class="o">)</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Hola<span class="w"> </span>Node
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>undefined
+</span></code></pre></div>
+<p>Com podem veure, quan llancem node, el <em>prompt</em> del sistema canvia al símbol <code>&gt;</code>, indicant que estem dins de la consola de Node. Si alguna vegada hem treballat amb la consola web del navegador, el funcionament és exactament el mateix.</p>
+<p>Si ens fixem, hem escrit només una instrucció <code>console.log</code>, que seria ho equivalen a Java a <code>System.out.println</code>. Podem veure, com no ens ha fet falta definir cap classe principal ni cap mètode main. Javascript, a pesar que suporta la programació orientada a objectes, no obliga al fet que tot, inclòs el programa principal estiga dins d'una classe. D'aquesta manera, podem tindre codi tan senzill com una simple instrucció.</p>
+<p>Veiem també que al final ens torna un valor <code>undefined</code>. Això es deu al fet que la funció <code>console.log</code> no retorna cap valor (és de tipus <em>void</em>), i per tant, ens indica que el resultat que retorna la funció no està definit.</p>
+<p>Per a eixir de la manera interactiva farem ús de la combinació de tecles <code>Ctrl+D</code></p>
+<h4 id="24-execucio-de-scripts">2.4. Execució de scripts</h4>
+<p>La manera habitual en què funcionarem amb Node.js serà llançant l'ordre <code>node</code> sobre un script. Vegem-ho amb un senzill exemple. Tenim el script següent, denominat hola.js</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">.</span><span class="nx">length</span><span class="o">==</span><span class="mf">3</span><span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hola &quot;</span><span class="o">+</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mf">2</span><span class="p">])</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">else</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hola Nodejs&quot;</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Per a executar-ho, utilitzarem  <code>node</code> juntament amb el nom del fitxer:</p>
+<p><div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>node<span class="w"> </span>hola.js<span class="w"> </span>Jose
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">Hola Jose</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="gp">$ </span>node<span class="w"> </span>hola.js<span class="w"> </span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">Hola Nodejs</span>
+</span></code></pre></div>
+Com veiem, es tracta d'un <em>Hola Món</em> personalitzat, on segons els paràmetres que li proporcionem, escriurà l'una o l'altra cosa. També podem observar, com s'ha comentat abans, que no ha fet falta incloure el codi en cap classe ni funció especial. A més, veiem que podem accedir als paràmetes que passem per la línia d'ordres a través de l'objecte (vector) process.argv, que la propietat process.argv.length ens dóna la longitud d'aquest, i que la segona posició d'aquest (<code>process.argv[2]</code>) fa referència al primer paràmetre que li hem passat.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

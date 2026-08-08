@@ -1,0 +1,77 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <div id="content"></div>
+    <script>
+        // Aquesta funció rep un recurs i un callback
+        function realitzaPeticioHTTP(recurs, callback) {
+
+            // En JS fem ús de l'objecte HMLHttpRequest
+            let peticioHttp = new XMLHttpRequest();
+
+
+            // Es prepara el callback per a quan es rep resposta
+            peticioHttp.onreadystatechange = function() {
+                if (peticioHttp.readyState == 4) {
+                    if (peticioHttp.status == 200) {
+                        // Invoquem la funció callback amb la resposta
+                        callback(peticioHttp.response);
+                    }
+                }
+            }
+
+            // Preparem un GET sobre la petició HTTP
+            peticioHttp.open('GET', recurs, true);
+            //peticioHttp.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8000");
+            // I la llancem
+            peticioHttp.send();
+
+
+        }
+
+        function inici() {
+
+            realitzaPeticioHTTP("https://node-comarques-rest-server-production.up.railway.app/api/provDelay", // Recurs
+                function(resposta) { // Callback
+                    let content = document.getElementById("content");
+                    //console.log(peticioHttp.responseText);
+                    console.log(resposta);
+
+                    for (let provincia of JSON.parse(resposta)) {
+                        // I fem la petició per a les comarques
+                        realitzaPeticioHTTP("https://node-comarques-rest-server-production.up.railway.app/api/comDelay/" + provincia, // Recurs
+                            function(resposta2) { // Callback                                
+                                console.log(resposta2);
+                                for (let comarca of JSON.parse(resposta2)) {
+                                    //content.innerHTML += comarca.comarca + " (" + provincia + ")" + "<br/>";
+                                    console.log(comarca.comarca);
+                                    realitzaPeticioHTTP("https://node-comarques-rest-server-production.up.railway.app/api/capDelay/" + comarca.comarca, // Recurs
+                                        function(resposta3) { // Callback
+                                            //console.log(resposta3);
+                                            let content = document.getElementById("content");
+                                            let item = document.createElement("div");
+                                            if (provincia == "València")
+                                                item.style.color = "#0000ff"
+                                            else if (provincia == "Alacant")
+                                                item.style.color = "#ff0000"
+                                            else item.style.color = "#00ff00"
+                                            item.innerHTML = comarca.comarca + " (" + provincia + "), capital: " + resposta3;
+                                            content.append(item);
+                                        })
+                                }
+                            })
+                    }
+
+
+                })
+        }
+
+        // Càrrega inicial
+        onload = inici;
+    </script>
+</body>
+
+</html>

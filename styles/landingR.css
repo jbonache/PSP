@@ -1,0 +1,181 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.landing-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+/* --- IMAGEN DE PORTADA --- */
+.landing-image {
+  flex: 1;
+  text-align: center;
+}
+
+.landing-image img {
+  width: auto;
+  height: auto;
+  max-width: 90%;
+}
+
+.landing-image p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.landing-image .subtitle {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #555;
+}
+
+/* --- DIVISOR VERTICAL --- */
+.landing-divider {
+  width: 2px;
+  height: 1000px;
+  background-color: #ccc;
+  margin: 0 2rem;
+}
+
+/* --- ENLACES --- */
+.landing-links {
+  flex: 1;
+}
+
+.landing-links h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.landing-links ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.landing-links li {
+  margin: 1rem 0;
+}
+
+.landing-links a {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #1a73e8;
+}
+
+/* --- CONTENEDOR DE TARJETAS --- */
+.container {
+  max-width: 50%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Tarjeta destacada */
+.container .card:first-child {
+  grid-column: span 2;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 10px solid purple;
+}
+
+/* --- TARJETAS --- */
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-header {
+  padding: 16px;
+  background-color: purple;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+.card-body {
+  padding: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.disabled {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    pointer-events: none; /* evita clics */
+}
+
+/* --- OCULTAR ELEMENTOS ESPECÍFICOS EN LA PORTADA --- */
+.md-search {
+  display: none !important;
+}
+
+.md-content h1:first-of-type {
+  display: none !important;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .landing-divider {
+    display: none;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  .container .card:first-child {
+    grid-column: span 1;
+    border-bottom: none;
+  }
+
+  .landing-image img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .card-body {
+    padding: 12px;
+  }
+}
+

@@ -1,0 +1,50 @@
+¿Qué hace exactamente la orden ProcessBuilder pb \= new ProcessBuilder("firefox"); ?
+{
+    ~Crea una instancia del proceso Firefox.
+    ~Lanza el programa Firefox.
+    ~Crea una instancia de la clase ProcessBuilder.
+    ~Crea una instancia de la clase ProcessBuilder pasándole como argumento el proceso Firefox.
+    =Crea una instancia de la clase ProcessBuilder y establece su atributo  command como “Firefox”
+}
+
+¿Qué deberemos modificar en una instancia de ProcessBuilder si deseamos añadir una variable de entorno?
+{
+    ~command
+    =environment
+    ~directory
+    ~InputStream
+    ~ErrorStream
+}
+
+¿Cómo podemos obtener una instancia de la clase Process?
+{
+    ~Mediante la orden Process p\=new Process()
+    ~Sólamente mediante el método start de ProcessBuilder
+    ~Sólamente mediante el método exec de Runtime
+    =Mediante el método start de ProcessBuilder o exec de Runtime.
+    ~Mediante el método start de ProcessBuilder y el operador new Processs.
+}
+
+::Sobre los métodos de la clase Process::
+El método exitValue() nos devuelve el código de salida del proceso, una vez finalizdo{T}
+
+::Sobre los métodos de la clase Process::
+b.	El Método isAlive() retorna true si el proceso creado sigue en ejecución{T}
+
+::Sobre los métodos de la clase Process::
+c.	El método waitFor() devuelve siempre un Booleano.{F}
+
+::Sobre los métodos de la clase Process::
+d.	El método destroy envía la señal SIGKILL al proceso{F}
+
+::Sobre los métodos de la clase Process::
+e.	El método destroyForcibily envía la señal SIGTERM al proceso{F}
+
+¿ Qué información NO podemos obtener mediante la interfaz ProcessHandle.Info?
+{
+    ~Los argumentos del proceso
+    ~El comando lanzado
+    ~La hora de inicio del proceso
+    ~El tiempo de CPU acumulado del proceso
+    =El PID del proceso
+}

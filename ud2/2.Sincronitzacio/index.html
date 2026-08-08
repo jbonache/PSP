@@ -1,0 +1,716 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1.Threads/">
+      
+      
+        <link rel="next" href="../3.Coordinacio/">
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>2. Sincronització - Programació multifil</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercici" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Programació multifil" class="md-header__button md-logo" aria-label="Programació multifil" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programació multifil
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Sincronització
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Programació multifil" class="md-nav__button md-logo" aria-label="Programació multifil" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Programació multifil
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.Threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Fils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    2. Sincronització
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Sincronització
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercici" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercici
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objectes-compartits-i-sincronitzacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectes compartits i sincronització
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sincronitzacio-mitjancant-monitors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sincronització mitjançant monitors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sincronització mitjançant monitors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodes-sincronitzats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mètodes Sincronitzats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocs-synchronized" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocs synchronized
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncronized-i-estats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syncronized i estats
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.Coordinacio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Coordinació entre fils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.LibreriaJavaUtilConcurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. La biblioteca java.util.concurrent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercici" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercici
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducció
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objectes-compartits-i-sincronitzacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectes compartits i sincronització
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sincronitzacio-mitjancant-monitors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sincronització mitjançant monitors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sincronització mitjançant monitors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodes-sincronitzats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mètodes Sincronitzats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocs-synchronized" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocs synchronized
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncronized-i-estats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syncronized i estats
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>2. Sincronització</h1>
+
+<h2 id="exercici">Exercici</h2>
+<p>Començarem amb un xicotet exercici: Crear un programa en Java que llance dos ordres (per exemple un <code>ls -l</code> i un <code>ps aux</code>) i mostre per pantalla els resultats, cadascun d'un color. Per a això:</p>
+<ul>
+<li>
+<p>Crea una classe anomenada <code>Launcher</code> que implemente la interfície <code>Runnable</code>, i que en el seu constructor s'inicialitze amb dos <em>Strings</em>, un amb el ordre a executar, i un altre amb un codi de color, per a mostrar l'eixida acolorida per pantalla.</p>
+</li>
+<li>
+<p>Després, crea una classe principal <code>LauncherExemples</code> que cree dos objectes de la classe <em>Launcher</em> inicialitzant-los amb un ordre i amb un codi de color, i que els llance com a fils.</p>
+</li>
+</ul>
+<p>Una vegada implementat, compila i executa el codi, i comprova si el resultat és l'esperat o no. En cas negatiu, a què es deu el mal funcionament? Com podríem esmenar-ho?</p>
+<div class="admonition note">
+<p class="admonition-title">Codi</p>
+<p>Disposareu de la solució en el programa <code>LauncherExemples.java</code></p>
+</div>
+<h2 id="introduccio">Introducció</h2>
+<p>La programació d'aplicacions multifil implica la generació de diferents fils d'execució per a abordar la resolució d'un problema de manera concurrent. En aquest cas, pot ser que sorgisca la necessitat de mantindre objectes o recursos accessibles per tots els fils, que a més poden servir com a mecanisme de comunicació entre ells.</p>
+<p>Quan un objecte o variable és compartit per diversos fils d'execució, hem de ser especialment cauts en el seu tractament, i accedir a ell de manera coordinada, de manera que les operacions que un fil realitza sobre un d'aquests objectes no es vegen alterades per unes altres. Pensem per exemple en l'escriptura d'un fitxer, que sol ser un procés més llarg. Si dos fils, per exemple desitgen escriure en el mateix fitxer, hauran de fer-lo de manera que les escriptures d'un no interferisquen en les de l'altre. El més senzill és que un fil espera que l'altre acabe d'escriure per a poder escriure ell.</p>
+<p>En aquest apartat introduirem els conceptes necessaris per a contextualitzar aquestes situacions i donar-los una solució des del punt de vista de la programació, mitjançant els mecanismes que Java ens proporciona per a això.</p>
+<h2 id="objectes-compartits-i-sincronitzacio">Objectes compartits i sincronització</h2>
+<p>El desenvolupament d'aplicacions multifil comporta l'execució de diversos fils de manera concurrent. La forma més habitual de mantindre la comunicació entre aquests fils, així com amb el fil principal és mitjançant l'ús de <strong>objectes</strong> o <strong>variables compartides</strong>, a les quals tots ells tenen accés.</p>
+<p>A aquests objectes o variables compartits per diversos fils d'execució, se'ls coneix com a <strong>objectes o variables en conflicte</strong>, i a més, a la part de codi que accedeix a ells, es coneix com a <strong>secció crítica</strong>.</p>
+<p>Formalment, podríem definir aquests termes com:</p>
+<blockquote>
+<p><strong>Variable/Objecte en conflicte</strong>
+: Variable o objecte que és compartida per diversos fils d'execució.</p>
+<p><strong>Secció crítica</strong>
+: Es refereix a aquella part del codi font d'un fil que realitza accions sobre una variable o objecte en conflicte.
+</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Qüestió</p>
+<p>En el nostre exemple sobre el Llançador, què es consideraria variable, objecte o recurs en conflicte? Quina seria la secció crítica?</p>
+</div>
+<p>El problema ara se situa a poder garantir que l'accés a aquests objectes compartits es realitze de manera segura. Necessitarem establir algun mecanisme perquè aquestes operacions sobre els objectes es realitzen de manera atòmica, de manera que fins que no finalitze una operació sobre l'objecte, no comence una altra.</p>
+<p>A aquesta coordinació en l'activitat de diversos fil es coneix com a <strong>sincronització</strong>.</p>
+<h2 id="sincronitzacio-mitjancant-monitors">Sincronització mitjançant monitors</h2>
+<p>A Java, aquesta sincronització és possible gràcies a l'ús de monitors, un mecanisme que permet controlar l'accés concurrent a objectes en conflicte. Els monitors tenen la capacitat de bloquejar un objecte mentre un fil està accedint a ell, de manera que no  permet l'accés per part d'altres fils. Això es coneix com a <strong>exclusió mútua</strong>. Quan el fil que bloquejava l'objecte acaba les seues operacions, desbloqueja l'objecte perquè puguen accedir altres objectes. D'aquesta manera, podem doncs sincronitzar l'accés a un objecte compartit</p>
+<p>Ara bé, com s'implementa tot això? En java, tots els objectes tenen associat un <em>monitor</em>, per la qual cosa poden sincronitzar-se. Per a accedir a aquest monitor s'utilitza la paraula reservada <em>synchronized</em>, que podem emprar de dues formes:</p>
+<ul>
+<li>Declarant un mètode en una classe <code>Runnable</code> com <code>synchronized</code>, o bé</li>
+<li>Declarar només <em>una secció de codi</em> com <code>synchronized</code></li>
+</ul>
+<p>Aquesta segona opció és la més recomanable, ja que és preferible sincronitzar com menys part de codi millor.</p>
+<h3 id="metodes-sincronitzats">Mètodes Sincronitzats</h3>
+<p>Per a sincronitzar un mètode utilitzem la paraula reservada <code>synchronized</code> en la seua declaració:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span> <span class="nc">MiClase</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">[</span><span class="n">modificador</span><span class="o">]</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">tipoRetorno</span><span class="w"> </span><span class="nf">NombreMetodo</span><span class="p">(</span><span class="n">lista_argumentos</span><span class="p">){</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="c1">// Acceso al objeto compartido</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">run</span><span class="p">(){...}</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>D'aquesta manera, quan el mètode <code>NombreMetodo</code> és invocat, el fil que el va invocar entra en el monitor de l'objecte, quedant aquest bloquejat. En aquest moment, cap altre fil que intente accedir a l'objecte compartit, ja siga a través d'aquest mètode sincronitzat o uns altres que utilitzen el mateix objecte, podran fer-lo, garantint així <strong>exclusió mútua</strong>.</p>
+<p>En el moment en què el fil que va bloquejar l'objecte finalitze el mètode sincronitzat, el monitor desbloqueja l'objecte, de manera que ja pot accedir a ell un altre fil</p>
+<p><strong>Amb aquest mecanisme, únicament hem de preocupar-nos de marcar com sincronitzats els mètodes que vagen a contindre una secció crítica.</strong></p>
+<h3 id="blocs-synchronized">Blocs synchronized</h3>
+<p>A més de poder especificar un mètode com <code>synchronized</code>, podem definir únicament un bloc de codi, de la següent manera:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">synchronized</span><span class="p">(</span><span class="n">objeto_a_bloquear</span><span class="p">){</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// Acceso al objeto</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">// (Sección crítica)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Això tindria dos possibles usos:</p>
+<ul>
+<li>Quan no siga possible definir un mètode com synchronized, per exemple perquè és una funció de llibreria que no està definida com a tal, però hem d'utilitzar-la de forma sincronitzada. Atés que no podem marcar el mètode com sincronitzat, l'emmarcaríem en un bloc synchronized:</li>
+</ul>
+<p><div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">synchronized</span><span class="p">(</span><span class="n">objeto_a_bloquear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Función_No_Sincronizada</span><span class="p">(</span><span class="n">lista_parametros</span><span class="p">);</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</span></code></pre></div>
+* Quan desitgem reduir el bloqueig únicament a la secció crítica. En alguns mètodes, la secció crítica serà únicament una part d'aquest, per la qual cosa no necessitarem declarar-ho íntegrament com synchronized. En aquest cas, tancaríem en un bloc synchronized a aquesta secció crítica</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">MiClase</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">ModificadorAcceso</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="nf">NombreMetodo</span><span class="p">(</span><span class="n">argumentos</span><span class="p">){</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="c1">// Lógica del método</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">objeto_a_bloquear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">          </span><span class="c1">//Sección crítica</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">run</span><span class="p">(){</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="c1">//...</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">objeto_a_bloquear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">            </span><span class="c1">//Sección crítica</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Com podem apreciar, podem incloure també un bloc synchronized directemente dins del mètode <code>run()</code>, com en qualsevol altre mètode que s'utilitze aquest.</p>
+<h3 id="syncronized-i-estats">Syncronized i estats</h3>
+<p>En l'apartat anterior vam veure el cicle de vida d'un fil, amb els diferents estats que aquest pot prendre. En ell, existia l'estat bloquejat, al qual s'accedia mitjançant la <em>espera/bloquege</em> d'un monitor.</p>
+<p>Centrant-nos en els estats que concerneixen l'ús de monitors, podem representar-los en el següent diagrama:</p>
+<p><a class="glightbox" href="../img/2/estats_blocked.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Estat de bloqueig" src="../img/2/estats_blocked.png" width="500px" /></a></p>
+<p>Com veiem, quan un fil intenta accedir a un mètode o bloc de codi sincronitzat i l'objecte al qual accedirà està bloquejat per un altre fil, el fil passa  a un estat bloquejat, passant a formar part d'una cua de fils bloquejats a l'espera que es desbloquege el monitor. Aquesta cua tindrà una estructura FIFO (First In First Out), per a garantir l'execució de tots els fils.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

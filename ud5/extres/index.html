@@ -1,0 +1,1049 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Extres - Webservices amb ExpressJS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#metodes-de-resposta" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Webservices amb ExpressJS" class="md-header__button md-logo" aria-label="Webservices amb ExpressJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Webservices amb ExpressJS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Extres
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Webservices amb ExpressJS" class="md-nav__button md-logo" aria-label="Webservices amb ExpressJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Webservices amb ExpressJS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.IntroExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p.expressSimple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Servidor web amb Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.ExpressRutas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Express. Adreçament, programari intermedi i API REST
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.MVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MVC del costat del servidor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.Https_JWT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Comunicacions segures. HTTPS i JWT.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.ExpressMongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Accés a BBDD MongoDB. Mongoose.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metodes-de-resposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mètodes de resposta
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>Extres</h1>
+
+<p>Tipus de middlewares</p>
+<ul>
+<li>Middleware de nivell d'aplicació, que requereixen fins a tres paràmetres (req, res i next)</li>
+<li>Middleware d'error, que rep quatre paràmetres, i que serveixen per a gestionar els errors, </li>
+<li>Middleware incorporats a Express, com poden ser <code>express.static</code>, <code>express.json</code>, que transforma el JSON del bodi de la sol·licitud en un objecte JSON equivalent, i <code>express.urlencoded</code>, que transforma els paràmetres d'un formulari en propietats de <code>req.body</code>.</li>
+<li>Encaminadors o middleware de nivell d'router, que funciona igual que el middleware de nivell d'aplicació, a diferència que està enllaçat a una instància d'express.Router():</li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">router</span><span class="o">=</span><span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+</span></code></pre></div>
+<p>Aquests middlewares ofereixen un major nivell de modularidad, i suposen una agrupació d'altres middleware ja associats a rutes </p>
+<ul>
+<li>Middlewares de tercers, amb funcionalitats variades, i que han d'importar-se com a paquets <em>npm</em> en el projecte i en l'app <em>Express</em>, abans de la seua instal·lació en el nostre servidor. Alguns d'ells són el <em>body-parser</em> per a analitzar el cos de les peticions HTTP, <em>cors</em>, per a habilitar el <em>Intercanvi de Recursos d'Origen Creuat</em> (<em>Cross Origin Resource Sharing</em>), etcètera</li>
+</ul>
+<p>Documentació oficial</p>
+<ul>
+<li>
+<p>Escriptura de middleware per al seu ús en aplicacions Express
+http://expressjs.com/es/guide/writing-middleware.html</p>
+</li>
+<li>
+<p>Utilització de middleware
+http://expressjs.com/es/guide/using-middleware.html</p>
+</li>
+</ul>
+<p>---&gt; Podríem intentar enriquir el de dalt amb açò daci baix... 
+-És dels enllaços de dalt, i crec que ja he comentat vàries cuses, però pot servir per aclarir conceptes</p>
+<p>https://miriadax.net/curso/desarrollo-backend-con-node-js-express-y-bbdds-3-a-edicion/</p>
+<p>---&gt; Això de l'router de després farà mancada per a JWT</p>
+<p>---&gt; La resta de cuses la tenim a /srv/home/Dropbox/Docència/Curs22-23/Recursos/Proves_APIs$</p>
+<h2 id="metodes-de-resposta">Mètodes de resposta</h2>
+<p>A part de <code>send</code>, l'objecte <code>res</code>posee altres mètodes per a enviar una resposta al client i acabar amb el cicle de sol·licitud/resposta. Si no s'invoca a cap d'aquests mètodes (ni a <code>next()</code>) en un gestor de rutes, la sol·licitud del client es quedarà penjada</p>
+<p>Aquests mètodes de resposta són els següents:</p>
+<table>
+<thead>
+<tr>
+<th>Mètode</th>
+<th>Descripció</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>res.download()</td>
+<td>Sol·licita un arxiu per a descarregar-lo.</td>
+</tr>
+<tr>
+<td>res.end()</td>
+<td>Finalitza el procés de resposta.</td>
+</tr>
+<tr>
+<td>res.json()</td>
+<td>Envia una resposta JSON.</td>
+</tr>
+<tr>
+<td>res.jsonp()</td>
+<td>Envia una resposta JSON amb suport JSONP.</td>
+</tr>
+<tr>
+<td>res.redirect()</td>
+<td>Redirigeix una sol·licitud.</td>
+</tr>
+<tr>
+<td>res.render()</td>
+<td>Representa una plantilla de vista.</td>
+</tr>
+<tr>
+<td>res.send()</td>
+<td>Envia una resposta de diversos tipus.</td>
+</tr>
+<tr>
+<td>res.sendFile()</td>
+<td>Envia un arxiu com una seqüència d'octets.</td>
+</tr>
+<tr>
+<td>res.sendStatus()</td>
+<td>Estableix el codi d'estat de la resposta i envia la seua representació de sèrie com el cos de resposta.</td>
+</tr>
+<tr>
+<td>app.route()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Pot crear gestors de rutes encadenables per a una via d'accés de ruta utilitzant app.route(). Com la via d'accés s'especifica en una única ubicació, la creació de rutes modulars és molt útil, igual que la reducció de redundància i errors tipogràfics. Per a obtindre més informació sobre les rutes, consulte: Documentació d'Router()</p>
+<p>A continuació, es mostra un exemple de gestors de rutes encadenats que es defineixen utilitzant app.route()</p>
+<p>app.route('/book')
+  .get(function(req, res) {
+    res.send('Get a random book');
+  })
+  .post(function(req, res) {
+    res.send('Add a book');
+  })
+  .put(function(req, res) {
+    res.send('Update the book');
+  });</p>
+<p>express.Router</p>
+<p>Utilitze la classe express.Router per a crear gestors de rutes muntables i modulars. Una instància Router és un sistema de middleware i adreçament complet; per aquest motiu, sovint es coneix com una “miniaplicació”</p>
+<p>El següent exemple crea un router com un mòdul, càrrega una funció de middleware en ell, defineix algunes rutes i munta el mòdul d'router en una via d'accés en l'aplicació principal</p>
+<p>Creu un arxiu d'router denominat birds.js en el directori de l'aplicació, amb el següent contingut:</p>
+<p>var express = require('express');
+var router = express.Router();</p>
+<p>// middleware that is specific to this router
+router.use(function timeLog(req, res, next) {
+  console.log('Time: ', Dóna't.now());
+  next();
+});
+// defineix the home page route
+router.get('/', function(req, res) {
+  res.send('Birds home page');
+});
+// defineix the about route
+router.get('/about', function(req, res) {
+  res.send('About birds');
+});</p>
+<p>module.exports = router;</p>
+<p>A continuació, carregue el mòdul d'router en l'aplicació:</p>
+<p>var birds = require('./birds');
+...
+app.use('/birds', birds);</p>
+<p>L'aplicació ara podrà manejar sol·licituds a /birds i /birds/about, així com invocar la funció de middleware timeLog que és específica de la ruta</p>
+<p>Escriptura de middleware per al seu ús en aplicacions Express
+Visió general</p>
+<p>Les funcions de middleware són funcions que tenen accés a fi de sol·licitud (req), a fi de resposta (res) i a la següent funció de middleware en el cicle de sol·licitud/respostes de l'aplicació. La següent funció de middleware es denota normalment amb una variable denominada next</p>
+<p>Les funcions de middleware poden fer les següents tasques:</p>
+<div class="language-text highlight"><pre><span></span><code>Ejecutar cualquier código.
+Realizar cambios en la solicitud y los objetos de respuesta.
+Finalizar el ciclo de solicitud/respuestas.
+Invocar el siguiente middleware en la pila.
+</code></pre></div>
+<p>Si la funció de middleware actual no finalitza el cicle de sol·licitud/respostes, ha d'invocar next() per a passar el control a la següent funció de middleware. En cas contrari, la sol·licitud quedarà penjada</p>
+<p>El següent exemple mostra els elements d'una anomenada a funció de middleware:</p>
+<p>Mètode HTTP per al qual s'aplica la funció de middleware.
+Via d'accés (ruta) per a la qual s'aplica la funció de middleware.
+La funció de middleware.
+Argument de devolució d'anomenada a la funció de middleware, denominat "next" per convenció.
+Argument de resposta HTTP a la funció de middleware, denominat "res" per convenció.
+Argument de sol·licitud HTTP a la funció de middleware, denominat "req" per convenció</p>
+<p>A continuació, es mostra un exemple d'una aplicació Express simple, “Hello World”, per a la qual definirà dues funcions de middleware:</p>
+<p>var express = require('express');
+var app = express();</p>
+<p>app.get('/', function (req, res) {
+  res.send('Hello World!');
+});</p>
+<p>app.llisten(3000);</p>
+<p>Desenvolupament</p>
+<p>Aquest és un exemple simple d'una funció de middleware denominada “myLogger”. Aquesta funció simplement imprimeix “LOGGED” quan una sol·licitud de l'aplicació passa per ella. La funció de middleware s'assigna a una variable denominada myLogger</p>
+<p>var myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};</p>
+<p>Observe la crida anterior a next(). L'anomenada a aquesta funció invoca la següent funció de middleware en l'aplicació. La funció next() no forma part de l'API d'Express o Node.js, però és el tercer argument que es passa a la funció de middleware. La funció next() pot tindre qualsevol nom, però per convenció sempre es denomina “next”. Per a evitar confusions, utilitze sempre aquesta convenció</p>
+<p>Per a carregar la funció de middleware, cride a app.use(), especificant la funció de middleware. Per exemple, el següent codi carrega la funció de middleware myLogger abans de la ruta a la via d'accés arrel (/)</p>
+<p>var express = require('express');
+var app = express();</p>
+<p>var myLogger = function (req, res, next) {
+  console.log('LOGGED');
+  next();
+};</p>
+<p>app.use(myLogger);</p>
+<p>app.get('/', function (req, res) {
+  res.send('Hello World!');
+});</p>
+<p>app.llisten(3000);</p>
+<p>Cada vegada que l'aplicació rep una sol·licitud, imprimeix el missatge “LOGGED” en el terminal</p>
+<p>L'ordre de càrrega del middleware és important: les funcions de middleware que es carreguen primer també s'executen primer</p>
+<p>Si myLogger es carrega després de la ruta a la via d'accés arrel, la sol·licitud mai l'aconsegueix i l'aplicació no imprimeix “LOGGED”, ja que el gestor de rutes de la via d'accés arrel determina el cicle de sol·licitud/respostes</p>
+<p>La funció de middleware myLogger simplement imprimeix un missatge i, a continuació, passa la sol·licitud a la següent funció de middleware de la pila cridant a la funció next()</p>
+<p>El següent exemple afig una propietat denominada requestTime a fi de sol·licitud. Cridarem a aquesta funció de middleware “requestTime”</p>
+<p>var requestTime = function (req, res, next) {
+  req.requestTime = Dóna't.now();
+  next();
+};</p>
+<p>L'aplicació ara utilitza la funció de middleware requestTime. Així mateix, la funció de devolució de crida de la ruta de via d'accés arrel utilitza la propietat que la funció de middleware afig a req (l'objecte de sol·licitud)</p>
+<p>var express = require('express');
+var app = express();</p>
+<p>var requestTime = function (req, res, next) {
+  req.requestTime = Dóna't.now();
+  next();
+};</p>
+<p>app.use(requestTime);</p>
+<p>app.get('/', function (req, res) {
+  var responseText = 'Hello World!';
+  responseText += 'Requested at: ' + req.requestTime + '';
+  res.send(responseText);
+});</p>
+<p>app.llisten(3000);</p>
+<p>Quan realitza una sol·licitud a l'arrel de l'aplicació, l'aplicació ara mostra la indicació de data i hora de la sol·licitud en el navegador</p>
+<p>Com té accés a fi de sol·licitud, l'objecte de resposta, la següent funció de middleware de la pila i tota l'API de Node.js, les possibilitats amb les funcions de middleware són il·limitades</p>
+<p>Per a obtindre més informació sobre el middleware d'Express, consulte: Utilització del middleware d'Express</p>
+<p>Utilització del middleware</p>
+<p>Express és una infraestructura web d'adreçament i middleware que té una funcionalitat mínima pròpia: una aplicació Express és fonamentalment una sèrie d'anomenades a funcions de middleware</p>
+<p>Les funcions de middleware són funcions que tenen accés a fi de sol·licitud (req), a fi de resposta (res) i a la següent funció de middleware en el cicle de sol·licitud/respostes de l'aplicació. La següent funció de middleware es denota normalment amb una variable denominada next</p>
+<p>Les funcions de middleware poden fer les següents tasques:</p>
+<div class="language-text highlight"><pre><span></span><code>Ejecutar cualquier código.
+Realizar cambios en la solicitud y los objetos de respuesta.
+Finalizar el ciclo de solicitud/respuestas.
+Invocar la siguiente función de middleware en la pila.
+</code></pre></div>
+<p>Si la funció de middleware actual no finalitza el cicle de sol·licitud/respostes, ha d'invocar next() per a passar el control a la següent funció de middleware. En cas contrari, la sol·licitud quedarà penjada</p>
+<p>Una aplicació Express pot utilitzar els següents tipus de middleware:</p>
+<div class="language-text highlight"><pre><span></span><code>Middleware de nivel de aplicación
+Middleware de nivel de direccionador
+Middleware de manejo de errores
+Middleware incorporado
+Middleware de terceros
+</code></pre></div>
+<p>Pot carregar middleware de nivell d'aplicació i de nivell d'router amb una via d'accés de muntatge opcional. També pot carregar una sèrie de funcions de middleware alhora, el que crea una subpila del sistema de middleware en un punt de muntatge.
+Middleware de nivell d'aplicació</p>
+<p>Enllaç el middleware de nivell d'aplicació a una instància de l'objecte d'aplicació utilitzant les funciones app.use() i app.METHOD(), on METHOD és el mètode HTTP de la sol·licitud que maneja la funció de middleware (per exemple, GET, PUT o POST) en minúscules</p>
+<p>Aquest exemple mostra una funció de middleware sense cap via d'accés de muntatge. La funció s'executa cada vegada que l'aplicació rep una sol·licitud</p>
+<p>var app = express();</p>
+<p>app.use(function (req, res, next) {
+  console.log('Time:', Dóna't.now());
+  next();
+});</p>
+<p>Aquest exemple mostra una funció de middleware muntada en la via d'accés /user/:id. La funció s'executa per a qualsevol mena de sol·licitud HTTP en la via d'accés /user/:id</p>
+<p>app.use('/user/:id', function (req, res, next) {
+  console.log('Request Type:', req.method);
+  next();
+});</p>
+<p>Aquest exemple mostra una ruta i la seua funció de gestor (sistema de middleware). La funció maneja les sol·licituds GET a la via d'accés /user/:id</p>
+<p>app.get('/user/:id', function (req, res, next) {
+  res.send('USER');
+});</p>
+<p>A continuació, es mostra un exemple de càrrega d'una sèrie de funcions de middleware en un punt de muntatge, amb una via d'accés de muntatge. Il·lustra una subpila de middleware que imprimeix informació de sol·licitud per a qualsevol mena de sol·licitud HTTP en la via d'accés /user/:id</p>
+<p>app.use('/user/:id', function(req, res, next) {
+  console.log('Request URL:', req.originalUrl);
+  next();
+}, function (req, res, next) {
+  console.log('Request Type:', req.method);
+  next();
+});</p>
+<p>Els gestors de rutes permeten definir diverses rutes per a una via d'accés. L'exemple següent defineix dues rutes per a les sol·licituds GET a la via d'accés /user/:id. La segona ruta no donarà cap problema, però mai s'invocarà, ja que la primera ruta finalitza el cicle de sol·licitud/respostes</p>
+<p>Aquest exemple mostra una subpila de middleware que maneja sol·licituds GET a la via d'accés /user/:id</p>
+<p>app.get('/user/:id', function (req, res, next) {
+  console.log('identificador:', req.params.id);
+  next();
+}, function (req, res, next) {
+  res.send('User Info');
+});</p>
+<p>// handler for the /user/:id path, which prints the user identificador
+app.get('/user/:id', function (req, res, next) {
+  res.end(req.params.id);
+});</p>
+<p>Per a ometre la resta de les funcions de middleware d'una pila de middleware d'router, invoque next('route') per a passar el control a la següent ruta. NOTA: next('route') només funcionarà en les funcions de middleware que s'hagen carregat utilitzant les funciones app.METHOD() o router.METHOD()</p>
+<p>Aquest exemple mostra una subpila de middleware que maneja sol·licituds GET a la via d'accés /user/:id</p>
+<p>app.get('/user/:id', function (req, res, next) {
+  // if the user identificador is 0, skip to the next route
+  if (req.params.id == 0) next('route');
+  // otherwise pass the control to the next middleware function in this stack
+  else next(); //
+}, function (req, res, next) {
+  // render a regular page
+  res.render('regular');
+});</p>
+<p>// handler for the /user/:id path, which renders a special page
+app.get('/user/:id', function (req, res, next) {
+  res.render('special');
+});</p>
+<p>Middleware de nivell d'router</p>
+<p>El middleware de nivell d'router funciona de la mateixa manera que el middleware de nivell d'aplicació, excepte que està enllaçat a una instància d'express.Router()</p>
+<p>var router = express.Router();</p>
+<p>Carregue el middleware de nivell d'router utilitzant les funciones router.use() i router.METHOD()</p>
+<p>El següent codi d'exemple replica el sistema de middleware que s'ha mostrat anteriorment per al middleware de nivell d'aplicació, utilitzant el middleware de nivell d'router:</p>
+<p>var app = express();
+var router = express.Router();</p>
+<p>// a middleware function with no mount path. This code is executed for every request to the router
+router.use(function (req, res, next) {
+  console.log('Time:', Dóna't.now());
+  next();
+});</p>
+<p>// a middleware sub-stack mostra request info for any type of HTTP request to the /user/:id path
+router.use('/user/:id', function(req, res, next) {
+  console.log('Request URL:', req.originalUrl);
+  next();
+}, function (req, res, next) {
+  console.log('Request Type:', req.method);
+  next();
+});</p>
+<p>// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get('/user/:id', function (req, res, next) {
+  // if the user identificador is 0, skip to the next router
+  if (req.params.id == 0) next('route');
+  // otherwise pass control to the next middleware function in this stack
+  else next(); //
+}, function (req, res, next) {
+  // render a regular page
+  res.render('regular');
+});</p>
+<p>// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', function (req, res, next) {
+  console.log(req.params.id);
+  res.render('special');
+});</p>
+<p>// mount the router on the app
+app.use('/', router);</p>
+<p>Middleware de maneig d'errors</p>
+<p>El middleware de maneig d'errors sempre utilitza quatre arguments. Ha de proporcionar quatre arguments per a identificar-ho com una funció de middleware de maneig d'errors. Encara que no necessite utilitzar l'objecte next, ha d'especificar-lo per a mantindre la signatura. En cas contrari, l'objecte next s'interpretarà com middleware normal i no podrà manejar errors</p>
+<p>Definisca les funcions de middleware de maneig d'errors de la mateixa forma que altres funcions de middleware, excepte amb quatre arguments en lloc de tres, específicament amb la signatura (err, req, res, next):</p>
+<p>app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.estatus(500).send('Something broke!');
+});</p>
+<p>Per a obtindre detalls sobre el middleware de maneig d'errors, consulte: Maneig d'errors.
+Middleware incorporat</p>
+<p>Des de la versió 4.x, Express ja no depén de Connect. Excepte express.static, totes les funcions de middleware que s'incloïen prèviament amb Express estan ara en mòduls diferents. Consulte la llista de funcions de middleware.
+express.static(root, [options])</p>
+<p>L'única funció de middleware incorporat en Express és express.static. Aquesta funció es basa en serve-static i és responsable del servei d'actius estàtics d'una aplicació Express</p>
+<p>L'argument root especifica el directori arrel des del qual es realitza el servei d'actius estàtics</p>
+<p>L'objecte options opcional pot tindre les següents propietats:
+Propietat   Descripció  Tipus   Valor predeterminat
+dotfiles    Opció per al servei de dotfiles. Els valors possibles són “allow”, “deny” i “ignore”    Sèrie   “ignore”
+etag    Habilitar o inhabilitar la generació d'etag     Booleà  true
+extensions  Estableix les reserves d'extensions d'arxius.   Matriu  []
+index   Envia l'arxiu d'índexs de directoris. Establisca'l en false per a inhabilitar la indexació de directoris.   Mixt    “index.html”
+lastModified    Establisca la capçalera Last-Modified en l'última data de modificació de l'arxiu en el sistema operatiu. Els valors possibles són true o false.     Booleà  true
+maxAge  Establisca la propietat max-age de la capçalera Cache-Control en mil·lisegons o una sèrie en format ms  Número  0
+redirect    Redirigir a la “/” final quan el nom de via d'accés és un directori.    Booleà  true
+setHeaders  Funció per a establir les capçaleres HTTP que se serveixen amb l'arxiu.     Funció   </p>
+<p>A continuació, es mostra un exemple d'ús de la funció de middleware express.static amb un objecte d'opcions elaborades:</p>
+<p>var options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now());
+  }
+}</p>
+<p>app.use(express.static('public', options));</p>
+<p>Pot tindre més d'un directori estàtic per a cada aplicació:</p>
+<p>app.use(express.static('public'));
+app.use(express.static('uploads'));
+app.use(express.static('files'));</p>
+<p>Per a obtindre més detalls sobre la funció serve-static i les seues opcions, consulte la documentació de serve-static.
+Middleware de tercers</p>
+<p>Utilitze el middleware de tercers per a afegir funcionalitat a les aplicacions Express</p>
+<p>Instal·le el mòdul Node.js per a la funcionalitat necessària i carregue-ho en l'aplicació a nivell d'aplicació o a nivell d'router</p>
+<p>El següent exemple il·lustra la instal·lació i càrrega de la funció de middleware d'anàlisi de cookies cookie-parser</p>
+<p>$ npm install cookie-parser</p>
+<p>var express = require('express');
+var app = express();
+var cookieParser = require('cookie-parser');</p>
+<p>// lloeu the cookie-parsing middleware
+app.use(cookieParser());</p>
+<p>Per a veure una llista parcial de les funcions de middleware de tercers que més s'utilitzen amb Express, consulte: Middleware de tercers</p>
+<p>Utilització de motors de plantilla amb Express</p>
+<p>Perquè Express puga representar arxius de plantilla, han d'establir-se els següents valors d'aplicació:</p>
+<div class="language-text highlight"><pre><span></span><code>views, el directorio donde se encuentran los archivos de plantilla. Ejemplo: app.set(&#39;views&#39;, &#39;./views&#39;)
+view engine, el motor de plantilla que se utiliza. Ejemplo: app.set(&#39;view engine&#39;, &#39;pug&#39;)
+</code></pre></div>
+<p>A continuació, instal·le el paquet npm de motor de plantilla corresponent:</p>
+<p>console
+$ npm install pug --save
+console</p>
+<p>Els motors de plantilla compatibles amb Express com, per exemple, Pug exporten una funció denominada __express(filePath, options, callback), que és invocada per la funció res.render() per a representar el codi de plantilla</p>
+<p>Alguns motors de plantilla no segueixen aquesta convenció. La biblioteca Consolidate.js segueix aquesta convenció correlacionant tots els motors de plantilla de Node.js més coneguts, per la qual cosa funciona de manera ininterrompuda en Express</p>
+<p>Una vegada establida la propietat view engine, no ha d'especificar el motor ni carregar el mòdul de motor de plantilla en l'aplicació; Express carrega el mòdul internament, com es mostra a continuació (per a l'exemple anterior)</p>
+<p>app.set('view engine', 'pug');</p>
+<p>Creu un arxiu de plantilla Pug denominat index.pug en el directori views, amb el següent contingut:</p>
+<p>html
+  head
+    title= title
+  bodi
+    h1= message</p>
+<p>A continuació, creu una ruta per a representar l'arxiu index.pug. Si la propietat view engine no s'estableix, ha d'especificar l'extensió de l'arxiu view. En cas contrari, pot ometre-la</p>
+<p>app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
+});</p>
+<p>Quan realitze una sol·licitud a la pàgina d'inici, l'arxiu index.pug es representarà com a HTML</p>
+<p>Per a obtindre més informació sobre com funcionen els motors de plantilla en Express, consulte: “Desenvolupament de motors de plantilla per a Express”</p>
+<p>Maneig d'errors</p>
+<p>Definisca les funcions de middleware de maneig d'errors de la mateixa forma que altres funcions de middleware, excepte que les funcions de maneig d'errors tenen quatre arguments en lloc de tres: (err, req, res, next). Per exemple:</p>
+<p>app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.estatus(500).send('Something broke!');
+});</p>
+<p>El middleware de maneig d'errors es defineix al final, després d'altres crides de rutes i app.use(); per exemple:</p>
+<p>var bodyParser = require('body-parser');
+var methodOverride = require('method-override');</p>
+<p>app.use(bodyParser());
+app.use(methodOverride());
+app.use(function(err, req, res, next) {
+  // logic
+});</p>
+<p>Les respostes des d'una funció de middleware poden estar en el format que preferisca, per exemple, una pàgina d'errors HTML, un missatge simple o una sèrie JSON</p>
+<p>A l'efecte de l'organització (i d'infraestructura de nivell superior), pot definir diverses funcions de middleware de maneig d'errors, de la mateixa forma que amb les funcions de middleware normals. Per exemple, si desitja definir un gestor d'errors per a les sol·licituds realitzades utilitzant XHR, i les que no ho tenen, pot utilitzar els següents mandats:</p>
+<p>var bodyParser = require('body-parser');
+var methodOverride = require('method-override');</p>
+<p>app.use(bodyParser());
+app.use(methodOverride());
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);</p>
+<p>En aquest exemple, els logErrors genèrics poden escriure informació de sol·licituds i errors en stderr, per exemple:</p>
+<p>function logErrors(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
+}</p>
+<p>També en aquest exemple, clientErrorHandler es defineix de la següent manera; en aquest cas, l'error es passa de manera explícita al següent:</p>
+<p>function clientErrorHandler(err, req, res, next) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something failed!' });
+  } else {
+    next(err);
+  }
+}</p>
+<p>La funció que detecta tots els errors d'errorHandler pot implementar-se de la següent manera:</p>
+<p>function errorHandler(err, req, res, next) {
+  res.estatus(500);
+  res.render('error', { error: err });
+}</p>
+<p>Si passa qualsevol valor a la funció next() (excepte la sèrie 'route'), Express considera que la sol·licitud actual té un error i ometrà les restants funcions de middleware i adreçament que no són de maneig d'errors. Si desitja manejar aqueix error d'alguna manera, haurà de crear una ruta de maneig d'errors com es descriu en la següent secció</p>
+<p>Si té un gestor de rutes amb diverses funcions de devolució de crida, pot utilitzar el paràmetre route per a ometre el següent gestor de rutes. Per exemple:</p>
+<p>app.get('/a_route_behind_paywall',
+  function checkIfPaidSubscriber(req, res, next) {
+    if(!req.user.hasPaid) {</p>
+<div class="language-text highlight"><pre><span></span><code>  // continue handling this request
+  next(&#39;route&#39;);
+}
+</code></pre></div>
+<p>}, function getPaidContent(req, res, next) {
+    PaidContent.find(function(err, doc) {
+      if(err) return next(err);
+      res.json(doc);
+    });
+  });</p>
+<p>En aquest exemple, s'ometrà el gestor getPaidContent, però els restants gestors en app per a /a_route_behind_paywall continuaran executant-se</p>
+<p>Les anomenades a next() i next(err) indiquen que el gestor actual està complet i en quin estat. next(err) ometrà els altres gestors de la cadena, excepte els que s'hagen configurat per a manejar errors com s'ha descrit anteriorment.
+El gestor d'errors predeterminat</p>
+<p>Express se subministra amb un gestor d'errors incorporat, que s'encarrega dels errors que apareixen en l'aplicació. Aquesta funció de middleware de maneig d'errors predeterminada s'afig al final de la pila de funcions de middleware</p>
+<p>Si passa un error a next() i no el maneja en el gestor d'errors, el manejarà el gestor d'errors incorporat; l'error s'escriurà en el client amb el seguiment de la pila. El seguiment de la pila no s'inclou a l'entorn de producció</p>
+<p>Establisca la variable d'entorn NODE_ENV en production, per a executar l'aplicació en modalitat de producció</p>
+<p>Si invoca next() amb un error després d'haver començat a escriure la resposta (per exemple, si troba un error mentre s'envia la resposta en modalitat contínua al client), el gestor d'errors predeterminat d'Express tanca la connexió i falla la sol·licitud</p>
+<p>Per tant, quan afig un gestor d'errors personalitzat, es recomana delegar en els mecanismes de maneig d'errors predeterminats d'Express, quan les capçaleres ja s'han enviat al client:</p>
+<p>function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.estatus(500);
+  res.render('error', { error: err });
+}</p>
+<p>Depuració d'Express</p>
+<p>Express utilitza el mòdul debug internament per a registrar informació sobre les coincidències de rutes, les funcions de middleware que s'estan utilitzant, la modalitat d'aplicació i el flux del cicle de sol·licitud/respostes</p>
+<p>debug és com una versió augmentada de console.log, encara que a diferència de console.log, no ha de comentar els registres debug en el codi de producció. El registre està desactivat de manera predeterminada i pot activar-se condicionalment utilitzant la variable d'entorn DEBUG</p>
+<p>Per a veure tots els registres interns utilitzats en Express, establisca la variable d'entorn DEBUG en express:* quan inicie l'aplicació</p>
+<p>$ DEBUG=express:* node index.js</p>
+<p>En Windows, utilitze el mandat corresponent</p>
+<blockquote>
+<p>set DEBUG=express:* &amp; node index.js</p>
+</blockquote>
+<p>L'execució d'aquest mandat en l'aplicació predeterminada generada pel generador d'Express imprimeix la següent eixida:</p>
+<p>$ DEBUG=express:* node ./bin/www
+  express:router:route new / +0ms
+  express:router:layer new / +1ms
+  express:router:route get / +1ms
+  express:router:layer new / +0ms
+  express:router:route new / +1ms
+  express:router:layer new / +0ms
+  express:router:route get / +0ms
+  express:router:layer new / +0ms
+  express:application compile etag weak +1ms
+  express:application compile query parser esteneu +0ms
+  express:application compile trust proxy false +0ms
+  express:application booting in development mode +1ms
+  express:router use / query +0ms
+  express:router:layer new / +0ms
+  express:router use / expressInit +0ms
+  express:router:layer new / +0ms
+  express:router use / favicon +1ms
+  express:router:layer new / +0ms
+  express:router use / logger +0ms
+  express:router:layer new / +0ms
+  express:router use / jsonParser +0ms
+  express:router:layer new / +1ms
+  express:router use / urlencodedParser +0ms
+  express:router:layer new / +0ms
+  express:router use / cookieParser +0ms
+  express:router:layer new / +0ms
+  express:router use / stylus +90ms
+  express:router:layer new / +0ms
+  express:router use / serveStatic +0ms
+  express:router:layer new / +0ms
+  express:router use / router +0ms
+  express:router:layer new / +1ms
+  express:router use /users router +0ms
+  express:router:layer new /users +0ms
+  express:router use / &lt;anonymous&gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &lt;anonymous&gt; +0ms
+  express:router:layer new / +0ms
+  express:router use / &lt;anonymous&gt; +0ms
+  express:router:layer new / +0ms</p>
+<p>Quan es realitza una sol·licitud a l'aplicació, veurà els registres especificats en el codi d'Express:</p>
+<p>express:router dispatching GET / +4h
+  express:router query  : / +2ms
+  express:router expressInit  : / +0ms
+  express:router favicon  : / +0ms
+  express:router logger  : / +1ms
+  express:router jsonParser  : / +0ms
+  express:router urlencodedParser  : / +1ms
+  express:router cookieParser  : / +0ms
+  express:router stylus  : / +0ms
+  express:router serveStatic  : / +2ms
+  express:router router  : / +2ms
+  express:router dispatching GET / +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms</p>
+<p>Per a veure només els registres de la implementació d'router, establisca el valor de DEBUG en express:router. De la mateixa forma, per a veure només els registres de la implementació d'aplicació, establisca el valor de DEBUG en express:application, etc.
+Aplicacions generades per express</p>
+<p>Una aplicació generada pel mandat express també utilitza el mòdul debug, i l'àmbit del seu espai de noms de depuració s'estableix en el nom de l'aplicació</p>
+<p>Per exemple, si ha generat l'aplicació amb $ express sample-app, pot habilitar les sentències de depuració amb el següent mandat:</p>
+<p>$ DEBUG=sample-app:* node ./bin/www</p>
+<p>Pot especificar més d'un espai de noms de depuració assignant una llista separada per comes de noms:</p>
+<p>$ DEBUG=http,mail,express:* node index.js</p>
+<p>Per a obtindre més informació sobre debug, consulte debug.
+Express és un projecte de la Fundació OpenJS.
+Bifurque el lloc web en GitHub.
+Copyright © StrongLoop, Inc. i altres col·laboradors d'expressjs.com.
+Llicència Creative Commons Aquesta obra està sota una Llicència Creative Commons Atribució-CompartirIgual 3.0 els Estats Units d'Amèrica</p>
+<p>Express darrere de proxies</p>
+<p>Quan execute una aplicació Express darrere d'un proxy, establisca (utilitzant app.set()) la variable d'aplicació trust proxy en un dels valors de la següent taula</p>
+<p>Encara que l'aplicació no deixarà d'executar-se si no s'estableix la variable d'aplicació trust proxy, registrarà incorrectament l'adreça IP del proxy com l'adreça IP del client, llevat que es configure trust proxy.
+Tipus   Valor
+Booleà  </p>
+<p>Si és true, l'adreça IP del client s'entén com l'entrada més a l'esquerra en la capçalera X-Forwarded-*</p>
+<p>Si és false, l'aplicació s'entén com orientada directament a Internet, i l'adreça IP del client s'obté de req.connection.remoteAddress. Aquest és el valor predeterminat.
+Adreces IP  </p>
+<p>Una adreça IP, una subxarxa o una matriu d'adreces IP i subxarxes de confiança. La següent llista mostra els noms de subxarxa preconfigurados:</p>
+<div class="language-text highlight"><pre><span></span><code>loopback - 127.0.0.1/8, ::1/128
+linklocal - 169.254.0.0/16, fe80::/10
+uniquelocal - 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, fc00::/7
+</code></pre></div>
+<p>Pot establir adreces IP de diverses formes:</p>
+<p>app.set('trust proxy', 'loopback') // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</p>
+<p>Quan s'especifiquen, les adreces IP o les subxarxes s'exclouen del procés de determinació d'adreces, i l'adreça IP no de confiança més pròxima al servidor d'aplicacions s'estableix com l'adreça IP del client.
+Número  </p>
+<p>Confie en la porció n entre l'origen i la destinació del servidor proxy accessible externament com el client.
+Funció  </p>
+<p>Implementació de confiança personalitzada. Utilitze-la només si sap el que està fent</p>
+<p>app.set('trust proxy', function (ip) {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
+  else return false;
+});</p>
+<p>Si estableix un valor de trust proxy diferent de false, es produeixen tres canvis importants:</p>
+<div class="language-text highlight"><pre><span></span><code>El valor de req.hostname se obtiene del valor definido en la cabecera X-Forwarded-Host, que puede estar establecido por el cliente o el proxy.
+
+El proxy inverso puede establecer X-Forwarded-Proto para indicar a la aplicación si es https, http o incluso un nombre no válido. req.protocol refleja este valor.
+
+Los valores req.ip y req.ips se rellenan con la lista de direcciones de X-Forwarded-For.
+</code></pre></div>
+<p>El valor trust proxy s'implementa utilitzant el paquet proxy-addr. Per a obtindre més informació, consulte la seua documentació</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

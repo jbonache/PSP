@@ -1,0 +1,50 @@
+¿Cuál de las siguientes frases define mejor el concepto de proceso?
+{
+    ~Un fichero ejecutable, que contiene órdenes para el procesador.
+    ~El conjunto de programas, documentación y recursos, como imágenes y ficheros de configuración.
+    =Una instancia de un programa en ejecución, al que se le han asignado recursos del sistema.
+    ~Una instancia de un programa en ejecución, que comparte recursos, como la memoria, con otros procesos.
+    ~El conjunto de pasos necesario para hacer que un programa ejecutable se cargue en memoria y empiece su ejecución.
+}
+
+¿Qué afirmación de las siguientes es correcta acerca del estado R (Runnable) de un proceso?
+{
+    =Contiene los estados Preparado y En ejecución. Quien decide qué proceso pasa de preparado a En Ejecución es el planificador del sistema.
+    ~Contiene los estados Preparado y En ejecución. Quien decide qué proceso pasa de En Ejecución a Preparado es el planificador del esistema.
+    ~Contiene los estados D y S, y el paso de uno a otro lo determinan las operaciones de E/S.
+    ~Contiene los estados Z y T, y el paso de uno a otro se realiza mediante señales.
+    ~Se inicia mediante la llamada al sistema wait()
+}
+
+¿Qué estado posee un proceso que ha finalizado su ejecución mediante exit(), pero su proceso padre todavía no ha consultado este estado de finalización?
+{
+    ~Estado D (En Espera E/S)
+    ~Esado S (Esperando evento)
+    =Estado Z (Zombie)
+    ~Estado T (Finalizado)
+    ~Estado R (Runnable)
+}
+
+¿Qué orden podemos utilizar para conocer en tiempo real los diferentes procesos y su consumo de recursos?
+{
+    =top
+    ~ps
+    ~pidof
+    ~pgrep
+    ~systemctl
+}
+
+::Sobre demonios y servicios::
+Los demonios son procesos que se ejecutan en segundo plano{T}
+
+::Sobre demonios y servicios::
+Los demonios pueden tener terminal asociada e interfaz gráfica{F}
+
+::Sobre demonios y servicios::
+Los demonios pueden ofrecer servicios o realizar otras tareas, como mantener la hora del sistema {T}
+
+::Sobre demonios y servicios::
+El demonio Systemd se encarga también de la secuencia de arranque del sistema y de gestionar los diferentes niveles de ejecución {T}
+
+::Sobre demonios y servicios::
+El demonio Systemd utiliza el comando systemctl para consultar el estado de los servicios, pero no puede gestionar éstos{F}

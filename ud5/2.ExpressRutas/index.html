@@ -1,0 +1,1176 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1p.expressSimple/">
+      
+      
+        <link rel="next" href="../3.MVC/">
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>ExpressJS. Adreçament, programari intermedi i API REST - Webservices amb ExpressJS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adrecament-i-metodes-de-ruta" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Webservices amb ExpressJS" class="md-header__button md-logo" aria-label="Webservices amb ExpressJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Webservices amb ExpressJS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ExpressJS. Adreçament, programari intermedi i API REST
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Webservices amb ExpressJS" class="md-nav__button md-logo" aria-label="Webservices amb ExpressJS" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Webservices amb ExpressJS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.IntroExpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p.expressSimple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Servidor web amb Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    2. Express. Adreçament, programari intermedi i API REST
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Express. Adreçament, programari intermedi i API REST
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adrecament-i-metodes-de-ruta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adreçament i mètodes de ruta
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manejadores-de-rutes-i-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manejadores de rutes i Middleware
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manejadores de rutes i Middleware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paràmetres
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apis-rest-amb-express" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIs REST amb Express
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="APIs REST amb Express">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rutes-en-express-i-apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rutes en Express i APIs REST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametres-del-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paràmetres del path
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composicio-i-execucio-de-middlewares" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composició i execució de Middlewares
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Composició i execució de Middlewares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#middlewares-derror" class="md-nav__link">
+    <span class="md-ellipsis">
+      Middlewares d'error
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peticions-post-i-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      peticions POST i PUT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="peticions POST i PUT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#petciones-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      Petciones POST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#peticions-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peticions PUT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.MVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. MVC del costat del servidor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.Https_JWT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Comunicacions segures. HTTPS i JWT.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.ExpressMongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Accés a BBDD MongoDB. Mongoose.
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adrecament-i-metodes-de-ruta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adreçament i mètodes de ruta
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manejadores-de-rutes-i-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manejadores de rutes i Middleware
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manejadores de rutes i Middleware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paràmetres
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apis-rest-amb-express" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIs REST amb Express
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="APIs REST amb Express">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rutes-en-express-i-apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rutes en Express i APIs REST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametres-del-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paràmetres del path
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composicio-i-execucio-de-middlewares" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composició i execució de Middlewares
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Composició i execució de Middlewares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#middlewares-derror" class="md-nav__link">
+    <span class="md-ellipsis">
+      Middlewares d'error
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peticions-post-i-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      peticions POST i PUT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="peticions POST i PUT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#petciones-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      Petciones POST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#peticions-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peticions PUT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>2. Express. Adreçament, programari intermedi i API REST</h1>
+
+<h2 id="adrecament-i-metodes-de-ruta">Adreçament i mètodes de ruta</h2>
+<p>L'adreçament en Express consisteix en la definició de punts finals d'aplicació o <em>endpoints</em> (URI) i com es respon a les sol·licituds de client.</p>
+<p>Els <strong>mètodes de ruta</strong> es corresponen amb els mètodes HTTP i s'adjunten a una instància d'Express. Entre altres, Express admet <code>get</code>, <code>post</code>, <code>put</code>, <code>patch</code>, <code>delete</code>, <code>head</code> i <code>options</code>; en els exemples utilitzarem principalment els cinc primers.</p>
+<p>A part d'aquests mètodes, existeix un mètode d'adreçament especial: <code>app.all()</code>, que no es correspon amb cap mètode HTTP i que s'utilitza per a carregar funcions de middleware per a tots els mètodes de sol·licitud.</p>
+<p>D'altra banda, disposem de les <strong>vies d'accés de ruta</strong>, que es combinana amb els mètode de sol·licitud per a definir aquests punts finals sobre els quals realitzar les sol·licituds. Així doncs:</p>
+<p>$$Punto.de.acceso.de.la.aplicació = Método.de.ruta + Vía.de.acceso.de.ruta$$</p>
+<p>Aquestes vies d'accés poden ser tant cadenes literals com patrons o expressions regulars</p>
+<p>Alguns exemples de vies d'accés de ruta que podem usar són els següents (extrets de la documentació oficial d'Express):</p>
+<ul>
+<li>Via d'accés de ruta per a les sol·licituds a la ruta arrel, mitjançant el mètode de ruta <em>GET</em></li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<ul>
+<li>Via d'accés que coincideix amb les sol·licituds al recurs <em>/about</em>, mitjançant el mètode <em>GET</em></li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/about&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;about&#39;</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<ul>
+<li>Express 5 ja no interpreta <code>?</code>, <code>+</code> o <code>*</code> com els patrons de cadena d'Express 4. Per a fer coincidir <code>acd</code> i <code>abcd</code>, podem emprar una expressió regular de JavaScript:</li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sr">/^\/ab?cd$/</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Patró ab?cd&#39;</span><span class="p">);</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<ul>
+<li>Via d'accés que coincideix amb el patró <code>ab+cd</code>, on <code>+</code> indica una o més repeticions del caràcter que el precedeix, per la qual cosa coincidirà amb <code>abcd</code>, <code>abbcd</code>:</li>
+</ul>
+<div class="language-JS highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sr">/^\/ab+cd$/</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;ab+cd&#39;</span><span class="p">);</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<ul>
+<li>Via d'accés que coincideix amb el patró <code>ab.*cd</code>, on <code>.*</code> indica qualsevol seqüència de caràcters:</li>
+</ul>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sr">/^\/ab.*cd$/</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;ab.*cd&#39;</span><span class="p">);</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En la <a href="https://expressjs.com/es/guide/routing.html">documentació oficial d'Express sobre adreçament</a> pots trobar més exemples de rutes, també amb expressions regulars.</p>
+</div>
+<h2 id="manejadores-de-rutes-i-middleware">Manejadores de rutes i Middleware</h2>
+<p>Per a gestionar les respostes a les diferents peticions utilitzem funcions de callback, que actuen com middleware. Quan el PATH i el mètode sol·licitats coincideixen amb una ruta, s'executa el callback definit en la instància d'Express per a aquesta ruta.</p>
+<p>Així doncs, amb el mètode <code>app.get(path, MiddleWare)</code>, el que fem és instal·lar el Middleware en l'a plicación perquè només s'execute quan arriben sol·licituds HTTP de tipus <code>GET path</code>. Si arriba una petició a la mateixa ruta amb un altre mètode (PUT, POST, DELETE) o el propi GET però amb un altre PATH, es passa al següent middleware, sense executar aquest.</p>
+<p>Per a instal·lar un <em>Middleware (MW)</em> utilitzarem bé el mètode <code>use(MW)</code>, o bé amb el mètode (<code>get</code>, <code>post</code>, etc.). Com ja hauràs deduït, els middleware s'invoquen en l'ordre d'instal·lació.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La principal diferència entre usar <code>use</code> i un mètode HTTP és que <code>use</code> respon a qualsevol mètode i a qualsevol ruta.</p>
+</div>
+<p>L'atenció a una sol·licitud HTTP finalitzarà quan s'invoque a <code>res.send(...)</code>, que envia la resposta i finalitza l'execució, de manera que quan s'atén una petició que envia una resposta, els següents <em>middleware</em> ja no s'executaran.</p>
+<h3 id="parametres">Paràmetres</h3>
+<p>Aquests callbacks o middleware reben diversos paràmetres. Els dos primers són:</p>
+<ul>
+<li><a href="http://expressjs.com/es/api#req"><code>req</code></a>: Un objecte Javascript amb els paràmetres sobre la sol·licitud HTTP, com el mètode usat o el path entre altres.</li>
+<li><a href="http://expressjs.com/es/api#res"><code>res</code></a>: Un objecte Javascript per a configurar la resposta HTTP, com el tipus MIME del recurs, o el codi d'estat.</li>
+</ul>
+<p>Vegem-ho amb el següent exemple. Si afegim el següent Middleware:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/info&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="c1">// Parámetros de la petición</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">metodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">ruta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;host&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Alias de req.header(&quot;host&quot;);</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="c1">// Configuración de la respuesta</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">tipo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;text/plain&quot;</span><span class="p">;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">200</span><span class="p">;</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="c1">// Uso de template string para la salida</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">salida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`Método: </span><span class="si">${</span><span class="nx">metodo</span><span class="si">}</span><span class="sb"> </span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="sb">Ruta: </span><span class="si">${</span><span class="nx">ruta</span><span class="si">}</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="sb">Host: </span><span class="si">${</span><span class="nx">host</span><span class="si">}</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="sb">`</span><span class="p">;</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="nx">tipo</span><span class="p">);</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="nx">estado</span><span class="p">);</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">salida</span><span class="p">);</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="p">});</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Callback general&quot;</span><span class="p">);</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`Lo siento, no encuentro </span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Com veiem, hem instal·lat un middleware per a la ruta <code>/info</code>, que ens retorna paràmetres relatius a la petició, com el mètode, la ruta, o l'Host (aquest últim utilitzant el mètode <code>get</code> de l'objecte <code>req</code> que és un àlies del mètode <code>header</code>). En la resposta, a més es configura el tipus com a text pla, i amb el codi d'estat 200.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Per a realitzar les peticions al nostre servei, podem utilitzar directament el navegador, o aplicacions tipus <em>Postman</em> que ens permeten una major configuració de les peticions.</p>
+<p>Un altre client interessant per a accedir als recursos del nostre servidor, des de la línia de ordres, és CURL.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ curl http://127.0.0.1:8080/info
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Método: GET 
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Ruta: /info
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Host: 127.0.0.1:8080
+</span></code></pre></div>
+<p>Aquest mateix ordre, amb l'opció -v (verbose) ens mostra informació detallada de la petició i la resposta:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ curl -v http://127.0.0.1:8080/info
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>*   Trying 127.0.0.1:8080...
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>* TCP_NODELAY set
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>&gt; GET /info HTTP/1.1
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>&gt; Host: 127.0.0.1:8080
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>&gt; User-Agent: curl/7.68.0
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>&gt; Accept: */*
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>&gt; 
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>* Mark bundle as not supporting multiuse
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>&lt; HTTP/1.1 200 OK
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>&lt; X-Powered-By: Express
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>&lt; Content-Type: text/plain; charset=utf-8
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>&lt; Content-Length: 47
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>&lt; ETag: W/&quot;2f-5Yzd6IVh8rTtp1AW6Q2GEbARu3U&quot;
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>&lt; Date: Thu, 29 Dec 2022 07:46:16 GMT
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>&lt; Connection: keep-alive
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>&lt; Keep-Alive: timeout=5
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>&lt; 
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>Método: GET 
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>Ruta: /info
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>Host: 127.0.0.1:8080
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>* Connection #0 to host 127.0.0.1 left intact
+</span></code></pre></div>
+</div>
+<h2 id="apis-rest-amb-express">APIs REST amb Express</h2>
+<p>Una API és un conjunt de definicions i protocols que permeten la interacció entre sistemes per a obtindre dades o executar certes funcionalitats, de manera que el sistema comprenga la sol·licitud i la complisca.</p>
+<p>A principis del segle XXI, no existia cap estándard sobre disseny d'APIs, i aquestes s'implementaven usant altres protocols com SOAP, pesats i complexos. Va ser llavors quan va sorgir, de la mà de Roy Fielding la transferència d'estat representacional, <strong><em>RE</em>*presentational </strong>S<strong>tate </strong>T*<em>ransfer</em> (REST)</p>
+<p>Fielding va proposar una sèrie de principis d'arquitectura per a les aplicacions web escalables, conegudes com a <em>Arquitectura Orientada a Recursos.</em> Aquests principis són:</p>
+<ul>
+<li><strong>Client-servidor</strong>: Client i servidor han de ser entitats independents, de manera que únicament es comuniquen mitjançant sol·licituds .HTTP, </li>
+<li><strong>Sense estat (<em>stateless</em>)</strong>: La comunicació entre el client i el servidor ha de ser sense estat, això és, sense que s'emmagatzema o compartisca informació entre peticions. Cada petició serà independent, i contindrà únicament la informació per al seu processament.</li>
+<li><strong>Direccionalibidad/Identificador únic (URI)</strong>: Tot recurs ha de tindre un identificador irrepetible, de manera que no existisquen dos o més recursos amb el mateix identificador en la xarxa, i a més, han de mantindre una jerarquia lògica.</li>
+<li><strong>Ús correcte d'HTTP</strong>: Respectant els verbs (mètodes GET, POST, PUT, PATCH, DELETE) i <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Status">codis d'estat</a> per a cada operació.</li>
+</ul>
+<p>A més es proposa l'ús de <strong>recursos en format obert</strong>, com a HTML, XML, JSON, etc</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En l'article <a href="https://medium.com/@dcortes.net/introducci%C3%B3n-a-las-apis-rest-6b3ad900acc9">Fonaments de l'arquitectura REST</a> disposes de més informació interessant sobre aquests principis i altres recomanacions interessants per al desenvolupament d'APIS REST.</p>
+</div>
+<h3 id="rutes-en-express-i-apis-rest">Rutes en Express i APIs REST</h3>
+<p>La manera de definir rutes en Express està dissenyada per a facilitar la creació d'APIS REST.</p>
+<p>Aquestes rutes estan formades per segments separats per <code>/</code>, que poden ser de dos tipus:</p>
+<ul>
+<li><strong>Segments literals</strong>: compostos per text amb caràcters permesos en URLs, combinats amb els caràcters especials <code>*</code>, <code>?</code> i <code>+</code>.</li>
+<li><strong>Paràmetres</strong>: Variables que es proporcionen a través de la URL.</li>
+</ul>
+<h3 id="parametres-del-path">Paràmetres del path</h3>
+<p>Un client HTTP pot enviar paràmetres a través de les URL (conegudes com a URL pesades o fat URL). Aquests paràmetres es poden identificar en Express en la definició de les rutes que accepta utilitzant el caràcter <code>:</code>, i accedint a elles a través de l'objecte <code>req.params</code></p>
+<p>Per exemple, un servei de <em>tire</em> molt simple seria:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/echo/:texto&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">texto</span><span class="p">);</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Com veiem, rep un paràmetre <em>text</em>, al qual accedim amb <code>req.params.texto</code>, i ho retornem en la resposta. Amb això, si el client realitza la petició <em>http://127.0.0.1:8080/echo/Hola</em> obté <em>Hola</em> com a resposta</p>
+<p>Altres exemples de rutes més complexes però útils podrien ser:</p>
+<ul>
+<li><code>/usuario/:id</code>, Per a obtindre un usuari pel seu <code>id</code> (<code>req.params.id</code>),</li>
+<li><code>/series/:idSerie/temporadas/:temporada/capitulos/:capitulo</code>, on <code>idSerie</code> (<code>req.params.idSerie</code>), <code>temporada</code> (<code>req.params.temporada</code>) i <code>capitulo</code> (<code>req.params.capitulo</code>) serien els paràmetres per a referenciar un capítol dins d'una temporada d'una sèrie.</li>
+</ul>
+<p>A Express 5 ha canviat la sintaxi de les rutes. Els paràmetres opcionals ja no s'indiquen amb <code>?</code>; s'han d'envoltar amb claus. Per exemple:</p>
+<ul>
+<li><code>/usuarios{/:id}</code> respondrà tant a <code>/usuarios/123</code> com a <code>/usuarios</code>.</li>
+</ul>
+<p>Express 5 ja no admet expressions regulars incrustades en una cadena de ruta com <code>/usuario/:id(\\d+)</code>. La ruta captura el valor i el codi l'ha de validar; per exemple, podem comprovar <code>req.params.id</code> amb una expressió regular i retornar <code>400 Bad Request</code> si no és vàlid. També podem passar una expressió regular completa com a ruta, però no hi obtindrem paràmetres amb nom.</p>
+<p>D'altra banda, un segment també pot incloure diversos paràmetres separats per "-" o per ".", per exemple: <code>/:from-:to</code> o <code>/:file.:extension</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Si desitgem també atendre a queries de tipus GET amb l'aspecte: <code>/recurso?parámetro=valor</code>, podem utilitzar l'objecte <code>query</code> de la petició de la següent manera:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/usuario&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Amb això, podem realitzar peticions tipus <code>http://127.0.0.1:8080/usuario?id=Pepe</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Recurs</p>
+<ul>
+<li>Vídeo <a href="https://www.youtube.com/watch?v=ntck3vefQtI&amp;list=PLo4CW_btA6oYkJICu47MsmR0t4JNUQT8z&amp;index=1">Express: Aplicació, MW, static, sol·licitud (req), resposta (resposta) i API REST</a></li>
+</ul>
+</div>
+<h2 id="composicio-i-execucio-de-middlewares">Composició i execució de Middlewares</h2>
+<p>Una aplicació Express consisteix en la instal·lació de middlewares associats a determinades rutes i mètodes, de manera que quan rep una petició HTTP, avalua els middlewares en l'ordre d'instal·lació, de manera que s'invoca al primer que concorde amb el mètode i la ruta de la sol·licitud.</p>
+<p>Recordem que un middleware no és més que una funció que, fins ara, rebia dos paràmetres: <code>req</code> i <code>res</code>. Podem completar aquesta funció amb un tercer argument <code>next</code>:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Cos del middleware */</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>Aquest tercer paràmetre serveix per a indicar a l'aplicació Express que continue avaluant els middlewares següents quan finalitze l'execució del middleware on s'invoca.</p>
+<p>Si un middleware no invoca <code>next()</code>, com en els middlewares vistos fins ara, ha d'enviar una resposta mitjançant <code>res.send()</code>, <code>res.json()</code>, <code>res.end()</code> o un mètode equivalent. <strong>En cas contrari, el client quedarà esperant una resposta.</strong></p>
+<p>Un altre aspecte a tindre en compte és que en Javascript tots els objectes són tractats mitjançant referències, per la qual cosa els objectes <code>req</code> i <code>res</code> poden tractar-se com a objectes persistents en una mateixa transacció. D'aquesta manera, un middleware pot crear o processar propietats de <code>req</code> i <code>res</code> per a les seues middlewares posteriors, activats mitjançant la funció <code>next()</code></p>
+<p>A més, disposem dels objectes <code>app.locals</code> i <code>res.locals</code>, que podem utilitzar per a passar dades entre middlewares de l'aplicació, concretament:</p>
+<ul>
+<li><code>app.locals</code> permet crear propietats persistents a l'aplicació (entre diferents transacciones HTTP).</li>
+<li><code>res.locals</code> permet crear propietats dins de la mateixa transacció HTTP, que desapareixen quan acabe.</li>
+</ul>
+<p>L'enfocament que ofrecce Express amb els middlewares permet una programació seqüencial i modular, però amb els avantatges de la programació funcional i basada en esdeveniments de Javascript.</p>
+<p>Vegem un xicotet exemple consistent en un comptador de visites per al nostre lloc.</p>
+<p>Instal·larem els següents middlewares en el nostre servidor, just abans d'instal·lar el middleware Static:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// Contador de visitas</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;visits&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">visits</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">visits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="p">});</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/visits/show&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`Número de visitas: </span><span class="si">${</span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">visits</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">});</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/visits/reset&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">visits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;Contador de visitas reseteado&quot;</span><span class="p">);</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Com veiem, hem instal·lat tres middlewares nous:</p>
+<ul>
+<li>
+<p>El primer coincidirà amb qualsevol petició (ja que es defineix amb <code>use</code>), i internament té el següent funcionament: Comprova si l'objecte <code>app.locals</code> posseeix un camp <code>visits</code>. En cas que no ho continga, ho crearà, inicialitzant-ho a 0. Si aquest existeix, el que farà serà incrementar-ho en una unitat. Finalment, invoca a <code>next()</code>, perquè continue examinant els següents middlewares.</p>
+</li>
+<li>
+<p>El segon, coincideix amb la petició <code>GET servidor:puerto/visits/show"</code>,i el que fa és retornar en <code>res</code> un text amb el valor d'aquest comptador.</p>
+</li>
+<li>
+<p>El tercer, coincideix amb la petició <code>GET servidor:puerto/visits/reset"</code>, I el que fa és reinicialitzar aquest comptador de visites, retornant un missatge amb de confirmació.</p>
+</li>
+</ul>
+<p>Com veiem, l'efecte del primer middleware és incrementa el comptador en cada visita al servidor, independentment del recurs que se sol·licite, ja que coincideix amb qualsevol petició. Recordem que <code>app.locals</code> és un objecte persistent en l'aplicació Express, per la qual cosa el seu valor no s'eliminarà després de cada transacció HTTP.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Què passaria si el primer middleware s'haguera instal·lat al final?</strong></p>
+<p>Observem la importància de l'ordre d'instal·lació dels middlewares, ja que una vegada que una petició coincidisca amb un mètode i una ruta executa el middleware associat, i finalitzaria l'execució sempre que no s'invoque a <code>next</code></p>
+</div>
+<h3 id="middlewares-derror">Middlewares d'error</h3>
+<p>Els errors o excepcions es gestionaran mitjançant middlewares d'error.</p>
+<p>Un middleware d'error es defineix amb un paràmetre inicial addicional (<code>err</code>):</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Cos del middleware d&#39;error */</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>I s'invoca mitjançant la funció <code>next()</code> proporcionant-li el codi d'error: <code>next(err)</code> </p>
+<p>La diferència principal enre <code>next()</code> i <code>next(err)</code> és que el primer indica a Express que continue avaluant els següents middlewares, i la segona que avalue els següents middlewares d'error.</p>
+<p>Per a instal·lar un middleware d'error, ho farem exactament igual que la resta de middleware, associant-los a rutes i mètodes </p>
+<p>Cal destacar que dins d'un middleware d'error, també podem invocar a <code>next()</code> per a indicar que es continuen examinant la resta de middlewares o a <code>next(err)</code>, per a indicar que es continuen examinant els middlewares d'error. Per exemple, si es produeix una excepció que se soluciona en un middleware d'error, amb <code>next()</code> podem seguir el flux d'anàlisi normal de middlewares.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Recordem que per a cada transacció HTTP, hem d'assegurar-nos de retornar una resposta al client, ja siga en un middleware comú o en un d'error.</p>
+</div>
+<p>La manera d'estructurar els middlewares serà similar a com estructurem el nostre codi mitjançant blocs d'excepcions try-catch</p>
+<p>Vegem un exemple per a un servidor estàtic que únicament acceptarà peticions GET:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">import</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;path&#39;</span><span class="p">;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">import</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;url&#39;</span><span class="p">;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">__filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">url</span><span class="p">.</span><span class="nx">fileURLToPath</span><span class="p">(</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="kd">const</span><span class="w"> </span><span class="nx">__dirname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">__filename</span><span class="p">);</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="c1">// Middleware 1</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;405&quot;</span><span class="p">;</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">        </span><span class="nx">next</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;405. Method Not Allowed&quot;</span><span class="p">));</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="p">})</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="c1">// Middleware 2 (Static)</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="k">static</span><span class="p">(</span><span class="nx">__dirname</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;/public&#39;</span><span class="p">));</span>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="c1">// Middleware 3</span>
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;404&quot;</span><span class="p">;</span>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">    </span><span class="nx">next</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;404 Not Found&quot;</span><span class="p">));</span>
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="p">});</span>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="c1">// Middleware de error</span>
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>En aquest codi, el primer middleware que instal·lem comprova mitjançant <code>req.method</code> que el mètode que se sol·licita és <code>GET</code>. En cas contrari, invocarà al middleware d'error, proporcionant-li un error amb el text <em>405. Method not allowed</em>. A més, utilitzarà l'objecte <code>res.locals</code> per a emmagatzemar el codi d'error. Si es tracta d'un mètode <code>GET</code>, continuarà amb l'eXecuió.</p>
+<p>El segon middleware, Static, atén les sol·licituds de recursos estàtics, situats en la carpeta <code>public</code>. Si el recurs existeix, se serveix, i es finalitza l'execució.</p>
+<p>En cas que no existisca cap recurs, es llançarà el tercer middleware, que casa amb qualsevol ruta, i que estableix el codi d'error <em>"404 Not Found"</em> per a invocar al middleware d'error.</p>
+<p>Finalment, ens trobem amb aquest middleware d'error, que establirà el codi d'error i retornarà el missatge d'error al client.</p>
+<p>Per a provar una sol·licitud amb un altre mètode, podem utilitzar CURL de la següent manera:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ curl -v -X PUT http://127.0.0.1:8080/
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>*   Trying 127.0.0.1:8080...
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>* TCP_NODELAY set
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>&gt; PUT / HTTP/1.1
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>&gt; Host: 127.0.0.1:8080
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>&gt; User-Agent: curl/7.68.0
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>&gt; Accept: */*
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>&gt; 
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>* Mark bundle as not supporting multiuse
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>&lt; HTTP/1.1 405 Method Not Allowed
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>&lt; X-Powered-By: Express
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>&lt; Content-Type: text/html; charset=utf-8
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>&lt; Content-Length: 30
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>&lt; ETag: W/&quot;1e-fU/5EJQx0ZPT+wEJ+VUkN33HsWQ&quot;
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>&lt; Date: Fri, 30 Dec 2022 08:36:00 GMT
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>&lt; Connection: keep-alive
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>&lt; Keep-Alive: timeout=5
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>&lt; 
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>* Connection #0 to host 127.0.0.1 left intact
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>Error: 405. Method Not Allowed
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<ul>
+<li>
+<p>Article <em>Utilització de middleware</em> en la documentació oficial d'Express:</p>
+<ul>
+<li><a href="https://expressjs.com/es/guide/using-middleware.html">https://expressjs.com/es/guide/using-middleware.html</a></li>
+</ul>
+</li>
+<li>
+<p>Podem trobar una llista de middleware de tercers en la documentació d'Express:</p>
+<ul>
+<li><a href="https://expressjs.com/es/resources/middleware.html">https://expressjs.com/es/resources/middleware.html</a></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En el següent vídeo del MOOC sobre desenvolupament Backend amb Node.js, Express i BBDD pots trobar més informació sobre aquest apartat.</p>
+<p>https://www.youtube.com/watch?v=A2lE9ZcYX0g&amp;list=PLo4CW_btA6oYkJICu47MsmR0t4JNUQT8z&amp;index=3</p>
+</div>
+<h2 id="peticions-post-i-put">peticions POST i PUT</h2>
+<p>A nivell de funcionalitat, una petició <code>POST</code> és igual a una petició <code>GET</code>. La diferència es troba en la manera d'enviar els paràmetres. El mètode <code>GET</code> envia els paràmetres usant la pròpia URL, mentre que <code>POST</code> els envia de manera oculta en el propi cos de la petició.</p>
+<p>Per a enviar paràmetres en una petició GET podíem fer-ho:</p>
+<ul>
+<li>Bé des de la mateixa ruta: </li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl -X GET http://127.0.0.1:8080/api/users
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>curl -X GET http://127.0.0.1:8080/api/users/pepe
+</span></code></pre></div>
+<p>I en aquest cas obtindríem els arguments en el servidor definint la ruta <code>'/api/users{/:nombre}'</code> i accedint als paràmetres amb <code>req.params.nombre</code></p>
+<ul>
+<li>Bé proporcionant-los com a consultes de tipus GET, incorporant lso arguments en la URL:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl -X GET http://127.0.0.1:8080/api/users?nombre=paco
+</span></code></pre></div>
+<p>La diferència és que ara obtindríem les dades mitjançant <code>req.query.nombre</code></p>
+<h3 id="petciones-post">Petciones POST</h3>
+<p>El mètode POST s'utilitza per a enviar una entitat a un recurs específic, podent modificar l'estat del servidor (per exemple, enviar una imatge.)</p>
+<p>Per a suportar peticions POST, s'utilitza el mètode post(path, MW), de la mateixa manera que utilitzàvem get, i fem ús de <code>req</code> i <code>res</code> dins del <em>Middleware</em> per a accedir als paràmetres de la petició i generar la resposta.</p>
+<p>A diferència dels paràmetres de consulta d'un GET, les dades principals d'un POST solen anar en el cos de la petició. Express incorpora els parsers necessaris per a JSON i formularis.</p>
+<p>Una vegada definida l'aplicació Express, activem els formats que acceptarem:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">limit</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;100kb&#39;</span><span class="w"> </span><span class="p">}));</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span><span class="w"> </span><span class="nx">extended</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}));</span>
+</span></code></pre></div>
+<p>Amb això haurem inicialitzat el middleware, i ens quedarà crear les rutes que utilitzarem per a atendre les peticions POST:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">);</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getUser</span><span class="p">(</span><span class="nx">nombre</span><span class="p">);</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">)</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;msg&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;User not Found&quot;</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Fixeu-vos, que per a accedir al cos de la petició fem ús de <code>req.body</code>, i el component corresponent a la clau que busquem (nom).</p>
+<p>Per a realitzar mediant <code>curl</code> una petició POST farem:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl -d nombre=pepe -X POST http://127.0.0.1:8080/api/users
+</span></code></pre></div>
+<p>De manera que amb <code>-d</code> afegim al cos de la petició el paràmetre <code>nombre</code> amb valor <code>pepe</code> per a la consulta</p>
+<h3 id="peticions-put">Peticions PUT</h3>
+<p>Si el que es desitja és afegir un recurs, podem utilitzar peticions de tipus PUT. Aquest tipus de peticions s'usaran de la mateixa manera que les peticions POST, això és, proporcionem els paràmetros en el cos de la funció, i els obtenim mitjançant <code>req.body</code>:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="c1">// Para peticiones POST debemos </span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">nombre</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nombre</span><span class="p">);</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">email</span><span class="p">);</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">response</span><span class="p">;</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">nombre</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">email</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">        </span><span class="nx">addUser</span><span class="p">(</span><span class="nx">nombre</span><span class="p">,</span><span class="w"> </span><span class="nx">email</span><span class="p">);</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="w">        </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;errorMsg&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Undefined Data&quot;</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>Per a realitzar aquest tipus de peticions mitjançant CURL faríem:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl -d &quot;nombre=usuari2&amp;email=usuari2@gmail.com&quot; -X PUT http://127.0.0.1:8080/api/users
+</span></code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

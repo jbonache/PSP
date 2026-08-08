@@ -1,0 +1,660 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>4. Comunicacions UDP per a videojocs en xarxa - Comunicació entre processos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quan-conve-utilitzar-udp" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Comunicació entre processos" class="md-header__button md-logo" aria-label="Comunicació entre processos" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Comunicació entre processos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Comunicacions UDP per a videojocs en xarxa
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Comunicació entre processos" class="md-nav__button md-logo" aria-label="Comunicació entre processos" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Comunicació entre processos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UD03_Comunicacions_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducció a la comunicació entre processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UD03_Comunicacions_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Biblioteques per a programar aplicacions en xarxa. Sockets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UD03_Comunicacions_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Comunicacions i programació multifil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quan-conve-utilitzar-udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quan convé utilitzar UDP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datagrames-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datagrames en Java
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocol-minim-de-posicions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protocol mínim de posicions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protocol mínim de posicions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grandaria-dels-datagrames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grandària dels datagrames
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servidor-java-que-difon-les-posicions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servidor Java que difon les posicions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-godot-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Godot 4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perdua-duplicacio-i-desordre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pèrdua, duplicació i desordre
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#de-lexemple-a-una-arquitectura-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      De l'exemple a una arquitectura real
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activitat-proposada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activitat proposada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referències
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>4. Comunicacions UDP per a videojocs en xarxa</h1>
+
+<h2 id="quan-conve-utilitzar-udp">Quan convé utilitzar UDP</h2>
+<p>TCP ofereix un flux fiable i ordenat. Si es perd informació, el protocol la retransmet i no entrega els bytes posteriors fins que pot mantindre l'ordre. És adequat per a l'autenticació, l'entrada o l'eixida d'una partida, el xat, l'inventari o el resultat final.</p>
+<p>UDP envia <strong>datagrames independents</strong>. No garanteix que arriben, que ho facen una sola vegada ni que mantinguen l'ordre. A canvi, una pèrdua no retarda automàticament els datagrames posteriors. Açò el fa útil per a informació freqüent i ràpidament reemplaçable, com la posició, velocitat o orientació dels jugadors.</p>
+<p>En el nostre videojoc aplicarem aquesta divisió:</p>
+<table>
+<thead>
+<tr>
+<th>Informació</th>
+<th>Transport</th>
+<th>Motiu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autenticació i assignació de l'identificador</td>
+<td>TCP</td>
+<td>No es pot perdre ni duplicar</td>
+</tr>
+<tr>
+<td>Entrada, eixida i canvi d'equip</td>
+<td>TCP</td>
+<td>Són esdeveniments puntuals i fiables</td>
+</tr>
+<tr>
+<td>Posicions i velocitats</td>
+<td>UDP</td>
+<td>Una instantània nova substitueix l'anterior</td>
+</tr>
+<tr>
+<td>Resultat de la partida</td>
+<td>TCP</td>
+<td>Ha d'arribar de manera íntegra</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>UDP no és necessàriament «més ràpid» en totes les situacions. La diferència important per a un joc és que evita que la retransmissió d'un paquet antic bloquege l'estat més recent.</p>
+</div>
+<h2 id="datagrames-en-java">Datagrames en Java</h2>
+<p>Java proporciona <code>DatagramSocket</code> per a enviar i rebre datagrames i <code>DatagramPacket</code> per a representar cada missatge. A diferència de <code>Socket</code>, no obtenim fluxos d'entrada i eixida ni fem <code>accept()</code>: cada paquet conserva els límits del missatge i inclou l'adreça IP i el port d'origen.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">1200</span><span class="o">]</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">DatagramPacket</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DatagramPacket</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">socket</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span><span class="w"> </span><span class="c1">// Bloqueja fins que arriba un datagrama.</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">packet</span><span class="p">.</span><span class="na">getData</span><span class="p">(),</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="na">getOffset</span><span class="p">(),</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">packet</span><span class="p">.</span><span class="na">getLength</span><span class="p">(),</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">SocketAddress</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="na">getSocketAddress</span><span class="p">();</span>
+</span></code></pre></div>
+<p>És important usar <code>packet.getLength()</code>: el búfer sol ser més gran que el missatge rebut. Per a enviar:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">DatagramPacket</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DatagramPacket</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="na">length</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">socket</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="protocol-minim-de-posicions">Protocol mínim de posicions</h2>
+<p>UDP no defineix el format de les dades. Per a l'exemple didàctic utilitzarem text UTF-8 separat amb <code>|</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>REG|jugador_1
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>POS|jugador_1|125.500|80.250
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>STATE|42|1780000000000|jugador_1,125.5,80.25;jugador_2,72.0,19.0;
+</span></code></pre></div>
+<ul>
+<li><code>REG</code> associa temporalment un identificador amb l'adreça i el port UDP d'origen.</li>
+<li><code>POS</code> comunica al servidor l'última posició del jugador.</li>
+<li><code>STATE</code> és la instantània que el servidor envia a tots els clients registrats.</li>
+<li>El número de seqüència permet descartar instantànies duplicades o antigues.</li>
+<li>El temps del servidor facilita calcular interpolacions i diagnosticar latència.</li>
+</ul>
+<p>El text facilita l'aprenentatge i la depuració. En una versió avançada podem usar un format binari compacte, però sempre hem de definir-ne explícitament els tipus, l'ordre dels bytes, la versió i la longitud màxima.</p>
+<h3 id="grandaria-dels-datagrames">Grandària dels datagrames</h3>
+<p>Encara que UDP permet datagrames grans, la fragmentació IP augmenta la probabilitat de perdre'ls. Com a criteri conservador per a Internet, l'exemple limita cada datagrama a <strong>1.200 bytes</strong>. Si tots els jugadors no caben en una instantània, cal dividir-la en fragments identificats o, preferiblement, usar representacions binàries i enviar només les entitats rellevants per a cada client.</p>
+<h2 id="servidor-java-que-difon-les-posicions">Servidor Java que difon les posicions</h2>
+<p>El codi complet està disponible en <a href="../exemples/Apartat_4_UDP/java/UdpPositionServer.java"><code>exemples/Apartat_4_UDP/java/UdpPositionServer.java</code></a>. El servidor realitza dues tasques:</p>
+<ol>
+<li>El fil principal rep <code>REG</code> i <code>POS</code> i actualitza un <code>ConcurrentHashMap</code>.</li>
+<li>Un <code>ScheduledExecutorService</code> genera 20 instantànies per segon i les envia a tots els punts remots registrats.</li>
+</ol>
+<p>El mapa concurrent és necessari perquè el fil receptor i el planificador hi accedeixen simultàniament. Els clients que no envien cap paquet durant cinc segons s'eliminen; així no conservem indefinidament adreces que ja no participen en la partida.</p>
+<p>Per a compilar i executar l'exemple:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>exemples/Apartat_4_UDP/java
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>javac<span class="w"> </span>UdpPositionServer.java
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>java<span class="w"> </span>UdpPositionServer<span class="w"> </span><span class="m">9999</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>L'exemple identifica el jugador mitjançant text per a mantindre el protocol llegible, però això no és autenticació. En el projecte complet, el servidor TCP ha de crear un testimoni de sessió aleatori i el servidor UDP ha de verificar-lo abans d'acceptar actualitzacions. Tampoc s'ha de considerar vàlida qualsevol posició enviada pel client: el servidor ha d'aplicar límits de velocitat i les regles del joc.</p>
+</div>
+<h2 id="client-godot-4">Client Godot 4</h2>
+<p>Godot 4 ofereix <code>PacketPeerUDP</code>. El client complet es troba en <a href="../exemples/Apartat_4_UDP/godot/udp_position_client.gd"><code>exemples/Apartat_4_UDP/godot/udp_position_client.gd</code></a>. El node:</p>
+<ul>
+<li>obri un port UDP local;</li>
+<li>configura el servidor com a destinació;</li>
+<li>envia <code>REG</code> en iniciar-se i <code>POS</code> vint vegades per segon;</li>
+<li>processa tots els datagrames pendents en cada fotograma;</li>
+<li>descarta les instantànies amb una seqüència anterior a l'última aplicada;</li>
+<li>emet <code>snapshot_received</code> amb un diccionari de posicions.</li>
+</ul>
+<p>Un controlador del joc pot connectar-se al senyal:</p>
+<div class="language-gdscript highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_udp_snapshot_received</span><span class="p">(</span><span class="n">_sequence</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">_time</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="n">players</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">players</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">$</span><span class="n">UdpPositionClient</span><span class="o">.</span><span class="n">player_id</span><span class="p">:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">            </span><span class="n">update_remote_target</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">players</span><span class="p">[</span><span class="n">id</span><span class="p">])</span>
+</span></code></pre></div>
+<p>No convé assignar directament cada posició rebuda al node remot, perquè el moviment es veuria a salts. Guardarem almenys les dues últimes instantànies i mostrarem els jugadors amb un retard breu, interpolant entre totes dues. Per al jugador local podem aplicar predicció i, quan arribe l'estat autoritatiu, reconciliar les diferències de manera gradual.</p>
+<h2 id="perdua-duplicacio-i-desordre">Pèrdua, duplicació i desordre</h2>
+<p>El protocol de l'aplicació ha d'assumir que qualsevol datagrama pot:</p>
+<ul>
+<li>no arribar;</li>
+<li>arribar més d'una vegada;</li>
+<li>arribar després d'un datagrama més nou;</li>
+<li>ser falsificat o contindre dades incorrectes.</li>
+</ul>
+<p>Per a les instantànies de posició no retransmetem: quan en falta una, esperem la següent. El número de seqüència resol la duplicació i el desordre. Per als esdeveniments que sí necessiten confirmació, utilitzarem TCP, tal com hem establit en l'arquitectura del joc.</p>
+<p>El bucle de xarxa tampoc ha de dependre dels fotogrames renderitzats. El servidor usa una freqüència fixa de 20 Hz; el client pot renderitzar a 60 Hz interpolant. Augmentar indiscriminadament la freqüència consumeix amplada de banda i CPU, però no corregeix una connexió inestable.</p>
+<h2 id="de-lexemple-a-una-arquitectura-real">De l'exemple a una arquitectura real</h2>
+<p>Una evolució raonable del projecte és:</p>
+<ol>
+<li>El client s'autentica per TCP i rep <code>playerId</code>, un testimoni UDP i el port de la partida.</li>
+<li>El client envia per UDP un missatge de registre signat amb aquest testimoni.</li>
+<li>El servidor associa la sessió TCP amb l'adreça UDP observada; no confia en una adreça enviada dins del missatge.</li>
+<li>El servidor simula l'estat autoritatiu del món a una freqüència fixa.</li>
+<li>Els clients envien entrades o posicions, segons el nivell de l'activitat.</li>
+<li>El servidor valida les dades i difon instantànies numerades.</li>
+<li>Godot interpola els jugadors remots i tracta el jugador local separadament.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En xarxes domèstiques, el client pot estar darrere de NAT. Enviar primer <code>REG</code> crea temporalment el mapatge necessari perquè el servidor responga al punt d'origen observat. Per a una activitat en la mateixa xarxa local és suficient; desplegaments reals poden requerir mecanismes addicionals i protecció contra abús.</p>
+</div>
+<h2 id="activitat-proposada">Activitat proposada</h2>
+<ol>
+<li>Executa el servidor Java i dos clients Godot amb identificadors diferents.</li>
+<li>Fes que cada client actualitze <code>local_position</code> amb la posició del seu personatge.</li>
+<li>Crea o actualitza els nodes dels jugadors remots quan arribe <code>snapshot_received</code>.</li>
+<li>Simula una pèrdua descartant aleatòriament un 10 % de les instantànies i comprova que el joc continua avançant.</li>
+<li>Implementa un búfer de dues instantànies i interpola el moviment remot.</li>
+<li>Mesura els bytes enviats per segon en augmentar el nombre de jugadors.</li>
+</ol>
+<h2 id="referencies">Referències</h2>
+<ul>
+<li><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/DatagramSocket.html">Classe <code>DatagramSocket</code> de Java 25</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/DatagramPacket.html">Classe <code>DatagramPacket</code> de Java 25</a></li>
+<li><a href="https://docs.godotengine.org/en/stable/classes/class_packetpeerudp.html">Classe <code>PacketPeerUDP</code> de Godot 4</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

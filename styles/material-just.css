@@ -1,0 +1,149 @@
+:root{
+    --md-default-fg-color--lighter: #d1e0ff !important; /* Blau clar */
+    --md-primaty-fg-color: #d1e0ff !important;
+    --md-accent-fg-color:  #5c6bc0; /* Ãndigo mitjÃ  */
+
+    /* Personalitzats */ 
+
+    --text-defecte-color: #283593; /* Ãndigo fosc */
+    --fons-clar: #e9e8f6; /* Blanc amb to Ã­ndigo */
+    --text-mitja:  #5c6bc0; /* Ãndigo mitjÃ  */
+    --text-fosc: #1a237e; /* Ãndigo intens */
+    --text-amber: #ffb300; /* Ã€mbar viu */
+    /*--fons-amber: #e8eaf6; /* Fons Ã mbar clar */
+}
+
+body {
+    /*font-family: "Lato", Trebuchet MS, Arial, Helvetica, sans-serif;*/
+    color: var(--text-defecte-color);
+    text-align: justify;
+    
+    background-image: url(background.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: -50% 0;
+
+}
+
+/*CapÃ§alera, titols, barra de cerca */
+
+.md-header {
+    margin: 0px;
+    height: 100px !important;
+    flex: 0 1 100%;
+    padding: 1em;
+    background-color: var(--fons-clar) !important;
+    /*background-image: url(bgmaterial.png);
+    background-size: contain;
+    background-repeat: no-repeat;*/
+    /*border-bottom: 1px solid var(--text-mitja) !important;*/
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0.2rem, rgba(0, 0, 0, 0.2) 0px 0.2rem 0.4rem;
+    color: var(--text-fosc);
+    /*font-family: 'Lato';*/
+}
+
+.md-header h1 {
+    text-transform: capitalize;
+    margin: 25px;
+    border-bottom: none;
+}
+
+/* Quadre de bÃºsqueda */
+
+.md-search {
+    border-radius: 15px !important;
+    background: transparent;
+}
+
+.md-search__input {
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 15px !important;
+    border: 1px solid var(--text-mitja);
+    color: var(--text-mitja);
+}
+
+.md-search__icon svg {
+    fill: var(--text-mitja);
+}
+
+.md-search__input::placeholder {
+    color: var(--text-mitja) !important;
+}
+
+.md-search__form {
+    background-color: transparent;
+}
+
+/* Barres de navegaciÃ³ */ 
+
+.md-sidebar {
+    text-align: left !important;
+    /*background-color: var(--fons-car) !important; /* Fons Ã mbar clar */
+}
+
+/* Barra esquerra */
+
+.md-nav--primary .md-nav__item {
+    background-color: var(--fons-clar); /* Fons Ã mbar clar */
+    color: #283593; /* Ãndigo fosc */
+    background-size: contain;
+    border-color: #ffffff;
+    display: block;
+    padding: 8px 10px 8px 20px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+}
+
+
+a:hover {
+    color: var(--text-fosc) !important; /* Ã€mbar viu */
+}
+
+.md-nav__item--active {
+    border-left: 5px solid var(--text-fosc) !important; /* Ã€mbar viu */
+    font-weight: bold;
+    /*background-image: url(bgbutton.png);
+    background-repeat: no-repeat;*/
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__link--active {
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__title {
+    box-shadow: none !important;
+    color: var(--text-fosc);
+    font-size: 1.5em;
+}
+
+.md-sidebar__scrollwrap {
+    scrollbar-color: var(--text-fosc) !important;
+}
+
+.md-sidebar__scrollwrap:hover {
+    scrollbar-color: var(--text-fosc) !important;
+}
+
+/* Imatges centrades */
+
+img, video, iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mermaid {
+    display: flex;
+    justify-content: center;
+}
+
+/* Icones menudes dins el text*/
+
+.icon{
+    display:inline !important;
+    vertical-align: middle !important;
+}
+

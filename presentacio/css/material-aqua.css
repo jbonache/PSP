@@ -1,0 +1,137 @@
+:root{
+    --md-default-fg-color--lighter: #d5e7e6 !important;
+    --md-accent-fg-color:  #98c8c5;
+
+    /* Personalitzats */ 
+
+    --text-defecte-color: #192150;
+    --fons-clar: #f7fafa;
+    --text-mitja:  #98c8c5;
+    --text-fosc: #1e9d8b;
+}
+
+body {
+    font-family: "Lato", Trebuchet MS, Arial, Helvetica, sans-serif;
+    color: var(--text-defecte-color);
+    text-align: justify;
+}
+
+/*Capçalera, titols, barra de cerca */
+
+
+.md-header {
+
+    margin: 0px;
+
+
+    height: 100px;
+    flex: 0 1 100%;
+    padding: 1em;
+
+    background-color: var(--fons-clar) !important;
+    border-bottom: 1px solid var(--text-mitja) !important;
+
+    /*margin: -.5em 0 1em 0;
+    margin-top: -0.5em;
+    /*font-size: 1em;
+    text-align: left;
+    font-size: 3px;*/
+    box-shadow: none;
+
+
+    color: var(--text-fosc);
+    font-family: 'Lato';
+}
+
+md-header h1 {
+    text-transform: capitalize;
+    margin: 25px;
+    border-bottom: none;
+}
+
+/* Quadre de búsqueda*/
+
+.md-search {
+    border-radius: 15px !important;
+    /*
+    border: 1px solid var(--text-mitja); 
+    color: var(--text-mitja);
+    background-color: #ffffff;*/
+    background: transparent;
+}
+
+.md-search__input {
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 15px !important;
+    border: 1px solid var(--text-mitja);
+    color: var(--text-mitja);
+}
+
+.md-search__icon svg {
+    fill: var(--text-mitja);
+    /* Canvia aquest color pel que vulguis */
+}
+
+.md-search__input::placeholder {
+    color: var(--text-mitja) !important;
+    /* Canvia aquest color pel que vulguis */
+}
+
+.md-search__form {
+    background-color: transparent
+}
+
+
+/* Barres de navegació */ 
+.md-sidebar {
+    text-align: left !important;
+}
+
+/* Barra esquerra */
+.md-nav--primary .md-nav__item {
+    background-color: #d5e7e6;
+    color: #071133;
+    border-color: #ffffff;
+    display: block;
+    padding: 8px 10px 8px 20px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+}
+
+
+a:hover{
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__item--active{
+    border-left: 5px solid var(--text-mitja) !important;
+    font-weight: bold;
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__link--active{
+    color: var(--text-fosc) !important;
+}
+
+.md-nav__title{
+    box-shadow: none !important;
+    color: var(--text-fosc);
+    font-size: 1.5em;
+    
+}
+
+.md-sidebar__scrollwrap{
+        scrollbar-color: var(--text-fosc) !important;
+}
+.md-sidebar__scrollwrap:hover{
+    scrollbar-color: var(--text-fosc) !important;
+}
+
+/* Imatges centrades */
+
+img{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+}
