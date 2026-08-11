@@ -649,33 +649,33 @@ En moltes ocasions, els processos poden requerir també d'informació proporcion
 <h3 id="processos-i-estats-dun-proces">Processos i estats d'un procés</h3>
 <p><strong>Què ocorre en el nostre equip quan llancem una aplicació?</strong> Quan llancem un fitxer executable, el sistema operatiu càrrega aquest en memòria, creant un procés, al qual li assigna un identificador (<em>PID/Process IDentifier</em>) i certs recursos que fan possible la seua execució, com la memòria, temps de CPU i  fitxers i dispositius d'entrada i eixida.</p>
 <p>Tenint això en ment, podem definir un procés com <strong>una instància d'un programa en execució</strong>, al qual se li han assignat determinats recursos del sistema.</p>
-<p>Un procés, a més, posseeix un estat. Aquests estats, segueixen un model sobre el qual es defineixen <em>transicions</em>, que es representen en forma de graf. Les transicions d'un estat a un altre es produeixen a conseqüència d'anomenades al sistema o com a resposta a certs esdeveniments. Veámos aquest model en el següent gràfic:</p>
+<p>Un procés, a més, posseeix un estat. Aquests estats, segueixen un model sobre el qual es defineixen <em>transicions</em>, que es representen en forma de graf. Les transicions d'un estat a un altre es produeixen a conseqüència de cridades al sistema o com a resposta a certs esdeveniments. Veiem aquest model en el següent gràfic:</p>
 <p><a class="glightbox" href="../img/1/EstadosProcesos.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Estats d'un procés" src="../img/1/EstadosProcesos.png" width="500px" /></a></p>
 <p>En la figura podem distingir tres estats principals:</p>
 <ul>
 <li>
-<p><strong>Executable (Estat R-Runnable)</strong>: el procés es troba en disposició d'executar-se, bé en la cua d'execució (<em>Preparat</em>) o bé en execució. Quan un procés s'inicia, mitjançant l'anomenada al sistema <em>fork</em>, aquest passa a la cua de processos preparats per a la seua execució, i és el planificador del sistema operatiu qui decideix quins processos d'aquesta cua s'emporten a execució. Quan un procés que està en execució rep una interrupció (per exemple, s'esgota el seu temps assignat de processament segons l'algorisme de planificació), torna a la cua de preparats.</p>
+<p><strong>Executable (Estat R-Runnable)</strong>: el procés es troba en disposició d'executar-se, bé en la cua d'execució (<em>Preparat</em>) o bé en execució. Quan un procés s'inicia, mitjançant la cridada al sistema <em>fork</em>, aquest passa a la cua de processos preparats per a la seua execució, i és el planificador del sistema operatiu qui decideix quins processos d'aquesta cua s'emporten a execució. Quan un procés que està en execució rep una interrupció (per exemple, s'esgota el seu temps assignat de processament segons l'algorisme de planificació), torna a la cua de preparats.</p>
 </li>
 <li>
-<p><strong>Bloquejat o en espera (Waiting)</strong>: El procés ha sigut bloquejat, bé perquè ha realitzat una anomenada al sistema d'Entrada/Eixida i queda a l'espera (<em>Estat D</em>) de la finalització d'aquesta operació (per exemple llegir un fitxer o o entrada d'usuari), o bé perquè requereix d'una altra mena d'esdeveniment, com per exemple un temporitzador (<em>Estat S - Interruptible Sleep</em>).  Quan aquest esdeveniment es produeix, o acaba l'operació de E/S a la qual s'estava esperant, el procés torna a la cua de preparats.</p>
+<p><strong>Bloquejat o en espera (Waiting)</strong>: El procés ha sigut bloquejat, bé perquè ha realitzat una cridada al sistema d'Entrada/Eixida i queda a l'espera (<em>Estat D</em>) de la finalització d'aquesta operació (per exemple llegir un fitxer o o entrada d'usuari), o bé perquè requereix d'una altra mena d'esdeveniment, com per exemple un temporitzador (<em>Estat S - Interruptible Sleep</em>).  Quan aquest esdeveniment es produeix, o acaba l'operació de E/S a la qual s'estava esperant, el procés torna a la cua de preparats.</p>
 </li>
 <li>
-<p><strong>Finalitzat</strong>: El procés ha finalitzat la seua execució, i el sistema operatiu allibera la memòria i recursos assignats. Aquesta finalització pot produir-se bé perquè el procés rep un senyal de finalització, passant a estat <em>Finalitzat (T)</em>, o bé perquè el procés acaba l'execució de totes les seues instruccions. Quan el procés finalitza, pot retornar l'estat de finalització al procés que el va crear (processe pare), mitjançant <em>exit()</em>. En aquest cas, procés passarà a estat <em>Z (Zombi)</em> fins que el procés pare reculla aquesta eixida mitjançant l'anomenada al sistema <em>wait()</em>. Quan el pare recull aquesta eixida, el procés passa a l'estat de <em>Acabat</em>.</p>
+<p><strong>Finalitzat</strong>: El procés ha finalitzat la seua execució, i el sistema operatiu allibera la memòria i recursos assignats. Aquesta finalització pot produir-se bé perquè el procés rep un senyal de finalització, passant a estat <em>Finalitzat (T)</em>, o bé perquè el procés acaba l'execució de totes les seues instruccions. Quan el procés finalitza, pot retornar l'estat de finalització al procés que el va crear (processe pare), mitjançant <em>exit()</em>. En aquest cas, el procés passarà a estat <em>Z (Zombi)</em> fins que el procés pare reculla aquesta eixida mitjançant la cridada al sistema <em>wait()</em>. Quan el pare recull aquesta eixida, el procés passa a l'estat de <em>Finalitzar (T)</em>.</p>
 </li>
 </ul>
 <h3 id="utilitats-en-gnulinux-per-a-la-gestio-de-processos">Utilitats en GNU/Linux per a la gestió de processos</h3>
 <p>Els sistemes operatius basats en GNU/Linux disposen de diverses utilitats per a la consulta dels processos i el seu estat. Veurem algunes d'elles.</p>
 <h4 id="lordre-top">L'ordre top</h4>
-<p>Mostra en temps real l'activitat del processador, amb una llista dels processos ordenats pel consum de CPU, permetent manipular aquests. Top pot classificar les diferents tasques per ús de CPU, de memòria o temps d'execució. Les característiques que mostra es poden configurar bé per ordres interactives o per fitxers de configuració.</p>
+<p>Mostra en temps real l'activitat del processador, amb una llista dels processos ordenats pel consum de CPU, permetent manipular aquests. <em>Top</em> pot classificar les diferents tasques per ús de CPU, de memòria o temps d'execució. Les característiques que mostra es poden configurar bé per ordres interactives o per fitxers de configuració.</p>
 <p>Per a cada procés, mostra, informació com el seu identificador de procés (PID), l'usuari propietari (USER), la seua prioritat (PR i NI), el consum de memòria virtual (VIRT), resident (RES), compartida (SHR), l'estat del procés (S), indicant els valors comentats en el diagrama anterior (R, D, S, Z, T…), el percentatge de CPU utilitzat des de la seua última actualització, el percentatge de memòria o el temps total de CPU utilitzat pel procés, així com el ordre que el va llançar. A més, en la part superior mostra diverses dades d'interés, com l'hora, el temps actiu de l'equip, la càrrega mitjana, el total de processos i els diferents estats, percentatge de CPU utilitzat per CPU, així com la memòria total, lliure, utilitzada, etc.</p>
 <p><a class="glightbox" href="../img/1/eixidaTop.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Eixida del ordre top" src="../img/1/eixidaTop.png" width="500px" /></a></p>
-<p>Top és un ordre molt complet, i que admet moltes opcions. Pots consultar la pàgina del manual del sistema per a aquesta ordre llançant, des de la terminal:</p>
+<p><em>Top</em> és un ordre molt complet, i que admet moltes opcions. Pots consultar la pàgina del manual del sistema per a aquesta ordre llançant, des de la terminal:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>man<span class="w"> </span>top
 </span></code></pre></div>
-<p>Cal destacar que top és un ordre dinàmic, i que ens mostra l'estat dels processos en temps real. Per a eixir de la vista del ordre,   premerem la tecla q (quit).</p>
-<p>D'altra banda, existeixen altres eines similars, com htop, una versió millorada de top, o atop, un monitor de processos en temps real. Cap d'elles sol vindre preinstal·lada per defecte en el sistema, però es troben disponibles en els repositoris de les distribucions per a la seua instal·lació.</p>
+<p>Cal destacar que <em>top</em> és un ordre dinàmica, i que ens mostra l'estat dels processos en temps real. Per a eixir de la vista del ordre,   premerem la tecla q (quit).</p>
+<p>D'altra banda, existeixen altres eines similars, com <em>htop</em>, una versió millorada de <em>top</em>, o <em>atop</em>, un monitor de processos en temps real. Cap d'elles sol vindre preinstal·lada per defecte en el sistema, però es troben disponibles en els repositoris de les distribucions per a la seua instal·lació.</p>
 <h4 id="lordre-ps-process-estatus">L'ordre ps (Process Estatus)</h4>
-<p>Es tracta d'una de les eines més populars en el món GNU/Linux, i mostra una instantània dels processos actuals. Es tracta d'un ordre molt complet, que admet un gran ventall d'opcions, tant de tipus Unix (precedides d'un guió -) com BSD (sense cap guió) o GNU (precedides de dos guions --).</p>
+<p>Es tracta d'una de les eines més populars en el món GNU/Linux, i mostra una instantània dels processos actuals. Es tracta d'una ordre molt completa, que admet un gran ventall d'opcions, tant de tipus Unix (precedides d'un guió -) com BSD (sense cap guió) o GNU (precedides de dos guions --).</p>
 <p>Sense cap paràmetre mostra els processos de l'usuari actual en la terminal actual, al costat del seu PID, la terminal on es troba el temps de procés o el ordre que el va executar:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>ps
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>PID<span class="w"> </span>TTY<span class="w">          </span>TIME<span class="w"> </span>CMD
@@ -686,8 +686,8 @@ En moltes ocasions, els processos poden requerir també d'informació proporcion
 <p>En aquest punt, també és interessant conéixer el ordre <code>pstree</code>, que ens mostra l'arbre de processos del sistema, o cosa que és el mateix, la jerarquia de processos d'aquest.</p>
 <h3 id="threads">Threads</h3>
 <p>Els threads, processos lleugers o fils d'execució, són processos que comparteixen determinats recursos, com l'espai de direccions de memòria, variables, fitxers, senyals, etc.</p>
-<p>El seu ús és molt comú, i suposa una sèrie d'avantatges sobre els processos com a tal, entre les quals podem destacar un cost computacional considerablement menor a l'hora de crear i destuir fils respecte als processos, un menor consum de recursos o la possibilitat de dividir tasques entre múltiples fils, aprofitant millor les arquitectures multiprocessador.</p>
-<p>Mitjançant el ordre <code>ps</code> podem obtindre també informació sobre els fils d'ejecuión, per exemple, utilitzant la sintaxi tipus UNIX <code>ps -eLf</code>, o la sintaxi BSD ps <code>axms</code>. Aquests paràmetres ens oferiran noves dades com <strong>LWP</strong> (<em>LightWeight Process</em>), amb l'identificador de thread o <strong>NLWP</strong> (<em>Number of LighWeight Processes</em>), amb el nombre de fils del procés.</p>
+<p>El seu ús és molt comú, i suposa una sèrie d'avantatges sobre els processos com a tal, entre les quals podem destacar un cost computacional considerablement menor a l'hora de crear i destRuir fils respecte als processos, un menor consum de recursos o la possibilitat de dividir tasques entre múltiples fils, aprofitant millor les arquitectures multiprocessador.</p>
+<p>Mitjançant el ordre <code>ps</code> podem obtindre també informació sobre els fils d'execucio, per exemple, utilitzant la sintaxi tipus UNIX <code>ps -eLf</code>, o la sintaxi BSD ps <code>axms</code>. Aquests paràmetres ens oferiran noves dades com <strong>LWP</strong> (<em>LightWeight Process</em>), amb l'identificador de thread o <strong>NLWP</strong> (<em>Number of LighWeight Processes</em>), amb el nombre de fils del procés.</p>
 <p>Vegem un exemple, restringit al procés NetworkManager:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>UID<span class="w">  </span>PID<span class="w"> </span>PPID<span class="w"> </span>LWP<span class="w">  </span>C<span class="w">  </span>NLWP<span class="w"> </span>STIME<span class="w">   </span>TTY<span class="w">  </span>TIME<span class="w">      </span>CMD
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>root<span class="w"> </span><span class="m">862</span><span class="w">  </span><span class="m">1</span><span class="w">   </span><span class="m">862</span><span class="w">  </span><span class="m">0</span><span class="w">    </span><span class="m">3</span><span class="w">  </span>Dec21<span class="w"> </span>?<span class="w">   </span><span class="m">00</span>:00:09<span class="w"> </span>/usr/sbin/NetworkManager<span class="w"> </span>
@@ -696,10 +696,10 @@ En moltes ocasions, els processos poden requerir també d'informació proporcion
 </span></code></pre></div>
 <p>Com veiem, aquest procés (PID 862) té 3  fils d'execució (NLWP), amb els identificadors 862, 925 i 935.</p>
 <h3 id="dimonis-i-serveis-systemd">Dimonis i serveis. Systemd</h3>
-<p>Els dimonis (<em>daemon</em>) són processos que s'executen en segon pla, sense terminal associada, ni interfície gràfica, esperant que ocórrega algun esdeveniment en el sistema o la recepció d'una petició de servei. Un servidor web, per exemple, s'executaria d'aquest per a rebre peticions de documents web i enviar aquests.</p>
+<p>Els dimonis (<em>daemon</em>) són processos que s'executen en segon pla, sense terminal associada, ni interfície gràfica, esperant que ocórrega algun esdeveniment en el sistema o la recepció d'una petició de servei. Un servidor web, per exemple, s'executaria d'aquest mode per a rebre peticions de documents web.</p>
 <p>També existeixen dimonis que no són tan visibles com aquells que ofereixen serveis, i que fan tasques com escriure en el registre o mantindre la precisió del rellotge del sistema.</p>
 <p>En la majoria de sistemes GNU/Linux actuals, els serveis són administrats pel dimoni Systemd. Quan es llança un servei en el sistema, és Systemd qui s'encarrega de la seua posada en marxa i gestió, convertint-se en el procés pare del nou servei.</p>
-<p>Sytemd també és l'encarregat de la seqüència d'arrencada del sistema, així com els diferents nivells d'execució. Integra també altres serveis com la gestió de l'inici de sessió, la connexió en calenta de dispositius o la programació de tasques periòdiques.</p>
+<p>Sytemd també és l'encarregat de la seqüència d'arrancada del sistema, així com els diferents nivells d'execució. Integra també altres serveis com la gestió de l'inici de sessió, la connexió en calent de dispositius o la programació de tasques periòdiques.</p>
 <p>Systemd proporciona el ordre systemctl per a interactuar amb els serveis. La sintaxi bàsica d'aquest ordre és:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>systemctl orden servicio.service
 </span></code></pre></div>
@@ -757,12 +757,11 @@ En moltes ocasions, els processos poden requerir també d'informació proporcion
 </ul>
 <p>Veurem diferents mecanismes que aprofiten aquesta entrada i eixida per a realitzar la comunicació entre processos.</p>
 <h4 id="redireccions">Redireccions</h4>
-<p>Un mecanisme relativament simple de comunicació de processos és mitjançant redireccions. Aquest mecanisme consisteix a redirigir aquests descriptors de fitxers des d'o cap a altres fonts diferents a l'estándard</p>
+<p>Un mecanisme relativament simple de comunicació de processos és mitjançant redireccions. Aquest mecanisme consisteix a redirigir aquests descriptors de fitxers des de o cap a altres fonts diferents a l'estándard.</p>
 <p>Vegem algunes maneres de fer possible aquesta comunicació:</p>
-<h5 id="redireccio-de-lentrada-estandard-i">Redirecció de l'entrada estàndard (&lt; i &lt;&lt;)</h5>
-<p>.
-Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des de teclat</p>
-<p>Amb <code>&lt;&lt;</code> obtenim l'entrada per al ordre línia per línia pel teclat, fins que s'escriga el la marca indicada.</p>
+<h5 id="redireccio-de-lentrada-estandard-i">Redirecció de l'entrada estàndard (<code>&lt;</code> i <code>&lt;&lt;</code>)</h5>
+<p>Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des de teclat</p>
+<p>Amb <code>&lt;&lt;</code> obtenim l'entrada per a la ordre línia per línia pel teclat, fins que s'escriga la marca final indicada.</p>
 <div class="language-text highlight"><pre><span></span><code>**Exemple:**
 </code></pre></div>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$<span class="w"> </span>cat<span class="w"> </span><span class="s">&lt;&lt; FIN </span>
@@ -775,25 +774,25 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 <ul>
 <li><strong><em>Redirecció de l'eixida estàndard (&gt; i &gt;&gt;)</em></strong>: Permet redirigir l'eixida del procés a un fitxer, eliminant el seu contingut (amb <code>&gt;</code>) o afegint el resultat al final (amb <code>&gt;&gt;</code>).</li>
 </ul>
-<p><strong>Exemple:</strong></p>
+<p><strong>Exemple 1:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w">  </span>Hola!<span class="w"> </span>&gt;<span class="w"> </span>Saludo.txt
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>“Bienvenidos”<span class="w"> </span>&gt;<span class="w"> </span>Saludo.txt
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>“Bienvenidos”<span class="w"> </span>&gt;&gt;<span class="w"> </span>Saludo.txt<span class="w"> </span>
 </span></code></pre></div>
 <p><strong>Exemple 2:</strong></p>
 <ul>
 <li>Dede una terminal, esbrinem de quina terminal es tracta mitjançant el ordre <code>tty</code>:</li>
 </ul>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ tty
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>/dev/pts/1
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>/dev/pts/2
 </span></code></pre></div>
-<p>Que ens indica que estem en la pseudoerminal 1 (<em>/dev/pts/1</em>).</p>
+<p>Que ens indica que estem en la terminal 2 (<em>/dev/pts/2</em>).</p>
 <ul>
-<li>Des d'una altra terminal, podem redirigir l'eixida de qualsevol ordre cap a aquesta pseudoruta, de manera que l'eixida es mostra en l'altra terminal.</li>
+<li>Des d'una altra terminal, podem redirigir l'eixida de qualsevol ordre cap a una terminal concreta, de manera que l'eixida es mostra en l'altra terminal, la 2.</li>
 </ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ echo &quot;hola terminal 1&quot; &gt; /dev/pts/1
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ echo &quot;hola terminal 2&quot; &gt; /dev/pts/2
 </span></code></pre></div>
 <p><a class="glightbox" href="../img/1/redireccions.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../img/1/redireccions.png" width="500px" /></a></p>
-<h5 id="redireccio-de-leixida-derror-estandard-2-i-2">Redirecció de l'eixida d'error estàndard (2&gt; i 2&gt;&gt;)</h5>
+<h5 id="redireccio-de-leixida-derror-estandard-2-i-2">Redirecció de l'eixida d'error estàndard (2&gt;  i  2&gt;&gt;)</h5>
 <p>Permet redirigir l'eixida d'error del procés a un fitxer, de la mateixa manera que l'eixida estándard.</p>
 <p>Exemple:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ let a=3/0 2&gt; /dev/null
@@ -804,15 +803,15 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 <p>L'ús de canonada segueix la següent sintaxi:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>comando_productor | comando_consumidor
 </span></code></pre></div>
-<p>Un exemple clàssic és utilitzar l'eixida del ordre ps com a entrada al ordre grep, per a filtrar l'eixida de ps i obtindre, per exemple, informació d'un programa concret.Per exemple:</p>
+<p>Un exemple clàssic és utilitzar l'eixida de l'ordre <code>ps</code> com a entrada de l'ordre <code>grep</code>, per a filtrar l'eixida de <code>ps</code> i obtindre, per exemple, informació d'un programa concret. Per exemple:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$<span class="w"> </span>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>bash
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>joamuran<span class="w">    </span><span class="m">8912</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">12128</span><span class="w">  </span><span class="m">6036</span><span class="w"> </span>pts/1<span class="w">    </span>Ss+<span class="w">  </span>de<span class="w"> </span>set.14<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>joamuran<span class="w">   </span><span class="m">16566</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">12120</span><span class="w">  </span><span class="m">6308</span><span class="w"> </span>pts/2<span class="w">    </span>Ss+<span class="w">  </span><span class="m">06</span>:18<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>joamuran<span class="w">   </span><span class="m">18528</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">11880</span><span class="w">  </span><span class="m">5736</span><span class="w"> </span>pts/3<span class="w">    </span>Ss<span class="w">   </span><span class="m">06</span>:36<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>joamuran<span class="w">   </span><span class="m">18876</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">12012</span><span class="w">  </span><span class="m">5984</span><span class="w"> </span>pts/4<span class="w">    </span>Ss+<span class="w">  </span><span class="m">06</span>:42<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>jasb<span class="w">    </span><span class="m">8912</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">12128</span><span class="w">  </span><span class="m">6036</span><span class="w"> </span>pts/1<span class="w">    </span>Ss+<span class="w">  </span>de<span class="w"> </span>set.14<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>jasb<span class="w">   </span><span class="m">16566</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">12120</span><span class="w">  </span><span class="m">6308</span><span class="w"> </span>pts/2<span class="w">    </span>Ss+<span class="w">  </span><span class="m">06</span>:18<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>jasb<span class="w">   </span><span class="m">18528</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">11880</span><span class="w">  </span><span class="m">5736</span><span class="w"> </span>pts/3<span class="w">    </span>Ss<span class="w">   </span><span class="m">06</span>:36<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>jasb<span class="w">   </span><span class="m">18876</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">12012</span><span class="w">  </span><span class="m">5984</span><span class="w"> </span>pts/4<span class="w">    </span>Ss+<span class="w">  </span><span class="m">06</span>:42<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/bin/bash
 </span></code></pre></div>
 <h3 id="comunicacio-mitjancant-variables-dentorn-i-de-la-shell">Comunicació mitjançant variables d'entorn i de la shell</h3>
-<p>En bash podem utilitzar variables locals a la shell, i variables d'entorn, que definirem mitjançant <code>export</code>. Aquestes variables s'ajuste poden ser també utilitzades com a mecanisme de comunicació entre processos.</p>
+<p>En bash podem utilitzar variables locals a la shell, i variables d'entorn, que definirem mitjançant <code>export</code>. Aquestes variables d'entorn poden ser també utilitzades com a mecanisme de comunicació entre processos.</p>
 <p>Vegem-ho amb un xicotet exemple. Si en un script (<code>script1.sh</code>) definim la variable <code>MYVAR</code> de la següent manera, i invoquem a un altre script (<code>script2.sh</code>), des d'aquest segon script tindrem accés a la variable exportada del primer:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/bin/bash</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># fichero  script1.sh</span>
@@ -827,10 +826,10 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>echo &quot;El contenido de la variable es Valor&quot;
 </span></code></pre></div>
 <h3 id="comunicacio-mitjancant-senyals">Comunicació mitjançant senyals</h3>
-<p>Els senyals són missatges que el sistema operatiu envia a un procés en temps d'execució, per a informar-lo del succés d'un esdeveniment. Aquestes interrupcions són enviads pel kernel al procés, encara que pot ser un altre procés qui les genere. Algunes d'aquests senyals, podran ser també interpretades com a ordres que rep el procés.</p>
+<p>Els senyals són missatges que el sistema operatiu envia a un procés en temps d'execució, per a informar-lo del succés d'un esdeveniment. Aquestes interrupcions són enviades pel kernel al procés, encara que pot ser un altre procés qui les genere. Algunes d'aquests senyals, podran ser també interpretades com a ordres que rep el procés.</p>
 <h4 id="lordre-kill">L'ordre Kill</h4>
-<p>Per a enviar senyals a un procés utilitzem l'ordre kill, que respon a la següent sintaxi:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">kill</span><span class="w"> </span>-señal<span class="w"> </span><span class="o">[</span>Lista<span class="w"> </span>de<span class="w"> </span>PIDs<span class="o">]</span>
+<p>Per a enviar senyals a un procés utilitzem l'ordre <code>kill</code>, que respon a la següent sintaxi:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">kill</span><span class="w"> </span>-senyal<span class="w"> </span><span class="o">[</span>Lista<span class="w"> </span>de<span class="w"> </span>PIDs<span class="o">]</span>
 </span></code></pre></div>
 <p>Si no especifiquem res, el senyal que s'envia és la número 15 (<code>SIGTERM</code>)</p>
 <p>Els números de senyal més comuns són:</p>
@@ -883,7 +882,7 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 </div>
 <h4 id="captura-de-senyals-lordre-trap">Captura de senyals. L'ordre trap</h4>
 <p>Mitjançant l'ordre trap podem capturar senyals i realitzar certes accions en resposta a aquest senyal. La sintaxi de trap és:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>trap ‘Órdenes’ [lista de señales]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>trap ‘ordres’ [llista de senyals]
 </span></code></pre></div>
 <p>On ordres seran les instruccions a realitzar quan es reba el senyal. En cas que no especifiquem res, s'inhibirà el senyal.</p>
 <p>Cal tindre en compte, que per disseny del sistema operatiu, el senyal <code>SIGKILL</code> (9) no  es pot capturar, ja que faria un procés indestructible.</p>
@@ -924,10 +923,10 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 <p>Quan realitzem aquesta lectura, el procés no finalitza, sinó que espera a l'entrada d'informació en la cua. Des d'una altra terminal, podem comprovar si es tracta d'una canonada amb nom (amb un <code>test -p</code>), i en cas afirmatiu, escriure en ella:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>[ -p cola ] &amp;&amp; echo &quot;hola&quot; &gt; cola
 </span></code></pre></div>
-<p>Hem de tindre en compte que es tracta d'un <strong>mecanisme bloquejant</strong>: quan un procés productor escriu en la canonada, queda a l'espera que un procés consumidor la llija. De la mateixa manera, quan un procés consumidor intenta llegir i la cua està buida, espera al fet que un procés productor escriga en ella.</p>
+<p>Hem de tindre en compte que es tracta d'un <strong>mecanisme bloquejant</strong>: quan un procés productor escriu en la canonada, queda a l'espera que un procés consumidor la llisca. De la mateixa manera, quan un procés consumidor intenta llegir i la cua està buida, espera al fet que un procés productor escriga en ella.</p>
 <h4 id="comunicacio-mitjancant-sockets">Comunicació mitjançant sockets</h4>
 <p>Els sockets permeten la comunicació entre processos situats en diferents màquines, i s'especifiquen mitjançant una adreça IP i un número de port (TCP o UDP).</p>
-<p>Bash permet establir connexions amb sockets mitjançant les pseudorutas <code>/dev/tcp</code> i <code>/dev/udp</code>. Recordem que aquestes pseudorutas no són fitxers en disc com a tal, sinó que es tracta d'una abstracció que utilitza el sistema operatiu perquè es puguen realitzar sobre ells les mateixes operacione que sobre els fitxers (lectures i escriptures).</p>
+<p>Bash permet establir connexions amb sockets mitjançant les pseudorutes <code>/dev/tcp</code> i <code>/dev/udp</code>. Recordem que aquestes pseudorutes no són fitxers en disc com a tal, sinó que es tracta d'una abstracció que utilitza el sistema operatiu perquè es puguen realitzar sobre ells les mateixes operacions que sobre els fitxers (lectures i escriptures).</p>
 <p>La sintaxi per a establir una connexió en un socket mitjançant bash és:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>$<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="o">{</span>descriptor_de_fichero<span class="o">}</span>&lt;&gt;/dev/<span class="o">{</span>protocolo<span class="o">}</span>/<span class="o">{</span>host<span class="o">}</span>/<span class="o">{</span>puerto<span class="o">}</span>
 </span></code></pre></div>
@@ -938,7 +937,7 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 <p>Per a això, llancem el següent ordre des d'una terminal, amb la qual establim un socket bidireccional TCP al port 80 de www.google.com:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ exec 3&lt;&gt;/dev/tcp/www.google.com/80
 </span></code></pre></div>
-<p>Per a comprovar que tenim la connexió creada, podem consultar en el directori proc els descriptors de fitxers en ús pel procés actual (referit amb $$):</p>
+<p>Per a comprovar que tenim la connexió creada, podem consultar en el directori <strong><em>proc</em></strong> els descriptors de fitxers en ús pel procés actual (referit amb $$):</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>$<span class="w"> </span>file<span class="w"> </span>/proc/<span class="nv">$$</span>/fd/*<span class="w"> </span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>/proc/29167/fd/0:<span class="w">   </span>symbolic<span class="w"> </span>link<span class="w"> </span>to<span class="w"> </span>/dev/pts/9
@@ -951,9 +950,9 @@ Redirigeix l'entrada de dades d'un procés des d'un fitxer en lloc de fer-lo des
 <p>D'altra banda, amb lsof (ordre que ofereix un llistat els fitxers utilitzats per un procés), podem veure les connexions establides pel procés actual ($$, que és el 29167 en aquest cas):</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>$ lsof -p $$
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>COMMAND   PID     USER   FD   TYPE  DEVICE SIZE/OFF    NODE NAME
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>bash    29167 joamuran    3u  IPv4 219063      0t0     TCP neon:51646-&gt;mad41s13-in-f4.1e100.net:http (ESTABLISHED)
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>bash    29167     jasb    3u  IPv4 219063      0t0     TCP  ASUS-EXPERTBOOK:59418-&gt;142.251.150.119:http (ESTABLISHED)
 </span></code></pre></div>
-<p>Ara, a través d'aquesta connexió podem enviar una petició HTTP de tipus GET sobre el socket, escrivint mitjançant tire en aquest descriptor.</p>
+<p>Ara, a través d'aquesta connexió podem enviar una petició HTTP de tipus GET sobre el socket, escrivint mitjançant <code>echo</code> en aquest descriptor.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;GET /&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">3</span>
 </span></code></pre></div>
 <p>I llegir del socket simplement llegint del descriptor:</p>
