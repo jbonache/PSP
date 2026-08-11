@@ -540,12 +540,12 @@
   <h1>2. Multiprocés i Java</h1>
 
 <h2 id="introduccio">Introducció</h2>
-<p>Una de les característiques principals dels sistemes operatius moderns és el de la multitarea o el multiprocés. El multiprocés permet que diversos processos s'estiguen executant de manera simultània, encara que solament es dispose d'un únic processador, en contraposició als sistemes monoproceso, on els processos s'executen de manera seqüencial.</p>
-<p>Tal com hem vist, quan un procés és creat pel sistema, aquesta passa a l'estat de Preparat i és el Planificador, el component del sistema operatiu qui encarrega de decidir quin procés, d'entre tots els preparats és atés pel processador. Quan un procés passa de preparat a En execució (o actiu), retira de la CPU el procés que es trobara en execució, retornant-lo a la cua de preparats. Aquest component planificador i els algorismes de planificació són el cor de la capacitat de multiprocesamiento dels sistemes actuals.</p>
+<p>Una de les característiques principals dels sistemes operatius moderns és el de la multitarea o el multiprocés. El multiprocés permet que diversos processos s'estiguen executant de manera simultània, encara que solament es dispose d'un únic processador, en contraposició als sistemes monoprocés, on els processos s'executen de manera seqüencial.</p>
+<p>Tal com hem vist, quan un procés és creat pel sistema, aquest passa a l'estat de <em>Preparat</em> i és el Planificador, el component del sistema operatiu qui s'encarrega de decidir quin procés, d'entre tots els preparats és atés pel processador. Quan un procés passa de preparat a <em>En execució</em> (o actiu), retira de la CPU el procés que es trobarà en execució, retornant-lo a la cua de preparats. Aquest component planificador i els algorismes de planificació són el cor de la capacitat de multiprocesament dels sistemes actuals.</p>
 <p>D'altra banda, i centrant-nos ja en el món de la programació, abordarem el desenvolupament de programes que puguen implementar diversos processos o fils d'execució, i col·laboren entre si per a dur a terme una tasca, això és, la <strong>programació concurrent</strong>.</p>
-<p>La programació concurrent pot a més ser de dos tipus: paral·lela i distribuïda.</p>
+<p>La programació concurrent pot ser de dos tipus: paral·lela o distribuïda.</p>
 <ul>
-<li>La <strong>programació paral·lela</strong> consisteix en la creació de programes que s'executen en un únic ordinador, tinga o no diversos processadors. Evidentment, amb diversos processadors, el rendiment serà major. En cas que únicament es dispose d'un processador, es reparteix el temps de procés entre les diferents tasques, com ja hem vist.</li>
+<li>La <strong>programació paral·lela</strong> consisteix en la creació de programes que s'executen en un únic ordinador, tinga o no diversos processadors. Evidentment, amb diversos processadors, el rendiment serà major. En cas que únicament es dispose d'un processador, es reparteix el temps de procés entre les diferents tasques, simulant que treballen alhora, en paral·lel.</li>
 <li>La <strong>programació distribuïda</strong> consisteix en la creació de programari que s'executa en diferents ordinadors, i que es comuniquen a través d'una xarxa. 
 En el següent apartat, farem una introducció a la creació de processos a Java, i les diferents classes que els representen.</li>
 </ul>
@@ -565,12 +565,13 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </ul>
 <p><div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="s">&quot;firefox&quot;</span><span class="p">);</span>
 </span></code></pre></div>
-* Un constructor al qual li proporcionem una llista de Stings, amb el ordre a executar i els seus arguments:</p>
+* Un constructor al qual li proporcionem una llista de Strings, amb el ordre a executar i els seus arguments:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://www.google.es&quot;</span><span class="p">);</span>
 </span></code></pre></div>
-<p>:::caution
-Hem de tindre en compte que el ordre que anem a llançar es trobe en alguna carpeta inclosa en el <em>PATH</em>, de la mateixa manera que quan el llancem a través de la terminal. En cas contrari, haurem d'especificar la ruta completa a l'executable.
-:::</p>
+<div class="admonition caution">
+<p class="admonition-title">Precaució</p>
+<p>Hem de tindre en compte que el ordre que anem a llançar es trobe en alguna carpeta inclosa en el <em>PATH</em>, de la mateixa manera que quan el llancem a través de la terminal. En cas contrari, haurem d'especificar la ruta completa a l'executable.</p>
+</div>
 <p>Una instància de ProcessBuilder, pot a més gestionar els següents atributs a través dels mètodes indicats per a això:</p>
 <table>
 <thead>
