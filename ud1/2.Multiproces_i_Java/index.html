@@ -565,12 +565,12 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </ul>
 <p><div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="s">&quot;firefox&quot;</span><span class="p">);</span>
 </span></code></pre></div>
-* Un constructor al qual li proporcionem una llista de Strings, amb el ordre a executar i els seus arguments:</p>
+* Un constructor al qual li proporcionem una llista de Strings, amb l'ordre a executar i els seus arguments:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://www.google.es&quot;</span><span class="p">);</span>
 </span></code></pre></div>
 <div class="admonition caution">
 <p class="admonition-title">Precaució</p>
-<p>Hem de tindre en compte que el ordre que anem a llançar es trobe en alguna carpeta inclosa en el <em>PATH</em>, de la mateixa manera que quan el llancem a través de la terminal. En cas contrari, haurem d'especificar la ruta completa a l'executable.</p>
+<p>Hem de tindre en compte que l'ordre que anem a llançar es trobe en alguna carpeta inclosa en el <em>PATH</em>, de la mateixa manera que quan el llancem a través de la terminal. En cas contrari, haurem d'especificar la ruta completa a l'executable.</p>
 </div>
 <p>Una instància de ProcessBuilder, pot a més gestionar els següents atributs a través dels mètodes indicats per a això:</p>
 <table>
@@ -583,7 +583,7 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 <tbody>
 <tr>
 <td><code>command</code></td>
-<td>La llista amb el ordre que desitgem llançar i els seus arguments. Una vegada creat un ProcessBuilder, podem modificar aquesta llista mitjançant l'atribut command. Per a accedir a ell, utilitzarem el mètode command(), sense arguments per a obtindre el seu valor i amb arguments per a establir-los.</td>
+<td>La llista amb l'ordre que desitgem llançar i els seus arguments. Una vegada creat un ProcessBuilder, podem modificar aquesta llista mitjançant l'atribut command. Per a accedir a ell, utilitzarem el mètode command(), sense arguments per a obtindre el seu valor i amb arguments per a establir-los.</td>
 </tr>
 <tr>
 <td><code>environment</code></td>
@@ -591,7 +591,7 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </tr>
 <tr>
 <td><code>Directory</code></td>
-<td>El directori de treball on s'executarà el ordre. Si no s'especifica, per defecte utilitza el directori actual del procés.</td>
+<td>El directori de treball on s'executarà l'ordre. Si no s'especifica, per defecte utilitza el directori actual del procés.</td>
 </tr>
 <tr>
 <td><code>InputStream</code>, <code>OutputStream</code> i <code>ErrorStream</code></td>
@@ -603,8 +603,8 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 <div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Lanzador</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">            </span><span class="c1">// Definimos un vector de Strings con el ordre</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="c1">// y los argumentos. En este caso, lanzamos el ordre </span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">            </span><span class="c1">// Definimos un vector de Strings con la orden</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="c1">// y los argumentos. En este caso, lanzamos la orden </span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">            </span><span class="c1">// firefox y una URL como argumento.</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ProcessBuilder.html&quot;</span><span class="p">};</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
@@ -631,8 +631,8 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Lanzador2</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">            </span><span class="c1">// Definimos un vector de Strings con el ordre</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="c1">// y los argumentos. En este caso, lanzamos el ordre </span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">            </span><span class="c1">// Definimos un vector de Strings con la orden</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="c1">// y los argumentos. En este caso, lanzamos la orden</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">            </span><span class="c1">// firefox y una URL como argumento.</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/core/process-api1.html&quot;</span><span class="p">};</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
@@ -817,7 +817,7 @@ En el programa disposes d'altres exemples per a llançar, per exemple un editor 
 </tr>
 <tr>
 <td><code>String commandLine()</code></td>
-<td>Retorna un String amb la línia del ordre introduïda, concatenant el ordre i els arguments.</td>
+<td>Retorna un String amb la línia dl'ordre introduïda, concatenant l'ordre i els arguments.</td>
 </tr>
 <tr>
 <td><code>Instant startInstant()</code></td>
@@ -912,7 +912,7 @@ En el programa disposes d'altres exemples per a llançar, per exemple un editor 
 </tr>
 <tr>
 <td><code>Process exec(ordre)</code></td>
-<td>Permet executar el ordre indicat. Admet diferents signatures, per a indicar ordre, arguments o entorn.</td>
+<td>Permet executar l'ordre indicat. Admet diferents signatures, per a indicar ordre, arguments o entorn.</td>
 </tr>
 <tr>
 <td><code>void exit()</code></td>
