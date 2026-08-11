@@ -362,7 +362,7 @@
           <li class="md-nav__item">
   <a href="#la-interficie-processhandleinfo" class="md-nav__link">
     <span class="md-ellipsis">
-      La interfície Processhandle.info
+      La interfície Processhandle.Info
     </span>
   </a>
   
@@ -498,7 +498,7 @@
           <li class="md-nav__item">
   <a href="#la-interficie-processhandleinfo" class="md-nav__link">
     <span class="md-ellipsis">
-      La interfície Processhandle.info
+      La interfície Processhandle.Info
     </span>
   </a>
   
@@ -595,18 +595,18 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </tr>
 <tr>
 <td><code>InputStream</code>, <code>OutputStream</code> i <code>ErrorStream</code></td>
-<td>Representen l'entrada, eixida i eixida d'error estàndard del procés, i pot ser modificades mitjançant els mètodes redirectInput, redirectOutput i RedirectError. Tractarem amb l'E/S més endavant.</td>
+<td>Representen l'entrada, eixida i eixida d'error estàndard del procés, i pot ser modificades mitjançant els mètodes redirectInput, redirectOutput i RedirectError. Ho tractarem amb l'E/S més endavant.</td>
 </tr>
 </tbody>
 </table>
-<p>Vegem un exemple de com llançar el navegador web Firefox mitjançant un ProcessBuilder (fitxer llançador.java):</p>
+<p>Vegem un exemple de com llançar el navegador web Firefox mitjançant un ProcessBuilder (fitxer Lanzador.java):</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Lanzador</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">            </span><span class="c1">// Definimos un vector de Strings con la orden</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="c1">// y los argumentos. En este caso, lanzamos la orden </span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">            </span><span class="c1">// firefox y una URL como argumento.</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ProcessBuilder.html&quot;</span><span class="p">};</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ProcessBuilder.html&quot;</span><span class="p">};</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">            </span><span class="c1">// Creamos el ProcessBuilder</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">            </span><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
@@ -621,10 +621,10 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Hem de destacar que el procés no es crea fins que s'invoca al mètode <code>start</code> del <code>processBuilder</code>. D'aquesta manera, si invoquem, per exemple dues vegades el mètode <code>start</code>, crearem dues instàncies de la classe <code>Process</code>, i per tant, dos processos diferents.</p>
-<p>D'altra banda, devem també tindre en compte que el mètode <code>start()</code> pot llançar una excepció d'Entrada i Eixida (<code>IOException</code>), per la qual cosa hem de tractar aquesta adequadament, bé mitjançant captura o propagació.</p>
+<p>D'altra banda, s'ha de tenir en compte que el mètode <code>start()</code> pot llançar una excepció d'Entrada i Eixida (<code>IOException</code>), per la qual cosa hem de tractar aquesta adequadament, bé mitjançant captura o propagació.</p>
 <h3 id="la-classe-process">La classe Process</h3>
 <p>La classe <code>java.lang.Process</code> és una classe abstracta que encapsula la informació sobre l'execució d'un procés.</p>
-<p>Quan invoquem al mètode <code>start</code> d'un <code>ProcessBuilder</code>, aquest ens retorna una instància de <code>Process</code>, amb la informació sobre el procés llançat. Aquesta classe pot utilitzar-se per a realitzar operacions d'entrada i eixida dels processos, comprovar si aquest ha finalitzat, el seu estat de finalització, o bé enviar-li un senyal per a eliminar-ho forçosament.</p>
+<p>Quan invoquem al mètode <code>start</code> d'un <code>ProcessBuilder</code>, aquest ens retorna una instància de <code>Process</code>, amb la informació sobre el procés llançat. Aquesta classe pot utilitzar-se per a realitzar operacions d'entrada i eixida dels processos, comprovar si aquest ha finalitzat, el seu estat de finalització, o bé enviar-li un senyal per a eliminar-lo forçosament.</p>
 <p>Vegem com podem, per exemple, llançar dues instàncies del mateix procés, i obtindre informació associada als processos. Per a això, utilitzarem el següent exemple <code>lanzador2.java</code>:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
@@ -634,7 +634,7 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">            </span><span class="c1">// Definimos un vector de Strings con la orden</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="c1">// y los argumentos. En este caso, lanzamos la orden</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">            </span><span class="c1">// firefox y una URL como argumento.</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/core/process-api1.html&quot;</span><span class="p">};</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/25/core/process-api1.html&quot;</span><span class="p">};</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">            </span><span class="c1">// Creamos el ProcessBuilder</span>
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">            </span><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
@@ -654,7 +654,7 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>En ell, hem creat dos objectes de tipus <code>Process</code>, on guardem els valors retornats per sengles invocacions al mètode <code>start</code> del <code>ProcessBuilder</code>:</p>
+<p>En ell, hem creat dos objectes de tipus <code>Process</code>, on guardem els valors retornats per ambdues invocacions al mètode <code>start</code> del <code>ProcessBuilder</code>:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Process</span><span class="w"> </span><span class="n">p1</span><span class="o">=</span><span class="n">pb</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">Process</span><span class="w"> </span><span class="n">p2</span><span class="o">=</span><span class="n">pb</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </span></code></pre></div>
@@ -693,7 +693,7 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 <td></td>
 </tr>
 <tr>
-<td><code>void destroyForcibily()</code></td>
+<td><code>void destroyForcibly()</code></td>
 <td>Forcen la terminació del procés, de manera controlada (<em>SIGTERM</em>) o forçosa (<em>SIGKILL</em>).</td>
 </tr>
 </tbody>
@@ -706,7 +706,7 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">            </span><span class="c1">// Creación del processBuilder</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/core/process-api1.html&quot;</span><span class="p">};</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/25/core/process-api1.html&quot;</span><span class="p">};</span>
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">            </span><span class="c1">// Otras alternativas para lanzar, por ejemplo un editor de texto</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">            </span><span class="c1">// Linux: Escritorio KDE-Plasma</span>
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">            </span><span class="c1">// String app[] = {&quot;kwrite&quot;, &quot;ejemplo.txt&quot;};</span>
@@ -763,13 +763,14 @@ En el següent apartat, farem una introducció a la creació de processos a Java
 <ul>
 <li>En primer lloc, creem un ProcessBuilder per a llançar el navegador Firefox i llancem aquest mitjançant start:</li>
 </ul>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/core/process-api1.html&quot;</span><span class="p">};</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/25/core/process-api1.html&quot;</span><span class="p">};</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">      </span><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">Process</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pb</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </span></code></pre></div>
-<p>:::note
-En el programa disposes d'altres exemples per a llançar, per exemple un editor de text. Tingues en compte que si ja tens Firefox obert, l'exemple pot no funcionar del tot.
-:::</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En el programa disposes d'altres exemples per a llançar, per exemple un editor de text. Tingues en compte que si ja tens Firefox obert, l'exemple pot no funcionar del tot bé.</p>
+</div>
 <ul>
 <li>En segon lloc, utilitzem el mètode waitFor per a esperar 3 segons. Transcorregut aquest temps, si l'usuari no ha tancat l'aplicació, la destruirem mitjançant el mètode <code>destroy()</code></li>
 </ul>
@@ -792,9 +793,9 @@ En el programa disposes d'altres exemples per a llançar, per exemple un editor 
 </ul>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;El proceso ha finalizado con la salida:&quot;</span><span class="w"> </span><span class="o">+</span><span class="n">p</span><span class="p">.</span><span class="na">exitValue</span><span class="p">());</span>
 </span></code></pre></div>
-<p>Com pots comprovar, el valor retornat per exitValue és 143, que es correspon al senyal <code>SIGTERM</code> (Codi 15). Si modifiquem el codi i en lloc de destroy utilitzem <code>destroyForcibily</code>, comprovarem que el valor retornat és el 137, que es correspon al senyal S<code>IGKILL</code> (Codi 9) </p>
-<h3 id="la-interficie-processhandleinfo">La interfície Processhandle.info</h3>
-<p>La interfície Processhandle.info ens permet obtindre informació addicional sobre un procés.</p>
+<p>Com pots comprovar, el valor retornat per exitValue és 143, que es correspon al senyal <code>SIGTERM</code> (Codi 15). Si modifiquem el codi i en lloc de destroy utilitzem <code>destroyForcibily</code>, comprovarem que el valor retornat és el 137, que es correspon al senyal <code>SIGKILL</code> (Codi 9) </p>
+<h3 id="la-interficie-processhandleinfo">La interfície Processhandle.Info</h3>
+<p>La interfície Processhandle.Info ens permet obtindre informació addicional sobre un procés.</p>
 <p>Per a obtindre aquesta informació, únicament haurem d'accedir al mètode info() de la classe Process:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ProcessHandle.Info informacion = p.info();
 </span></code></pre></div>
@@ -824,7 +825,7 @@ En el programa disposes d'altres exemples per a llançar, per exemple un editor 
 <td>Retorna l'hora d'inici del procés en un objecte de tipus Instant.</td>
 </tr>
 <tr>
-<td>`Duration totalCpuDuration()</td>
+<td><code>Duration totalCpuDuration()</code></td>
 <td>Retorna un objecte de tipus Duration amb el temps de CPU acumulat pel procés.</td>
 </tr>
 <tr>
@@ -837,62 +838,33 @@ En el programa disposes d'altres exemples per a llançar, per exemple un editor 
 <div class="language-java highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Lanzador3</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Lanzador4</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">            </span><span class="c1">// Creación del processBuilder</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;firefox&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://docs.oracle.com/en/java/javase/17/core/process-api1.html&quot;</span><span class="p">};</span>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">            </span><span class="c1">// Otras alternativas para lanzar, por ejemplo un editor de texto</span>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">            </span><span class="c1">// Linux: Escritorio KDE-Plasma</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">            </span><span class="c1">// String app[] = {&quot;kwrite&quot;, &quot;ejemplo.txt&quot;};</span>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">            </span><span class="c1">// Linux: Escritorio Gnome</span>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">            </span><span class="c1">// String app[] = {&quot;gedit&quot;, &quot;ejemplo.txt&quot;};</span>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">            </span><span class="c1">// Windows</span>
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">            </span><span class="c1">// String app[] = {&quot;notepad.exe&quot;, &quot;ejemplo.txt&quot;};</span>
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
-</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">            </span><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="err">```</span><span class="n">java</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">            </span><span class="c1">// Creació del ProcessBuilder</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">app</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;spotify&quot;</span><span class="p">};</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">            </span><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">            </span><span class="c1">// Definim i instanciem el procés</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">            </span><span class="n">Process</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pb</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">            </span><span class="c1">// Obtenim la informació</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">            </span><span class="n">ProcessHandle</span><span class="p">.</span><span class="na">Info</span><span class="w"> </span><span class="n">pInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">info</span><span class="p">();</span>
 </span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
-</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">            </span><span class="c1">// Definimos e instanciamos el proceso</span>
-</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">            </span><span class="n">Process</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pb</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
-</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
-</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="w">            </span><span class="c1">// Esperamos 3 segundos.</span>
-</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
-</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">            </span><span class="c1">// El método waitFor espera el tiempo indicado, y </span>
-</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">            </span><span class="c1">// retorna un valor lógico, incicando si el proceso</span>
-</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">            </span><span class="c1">// sigue vivo transcurrido este tiempo.</span>
-</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="w">            </span><span class="c1">// Dado que este método puede generar una excepción</span>
-</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="w">            </span><span class="c1">// de tipo InterruptedException, añadimos ésta </span>
-</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="w">            </span><span class="c1">// a la cláusula catch</span>
-</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="w">            </span><span class="n">Boolean</span><span class="w"> </span><span class="n">isProcessDead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">waitFor</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span>
-</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>
-</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="w">            </span><span class="c1">// Si el proceso no se ha destruido antes de 3</span>
-</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a><span class="w">            </span><span class="c1">// segundos, le enviamos la señal SIGTERM (p.destroy)</span>
-</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isProcessDead</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Destruyendo la aplicación&quot;</span><span class="p">);</span>
-</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a><span class="w">                </span><span class="n">p</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span><span class="w"> </span><span class="c1">// Sugerencia: Puedes usar destroyForcibily y </span>
-</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a><span class="w">                             </span><span class="c1">// comprobar el resultado.</span>
-</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>
-</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a><span class="w">            </span><span class="c1">// Dado que la destrucción del proceso no es inmediata,</span>
-</span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a><span class="w">            </span><span class="c1">// esperaremos a que éste finalice completamente. Para ello</span>
-</span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a><span class="w">            </span><span class="c1">// utilizamos el método isAlive, que devuelve si el proceso</span>
-</span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a><span class="w">            </span><span class="c1">// sigue vivo o no.</span>
-</span><span id="__span-13-44"><a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a><span class="w">            </span><span class="c1">// Si el proceso sigue vivo, esperaremos un milisegundo, y </span>
-</span><span id="__span-13-45"><a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a><span class="w">            </span><span class="c1">// mostraremos un mensaje.</span>
-</span><span id="__span-13-46"><a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>
-</span><span id="__span-13-47"><a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">isAlive</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-48"><a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;El proceso sigue vivo. Espero un milisegundo.&quot;</span><span class="p">);</span>
-</span><span id="__span-13-49"><a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a><span class="w">                </span><span class="n">p</span><span class="p">.</span><span class="na">waitFor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span>
-</span><span id="__span-13-50"><a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-13-51"><a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>
-</span><span id="__span-13-52"><a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>
-</span><span id="__span-13-53"><a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;El proceso ha finalizado con la salida: &quot;</span><span class="o">+</span><span class="n">p</span><span class="p">.</span><span class="na">exitValue</span><span class="p">());</span>
-</span><span id="__span-13-54"><a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-55"><a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-</span><span id="__span-13-56"><a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-13-57"><a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a>
-</span><span id="__span-13-58"><a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-13-59"><a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a><span class="p">}</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Usuari que ha llançat el procés: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pInfo</span><span class="p">.</span><span class="na">user</span><span class="p">().</span><span class="na">get</span><span class="p">());</span>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ordre executada: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pInfo</span><span class="p">.</span><span class="na">commandLine</span><span class="p">().</span><span class="na">get</span><span class="p">());</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Inici d&#39;execució: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pInfo</span><span class="p">.</span><span class="na">startInstant</span><span class="p">().</span><span class="na">get</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="w">            </span><span class="n">Duration</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pInfo</span><span class="p">.</span><span class="na">totalCpuDuration</span><span class="p">().</span><span class="na">get</span><span class="p">();</span>
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Temps (en ms) CPU utilitzat &gt;&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">toMillis</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; ms&quot;</span><span class="p">);</span>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">();</span>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="la-classe-javalangruntime">La classe java.lang.Runtime</h3>
 <p>L'API de Java per a la gestió de processos, a més de les classes <code>ProcessBuilder</code> i <code>Process</code>, es completa amb la classe <code>Runtime</code>, que encapsula l'entorn d'execució d'un procés.</p>
