@@ -702,7 +702,7 @@
 <p><a class="glightbox" href="../img/3/InputStreamDecorator.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../img/3/InputStreamDecorator.png" width="500px" /></a></p>
 <div class="admonition caution">
 <p class="admonition-title"><strong>Sobre la codificació de caràcters</strong></p>
-<p>Un aspecte a tindre en compte quan treballem amb <em>streams</em> és la codificació de la informació que s'intercanvia entre els processos, i que depén del sistema operatiu en què estiguem treballant. La majoria de sistemes (GNU/Linux, Mac US, Android, iOS..) utiizan la codificació <em>UTF-8</em>, basada en l'estàndard <em>Unicode</em>. Per part seua, MS Windows utilitza els seus propis formats, incompatibles amb la resta, com Windows-1252. Així que per a tractar les dades correctament en Java quan fem ús de mecanismes de comunicació entre processos més avançats, caldrà tindre en compte el tipus de codificació que el propi sistema utilitza.</p>
+<p>Un aspecte a tindre en compte quan treballem amb <em>streams</em> és la codificació de la informació que s'intercanvia entre els processos, i que depén del sistema operatiu en què estiguem treballant. La majoria de sistemes (GNU/Linux, Mac US, Android, iOS..) utiizan la codificació <em>UTF-8</em>, basada en l'estàndard <em>Unicode</em>. Per contra, MS Windows utilitza els seus propis formats, incompatibles amb la resta, com Windows-1252. Així que per a tractar les dades correctament en Java quan fem ús de mecanismes de comunicació entre processos més avançats, caldrà tindre en compte el tipus de codificació que el propi sistema utilitza.</p>
 </div>
 <h3 id="exemple-2-redireccio-a-fitxers">Exemple 2. Redirecció a fitxers</h3>
 <p>En el següent programa <code>EjemploStreams2.java</code>, tenim un exemple sobre com redirigir aquesta eixida cap a un fitxer, utilitzant per a això els decoradors <code>FileWriter</code> i <code>BufferedWriter</code>:</p>
@@ -773,9 +773,9 @@
 <p>La classe ProcessBuilder ens ofereix una forma més simple de redirigir l'entrada i eixida d'un procés, ja siga cap a l'eixida estàndard, cap a un fitxer o qualsevol altra font o destinació de dades, a través de mètodes com <code>redirectOutput</code>, <code>redirectInput</code> o <code>redirectError</code>. Mitjançant aquests mètodes, únicament haurem d'indicar cap a on redirigir l'eixida</p>
 <p>Per a indicar aquesta redirecció, podem utilitzar la classe <code>ProcessBuilder.Redirect</code>, que pot prendre alguns dels següents valors:</p>
 <ul>
-<li><code>ProcessBuilder.Redirect.PIPE</code>: Per a indicar que el subproceso de E/S es connectarà al procés Java actual a través d'una canonada. Aquest és el comportament per defecte.</li>
-<li><code>ProcessBuilder.Redirect.INHERIT</code>: Per a indicar que el subproceso de E/S tindrà els mateixos fluxos de E/S que el procés actual.</li>
-<li><code>ProcessBuilder.Redirect.DISCARD</code>: Descarta l'eixida del subproceso.</li>
+<li><code>ProcessBuilder.Redirect.PIPE</code>: Per a indicar que el subprocés de E/S es connectarà al procés Java actual a través d'una canonada. Aquest és el comportament per defecte.</li>
+<li><code>ProcessBuilder.Redirect.INHERIT</code>: Per a indicar que el subprocés de E/S tindrà els mateixos fluxos de E/S que el procés actual.</li>
+<li><code>ProcessBuilder.Redirect.DISCARD</code>: Descarta l'eixida del subprocés.</li>
 <li>Una redirecció per a llegir d'un fitxer, obtinguda mitjançant  <code>Redirect.from(fichero)</code></li>
 <li>Una redirecció per a escriure en un fitxer, obtinguda mediant <code>Redirect.to(fichero)</code></li>
 <li>Una redirecció per a escriure al final d'un fitxer, obtinguda mitjançant el mètode  <code>Redirect.appendTo(fichero)</code></li>
@@ -863,7 +863,7 @@
 </span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Tinguem en compte que amb <code>Redirect.to</code>, sobreescriurem el contingut del fitxer. Si el que desitgem és mantindre el contingut, utilitzarem el <code>método Redirect.appendTo</code>. Per exemple:</p>
+<p>Tinguem en compte que amb <code>Redirect.to</code>, sobreescriurem el contingut del fitxer. Si el que desitgem és mantindre el contingut, utilitzarem el mètode <code>Redirect.appendTo</code>. Per exemple:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="s">&quot;cal&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2026&quot;</span><span class="p">);</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">File</span><span class="w"> </span><span class="n">calendario</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;calendario2026.txt&quot;</span><span class="p">);</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">BufferedWriter</span><span class="w"> </span><span class="n">bw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedWriter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileWriter</span><span class="p">(</span><span class="n">calendario</span><span class="p">));</span>
@@ -873,7 +873,7 @@
 </span></code></pre></div>
 <h2 id="processbuilder-i-canonades-startpipeline">ProcessBuilder i canonades: StartPipeline</h2>
 <h3 id="canonades-de-processbuilder">Canonades de ProcessBuilder</h3>
-<p>L'API de <code>ProcessBuilder</code> incorpora el metodo estàtic <code>StartPipeline</code> que permet crear una canonada de processos en els quals l'eixida d'un procés s'envia a l'entrada del següent.</p>
+<p>L'API de <code>ProcessBuilder</code> incorpora el mètode estàtic <code>StartPipeline</code> que permet crear una canonada de processos en els quals l'eixida d'un procés s'envia a l'entrada del següent.</p>
 <p>Aquest mètode es defineix de la següent manera:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Process</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">startPipeline</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ProcessBuilder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">builders</span><span class="p">)</span>
 </span></code></pre></div>
@@ -893,6 +893,11 @@
 <div class="language-java highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">Process</span><span class="w"> </span><span class="n">ultimo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listaProcesos</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">listaProcesos</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Amb el que ja podrem utilitzar els mètodes <code>getInputStream</code> i <code>getErrorStream</code> per a obtindre l'eixida de tots ells.</p>
+<div class="admonition note">
+<p class="admonition-title">Completa el codi</p>
+<p>Implementa un mètode per tal de bolcar a un arxiu l'eixida de l'execució dels comandaments anteriors, fent ús de 
+les canonades de ProcessBuilder.</p>
+</div>
 
 
 
