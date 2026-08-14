@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../../4.Processos_Python/">
+      
       
       
       <link rel="icon" href="../../img/logo.svg">
@@ -77,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#estructura-del-projecte-myshell" class="md-skip">
+        <a href="#estructura-del-projecte" class="md-skip">
           Salta el contingut
         </a>
       
@@ -378,6 +380,117 @@
   
 
     
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Pràctica 1. MyShell
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pràctica 1. MyShell
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-projecte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura del projecte
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura del projecte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-1-funcionalitat-basica-5p" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 1. Funcionalitat bàsica. (5p)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2-suport-de-canonades-5p" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2. Suport de canonades. (5p)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claus-i-ajudes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Claus i ajudes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-3-myshell-en-python-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 3. MyShell en Python [Opcional]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -403,28 +516,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#estructura-del-projecte-myshell" class="md-nav__link">
+  <a href="#estructura-del-projecte" class="md-nav__link">
     <span class="md-ellipsis">
-      Estructura del projecte MyShell
+      Estructura del projecte
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Estructura del projecte MyShell">
+    <nav class="md-nav" aria-label="Estructura del projecte">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#part-1-funcionalitat-basica-7p" class="md-nav__link">
+  <a href="#part-1-funcionalitat-basica-5p" class="md-nav__link">
     <span class="md-ellipsis">
-      Part 1. Funcionalitat bàsica. (7p)
+      Part 1. Funcionalitat bàsica. (5p)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-2-suport-de-canonades-3p" class="md-nav__link">
+  <a href="#part-2-suport-de-canonades-5p" class="md-nav__link">
     <span class="md-ellipsis">
-      Part 2. Suport de canonades. (3p)
+      Part 2. Suport de canonades. (5p)
     </span>
   </a>
   
@@ -440,9 +553,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#part-3-myshell-en-python-opcional-2p-extra" class="md-nav__link">
+  <a href="#part-3-myshell-en-python-opcional" class="md-nav__link">
     <span class="md-ellipsis">
-      Part 3. MyShell en Python [Opcional. 2p extra]
+      Part 3. MyShell en Python [Opcional]
     </span>
   </a>
   
@@ -474,8 +587,8 @@
 
   <h1>Pràctica 1. MyShell</h1>
 
-<h2 id="estructura-del-projecte-myshell">Estructura del projecte MyShell</h2>
-<p>En aquesta primera pràctica realitzarem una shell interactiva que llance ordres del sistema, i que anomenarem MyShell</p>
+<h2 id="estructura-del-projecte">Estructura del projecte</h2>
+<p>En aquesta primera pràctica realitzarem una shell interactiva que llance ordres del sistema, i que anomenarem MyShell.</p>
 <p>L'estructura de carpetes del projecte serà com la següent:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└──<span class="w"> </span>src
@@ -489,10 +602,9 @@
 <p>Tots els fonts (.java) se situaran dins de la carpeta <em>MyShell</em>, i correspondran al paquet: <code>com.ieseljust.psp.myshell</code>. És a dir:</p>
 <ul>
 <li>La primera línia de cada font serà <code>package com.ieseljust.psp.myshell</code>.</li>
-<li>A més, per a executar l'aplicació, des del directori src/main/java, farem 
-<code>java com.ieseljust.psp.myshell.MyShell</code></li>
+<li>A més, per a executar l'aplicació, des del directori src/main/java, farem <code>java com.ieseljust.psp.myshell.MyShell</code></li>
 </ul>
-<h3 id="part-1-funcionalitat-basica-7p">Part 1. Funcionalitat bàsica. (7p)</h3>
+<h3 id="part-1-funcionalitat-basica-5p">Part 1. Funcionalitat bàsica. (5p)</h3>
 <p>L'aplicació MyShell consistirà en un intèrpret d'ordres, a l'estil Bash, amb el següent aspecte:</p>
 <p><a class="glightbox" href="../img/apac1_1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="MyShell" src="../img/apac1_1.png" width="450" /></a></p>
 <p>I el següent funcionament:</p>
@@ -502,21 +614,21 @@
 <li>L'eixida estándard del procés es mostra per defecte en color verd.</li>
 <li>L'eixida d'error del procés, de mostrarà per defecte en color roig.</li>
 <li>Algunes ordres de tipus <em>builtin</em> (aquelles interpretades directament per bash) <a href="http://manpages.ubuntu.com/manpages/bionic/man7/bash-builtins.7.html">^1</a>, no donaran error, però tampoc s'executaran. No és l'objectiu d'aquesta pràctica la implementació d'aquestes funcionalitats, sinò la gestió de processos, per la qual cosa aquest comportament es dóna per correcte.</li>
-<li>L'aplicació finalitzarà quan detecte l'ordre <code>quit</code> com a entrada</li>
+<li>L'aplicació finalitzarà quan detecte l'ordre <code>quit</code> com a entrada.</li>
 </ul>
 </li>
 </ul>
-<h3 id="part-2-suport-de-canonades-3p">Part 2. Suport de canonades. (3p)</h3>
-<p>Crea una altra aplicació dins del paquet que anomenaràs MyShell2, i que serà una variant de la primera part, però amb suport per a afegir canonades </p>
-<p>Per a això, hauràs d'utilitzar les funcionalitats que ens ofereix la classe <code>ProcessBuilder</code> per a treballar amb canonades</p>
+<h3 id="part-2-suport-de-canonades-5p">Part 2. Suport de canonades. (5p)</h3>
+<p>Crea una altra aplicació dins del paquet que anomenaràs MyShell2, i que serà una variant de la primera part, però amb suport per a afegir canonades.</p>
+<p>Per a això, hauràs d'utilitzar les funcionalitats que ens ofereix la classe <code>ProcessBuilder</code> per a treballar amb canonades.</p>
 <p><a class="glightbox" href="../img/apac1_1_b.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="MyShell 2" src="../img/apac1_1_b.png" width="400px" /></a></p>
 <h3 id="claus-i-ajudes">Claus i ajudes</h3>
 <h4 id="com-acolorir-leixida">Com acolorir l'eixida?</h4>
 <p>Per a <em>pintar</em> l'eixida per pantalla, no fa falta més que especificar el color en els mateixos <code>println</code> en forma de cadena de text. Per exemple:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\u001B[32m Esta línea aparece en rojo&quot;</span><span class="p">);</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Esta también aparece en rojo, porque los cambios de color se hacen permanentes a la consola&quot;</span><span class="p">);</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Con esto \u001B[0m restauramos el color original&quot;</span><span class="p">);</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\u001B[31m Esta línea escribe en verde y restaura el gris original \u001B[0m&quot;</span><span class="p">);</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\u001B[32m Aquesta línia apareix en verd&quot;</span><span class="p">);</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Aquesta també apareix en verd, perquè els canvis de color es fan permanents a la consola&quot;</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Amb açò \u001B[0m restaurem el color original&quot;</span><span class="p">);</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\u001B[31m Aquesta línia escriu en roig i restaura el gris original \u001B[0m&quot;</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Obté el següent resultat:</p>
 <p><a class="glightbox" href="../img/apac1_2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="MyShell" src="../img/apac1_2.png" width="400px" /></a></p>
@@ -529,14 +641,15 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">linea</span><span class="o">!=</span><span class="s">&quot;quit&quot;</span><span class="p">)</span>
 </span></code></pre></div>
-<p>:::caution</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+</div>
 <p><strong>Possibles errors amb l'split</strong></p>
 <ul>
 <li>Quan utilitzeu el mètode <code>split</code> per a separar ordres, tingueu en compte que el símbol <code>|</code> és un caràcter especial, per la qual cosa ha d'escapar-se.</li>
 <li>El resultat del <code>split</code> quan separem per canonades pot retornar-nos espais en blanc al principi o al final de cada ordre, per la qual cosa és possible que hàgem d'eliminar-los</li>
 </ul>
-<p>:::</p>
-<h3 id="part-3-myshell-en-python-opcional-2p-extra">Part 3. MyShell en Python [Opcional. 2p extra]</h3>
+<h3 id="part-3-myshell-en-python-opcional">Part 3. MyShell en Python [Opcional]</h3>
 <p>Com a part opcional, crea un script MyShell en python amb la mateixa funcionalitat que a Java</p>
 
 
