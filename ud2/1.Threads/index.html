@@ -853,16 +853,16 @@ Amb aquestes dues formes, com veiem, no hem necessitat crear una classe específ
 <p>En la secció de recursos, tens disponible el programa <code>HolaThreads.java</code>. En ell es defineix la classe <code>MiRunnable</code>, a partir de la qual es poden crear fils. A més, en el seu mètode <code>run()</code>, mostra informació dels fils en si. La classe <code>HolaThreads</code>, que conté el mètode <code>main()</code>, per part seua, crea tres objectes de la classe <code>MiRunnable</code>, i els llança en paral·lel.</p>
 <p>Compila i executa l'exemple i analitza els resultats, prestant especial atenció a aspectes com:</p>
 <ul>
-<li>L'ordre en què es muestan els resultats</li>
+<li>L'ordre en què es mostren els resultats</li>
 <li>Hi ha alguna diferència entre la referència <em>this</em> i <em>hiloActual?</em> En què es diferencia a nivell d'execució <code>this.nombre</code> i <code>hiloActual.getName()</code>?</li>
 </ul>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Exercici pràctic 2</p>
-<p>A partir del codi de <code>HolaThreads.java</code> de l'exercici anterior, crea un nou programa <code>HolaThreadsParam.java</code> es demana:</p>
+<p>A partir del codi de <code>HolaThreads.java</code> de l'exercici anterior, crea un nou programa <code>HolaThreadsParam.java</code> , on es demana:</p>
 <ul>
 <li>Realitzar les modificacions oportunes perquè s'admeta una llista de noms com a arguments en la invocació (vector <code>args</code>), de manera que es genere un fil per cadascun d'ells.</li>
-<li>Modifica la lògica interna perquè el nom del Thread estiga associat al nom de l'objecte per al qual s'ha llançat. És a dir, si la propietat nomene de l'objecte és <em>Joan</em>, que el seu Thread es cride <em>Thread-Joan</em>. Ací hauràs d'utilitzar el mètode <code>setName</code>.</li>
+<li>Modifica la lògica interna perquè el nom del Thread estiga associat al nom de l'objecte per al qual s'ha llançat. És a dir, si la propietat nom de l'objecte és <em>Joan</em>, que el seu Thread es cride <em>Thread-Joan</em>. Ací hauràs d'utilitzar el mètode <code>setName</code>.</li>
 <li>Just abans de finalitzar cada fil, realitza una pausa d'1 segon (mètode <code>sleep</code>) i mostra quan acabe aquesta pausa un missatge de comiat.</li>
 <li>El programa principal ha d'esperar que finalitzen els fils que genera per a finalitzar.</li>
 </ul>
