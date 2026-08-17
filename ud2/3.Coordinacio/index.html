@@ -495,28 +495,23 @@
 <p>La sincronització quan treballem amb múltiples processos és una tasca fonamental per a evitar situacions que puguen portar a inconsistències en els resultats. El treball coordinat dels diferents fils d'execució és indispensable per a no perdre informació en qualsevol procés. </p>
 <p>En programació concurrent existeixen diversos problemes clàssics de sincronització, que van ser dissenyats en el seu moment per a poder abstraure problemes de la vida real. La solució que es planteja a aquests problemes serà extensible a qualsevol problema que s'ajuste als plantejaments del model.</p>
 <p>Per esmentar alguns d'aquests problemes clàssics, tenim el problema dels lectors i escriptors, el probema dels filòsofs comensals, el problema del barber dormilega, o el problema dels productors i consumidors, del qual ens ocuparem en aquest apartat. </p>
-<div class="language-text highlight"><pre><span></span><code>!!! note &quot;Problema dels lectors i escriptors&quot;
-
-Hi ha dos tipus de fils que accedeixen a un **recurs compartit**, com ara un fitxer o una base de dades:
-
-- **Lectors**: només consulten la informació.
-- **Escriptors**: modifiquen la informació.
-
-Diversos lectors poden accedir simultàniament al recurs, perquè no modifiquen la informació.
-
-En canvi, quan un escriptor està modificant el recurs, necessita **accés exclusiu**:
-
-```text
-LECTOR + LECTOR       → ✓ poden treballar simultàniament
-LECTOR + ESCRIPTOR    → ✗
-ESCRIPTOR + ESCRIPTOR → ✗
-```
-
-El problema consisteix a dissenyar la sincronització adequada.
-
-Per exemple, si sempre donem prioritat als lectors, podria passar que arriben contínuament nous lectors i l&#39;escriptor no tinga mai l&#39;oportunitat d&#39;entrar. Això és un problema d&#39;inanició (starvation).
-</code></pre></div>
-<div class="admonition note">
+<div class="admonition info">
+<p class="admonition-title">Problema dels lectors i escriptors</p>
+<p>Hi ha dos tipus de fils que accedeixen a un <strong>recurs compartit</strong>, com ara un fitxer o una base de dades:</p>
+<ul>
+<li><strong>Lectors</strong>: només consulten la informació.</li>
+<li><strong>Escriptors</strong>: modifiquen la informació.</li>
+</ul>
+<p>Diversos lectors poden accedir simultàniament al recurs, perquè no modifiquen la informació.</p>
+<p>En canvi, quan un escriptor està modificant el recurs, necessita <strong>accés exclusiu</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LECTOR + LECTOR       → ✓ poden treballar simultàniament
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>LECTOR + ESCRIPTOR    → ✗
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ESCRIPTOR + ESCRIPTOR → ✗
+</span></code></pre></div>
+<p>El problema consisteix a dissenyar la sincronització adequada.</p>
+<p>Per exemple, si sempre donem prioritat als lectors, podria passar que arriben contínuament nous lectors i l'escriptor no tinga mai l'oportunitat d'entrar. Això és un problema d'inanició (starvation).</p>
+</div>
+<div class="admonition info">
 <p class="admonition-title">Problema dels filòsofs comensals</p>
 <p>Imagina 5 filòsofs estan asseguts al voltant d'una taula. Entre cada parella de filòsofs hi ha una <strong>forqueta</strong>.</p>
 <p>Cada filòsof alterna entre dues activitats:</p>
@@ -541,7 +536,7 @@ Filòsof 5 → espera forqueta 1</p>
 <p>Ningú pot continuar perquè cada filòsof està esperant un recurs que té un altre fil.</p>
 <p>Aquesta situació és un deadlock o interbloqueig.</p>
 </div>
-<div class="admonition note">
+<div class="admonition info">
 <p class="admonition-title">Problema del barber dormilega</p>
 <p>Hi ha una barberia amb:</p>
 <ul>
