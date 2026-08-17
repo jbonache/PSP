@@ -533,8 +533,8 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Filòsof 4 → espera forqueta 5
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Filòsof 5 → espera forqueta 1
 </span></code></pre></div>
-<p>Ningú pot continuar perquè cada filòsof està esperant un recurs que té un altre fil.</p>
-<p>Aquesta situació és un deadlock o interbloqueig.</p>
+<p>Ningú pot continuar perquè cada filòsof està esperant un recurs que té un altre fil. Aquesta situació és un deadlock o interbloqueig.</p>
+<p>El problema estudia com evitar els interbloquejos quan els fils necessiten diversos recursos simultàniament. </p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Problema del barber dormilega</p>
@@ -554,7 +554,7 @@
 </ul>
 <p>El problema consisteix a coordinar correctament el barber i els clients perquè no es produïsquen conflictes en l'accés a la sala d'espera i a la cadira del barber.</p>
 <p>Per exemple:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>                ┌─────────────┐
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>                ┌─────────────┐
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                │   BARBER    │
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                │   dormint   │
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                └──────┬──────┘
@@ -574,6 +574,7 @@
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>                │   treballa  │
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>                └─────────────┘
 </span></code></pre></div>
+El problema és com coordinar correctament qui pot accedir a la sala d'espera i com despertar el barber.</p>
 </div>
 <p>En tots ells, s'aborda la problemàtica dels recursos compartits entre diversos subprocesos des d'una perspectiva diferent, i s'aporten solucions que permeten la seua sincronització. Aquestes solucions poden implementar-se utilitzant diferents mecanismes, com puguen ser semàfors o monitors.</p>
 <p>Anem doncs a abordar aquest problema del productor-consumidor, on tractarem la producció i el consum d'informació per part de diferents fils d'execució de manera coordinada i sincronitzada mitjançant l'ús de monitors.</p>
