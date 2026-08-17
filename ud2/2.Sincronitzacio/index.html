@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exercici" class="md-skip">
+        <a href="#introduccio" class="md-skip">
           Salta el contingut
         </a>
       
@@ -323,15 +323,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#exercici" class="md-nav__link">
-    <span class="md-ellipsis">
-      Exercici
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#introduccio" class="md-nav__link">
     <span class="md-ellipsis">
       Introducció
@@ -388,6 +379,24 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercici-sincronitzacio-de-fils-i-acces-concurrent-a-la-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercici: Sincronització de fils i accés concurrent a la terminal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passos-necessaris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passos necessaris
+    </span>
+  </a>
   
 </li>
       
@@ -468,15 +477,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#exercici" class="md-nav__link">
-    <span class="md-ellipsis">
-      Exercici
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#introduccio" class="md-nav__link">
     <span class="md-ellipsis">
       Introducció
@@ -536,6 +536,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exercici-sincronitzacio-de-fils-i-acces-concurrent-a-la-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercici: Sincronització de fils i accés concurrent a la terminal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passos-necessaris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passos necessaris
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -557,7 +575,7 @@
 
   <h1>2. Sincronització</h1>
 
-<h2 id="exercici">Exercici</h2>
+<h2 id="introduccio">Introducció</h2>
 <p>Començarem amb un xicotet exercici: crear un programa en Java que llance dos ordres (per exemple un <code>ls -l</code> i un <code>ps aux</code>) i mostre per pantalla els resultats, cadascun d'un color. Per a això:</p>
 <ul>
 <li>
@@ -572,7 +590,6 @@
 <p class="admonition-title">Codi</p>
 <p>Disposareu de la solució en el programa <code>LauncherExemples.java</code></p>
 </div>
-<h2 id="introduccio">Introducció</h2>
 <p>La programació d'aplicacions multifil implica la generació de diferents fils d'execució per a abordar la resolució d'un problema de manera concurrent. En aquest cas, pot ser que sorgisca la necessitat de mantindre objectes o recursos accessibles per tots els fils, que a més poden servir com a mecanisme de comunicació entre ells.</p>
 <p>Quan un objecte o variable és compartit per diversos fils d'execució, hem de ser especialment cauts en el seu tractament, i accedir a ell de manera coordinada, de manera que les operacions que un fil realitza sobre un d'aquests objectes no es vegen alterades per unes altres. Pensem per exemple en l'escriptura d'un fitxer, que sol ser un procés més llarg. Si dos fils, per exemple desitgen escriure en el mateix fitxer, hauran de fer-lo de manera que les escriptures d'un no interferisquen en les de l'altre. El més senzill és que un fil espera que l'altre acabe d'escriure per a poder escriure ell.</p>
 <p>En aquest apartat introduirem els conceptes necessaris per a contextualitzar aquestes situacions i donar-los una solució des del punt de vista de la programació, mitjançant els mecanismes que Java ens proporciona per a això.</p>
@@ -653,6 +670,50 @@
 <p>Centrant-nos en els estats que concerneixen l'ús de monitors, podem representar-los en el següent diagrama:</p>
 <p><a class="glightbox" href="../img/2/estats_blocked.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Estat de bloqueig" src="../img/2/estats_blocked.png" width="500px" /></a></p>
 <p>Com veiem, quan un fil intenta accedir a un mètode o bloc de codi sincronitzat i l'objecte al qual accedirà està bloquejat per un altre fil, el fil passa  a un estat bloquejat, passant a formar part d'una cua de fils bloquejats a l'espera que es desbloquege el monitor. Aquesta cua tindrà una estructura FIFO (First In First Out), per a garantir l'execució de tots els fils.</p>
+<div class="admonition note">
+<p class="admonition-title">Sincronització de fils i accés concurrent a la terminal</p>
+<h2 id="exercici-sincronitzacio-de-fils-i-acces-concurrent-a-la-terminal">Exercici: Sincronització de fils i accés concurrent a la terminal</h2>
+<p>Partim del programa anterior, en què es creen dos fils que executen simultàniament dues ordres del sistema:</p>
+<ul>
+<li><code>ps aux</code></li>
+<li><code>ls -l /</code></li>
+</ul>
+<p>Cada fil mostra per la terminal (<code>System.out</code>) les línies que rep del procés que ha executat.</p>
+<p>En executar el programa, es pot observar que les línies de les dues ordres poden aparéixer <strong>intercalades</strong>, ja que els dos fils accedeixen simultàniament al recurs compartit <code>System.out</code>.</p>
+<p>L'objectiu de l'exercici és <strong>modificar el programa perquè la sortida de cada procés aparega completa i no es barrege amb la de l'altre procés</strong>.</p>
+<p>Per aconseguir-ho, utilitza un <strong>monitor</strong> mitjançant la paraula reservada <code>synchronized</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">objecte</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// Secció crítica</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="passos-necessaris">Passos necessaris</h2>
+</div>
+<ol>
+<li>
+<p>Crea una nova classe LauncherMonitor còpia de Launcher. LauncherExemples es modificarà per a fer ús d'aquesta nova classe per a generar els fils.</p>
+</li>
+<li>
+<p><strong><em>(LauncherMonitor)</em></strong>: Identifica el codi que escriu les línies en <code>System.out</code> com la secció crítica.</p>
+</li>
+<li>
+<p><strong><em>(LauncherMonitor)</em></strong>: Afegir el monitor com a atribut de la classe <code>LauncherMonitor</code>.</p>
+</li>
+<li>
+<p><strong><em>(LauncherMonitor)</em></strong>: Modificar el constructor de <code>LauncherMonitor</code> perquè reba el monitor.</p>
+</li>
+<li>
+<p><strong><em>(LauncherMonitor)</em></strong>: Envoltar la secció crítica amb un bloc <code>synchronized</code> utilitzant el monitor compartit.</p>
+</li>
+<li>
+<p><strong><em>(LauncherExemples)</em></strong>: Crear un objecte que actue com a monitor (per exemple <code>Object clauAcces;</code>).</p>
+</li>
+<li>
+<p><strong><em>(LauncherExemples)</em></strong>: Fer que els dos objectes <code>LauncherMonitor</code> compartisquen el mateix monitor.</p>
+</li>
+<li>
+<p>Comprova que només un fil pot executar la secció crítica al mateix temps. Executa el programa diverses vegades i comprovar que la sortida de cada procés ja no apareix intercalada.</p>
+</li>
+</ol>
 
 
 
