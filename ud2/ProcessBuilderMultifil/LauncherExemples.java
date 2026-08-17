@@ -43,11 +43,11 @@ public class LauncherExemples {
     public static void main(String[] args) {
         try {
             // Creamos algunos objetos de ejemplo
-            Launcher l = new Launcher("ps aux", "\u001B[31m");
+            Launcher l1 = new Launcher("ps aux", "\u001B[31m");
             Launcher l2 = new Launcher("ls -l /", "\u001B[32m");
 
             // Y los hilos correspondientes
-            Thread hilo1 = new Thread(l);
+            Thread hilo1 = new Thread(l1);
             Thread hilo2 = new Thread(l2);
             // Thread hilo2 = new Thread(runnable2);
             // Thread hilo3 = new Thread(runnable3);
@@ -60,7 +60,7 @@ public class LauncherExemples {
 
             // Y los juntamos con el principal cuando acaben cuando acaban
             hilo1.join();
-             hilo2.join();
+            hilo2.join();
             // hilo3.join();
 
         } catch (Exception e) {

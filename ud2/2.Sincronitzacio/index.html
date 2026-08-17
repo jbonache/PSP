@@ -378,9 +378,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#syncronized-i-estats" class="md-nav__link">
+  <a href="#synchronized-i-estats" class="md-nav__link">
     <span class="md-ellipsis">
-      Syncronized i estats
+      Synchronized i estats
     </span>
   </a>
   
@@ -523,9 +523,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#syncronized-i-estats" class="md-nav__link">
+  <a href="#synchronized-i-estats" class="md-nav__link">
     <span class="md-ellipsis">
-      Syncronized i estats
+      Synchronized i estats
     </span>
   </a>
   
@@ -558,10 +558,10 @@
   <h1>2. Sincronització</h1>
 
 <h2 id="exercici">Exercici</h2>
-<p>Començarem amb un xicotet exercici: Crear un programa en Java que llance dos ordres (per exemple un <code>ls -l</code> i un <code>ps aux</code>) i mostre per pantalla els resultats, cadascun d'un color. Per a això:</p>
+<p>Començarem amb un xicotet exercici: crear un programa en Java que llance dos ordres (per exemple un <code>ls -l</code> i un <code>ps aux</code>) i mostre per pantalla els resultats, cadascun d'un color. Per a això:</p>
 <ul>
 <li>
-<p>Crea una classe anomenada <code>Launcher</code> que implemente la interfície <code>Runnable</code>, i que en el seu constructor s'inicialitze amb dos <em>Strings</em>, un amb el ordre a executar, i un altre amb un codi de color, per a mostrar l'eixida acolorida per pantalla.</p>
+<p>Crea una classe anomenada <code>Launcher</code> que implemente la interfície <code>Runnable</code>, i que en el seu constructor s'inicialitze amb dos <em>Strings</em>, un amb l'ordre a executar, i un altre amb un codi de color, per a mostrar l'eixida acolorida per pantalla.</p>
 </li>
 <li>
 <p>Després, crea una classe principal <code>LauncherExemples</code> que cree dos objectes de la classe <em>Launcher</em> inicialitzant-los amb un ordre i amb un codi de color, i que els llance com a fils.</p>
@@ -594,7 +594,7 @@
 <p>El problema ara se situa a poder garantir que l'accés a aquests objectes compartits es realitze de manera segura. Necessitarem establir algun mecanisme perquè aquestes operacions sobre els objectes es realitzen de manera atòmica, de manera que fins que no finalitze una operació sobre l'objecte, no comence una altra.</p>
 <p>A aquesta coordinació en l'activitat de diversos fil es coneix com a <strong>sincronització</strong>.</p>
 <h2 id="sincronitzacio-mitjancant-monitors">Sincronització mitjançant monitors</h2>
-<p>A Java, aquesta sincronització és possible gràcies a l'ús de monitors, un mecanisme que permet controlar l'accés concurrent a objectes en conflicte. Els monitors tenen la capacitat de bloquejar un objecte mentre un fil està accedint a ell, de manera que no  permet l'accés per part d'altres fils. Això es coneix com a <strong>exclusió mútua</strong>. Quan el fil que bloquejava l'objecte acaba les seues operacions, desbloqueja l'objecte perquè puguen accedir altres objectes. D'aquesta manera, podem doncs sincronitzar l'accés a un objecte compartit</p>
+<p>A Java, aquesta sincronització és possible gràcies a l'ús de monitors, un mecanisme que permet controlar l'accés concurrent a objectes en conflicte. Els monitors tenen la capacitat de bloquejar un objecte mentre un fil està accedint a ell, de manera que no  permet l'accés per part d'altres fils. Això es coneix com a <strong>exclusió mútua</strong>. Quan el fil que bloquejava l'objecte acaba les seues operacions, desbloqueja l'objecte perquè puguen accedir altres objectes. D'aquesta manera, podem doncs sincronitzar l'accés a un objecte compartit.</p>
 <p>Ara bé, com s'implementa tot això? En java, tots els objectes tenen associat un <em>monitor</em>, per la qual cosa poden sincronitzar-se. Per a accedir a aquest monitor s'utilitza la paraula reservada <em>synchronized</em>, que podem emprar de dues formes:</p>
 <ul>
 <li>Declarant un mètode en una classe <code>Runnable</code> com <code>synchronized</code>, o bé</li>
@@ -611,7 +611,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>D'aquesta manera, quan el mètode <code>NombreMetodo</code> és invocat, el fil que el va invocar entra en el monitor de l'objecte, quedant aquest bloquejat. En aquest moment, cap altre fil que intente accedir a l'objecte compartit, ja siga a través d'aquest mètode sincronitzat o uns altres que utilitzen el mateix objecte, podran fer-lo, garantint així <strong>exclusió mútua</strong>.</p>
-<p>En el moment en què el fil que va bloquejar l'objecte finalitze el mètode sincronitzat, el monitor desbloqueja l'objecte, de manera que ja pot accedir a ell un altre fil</p>
+<p>En el moment en què el fil que va bloquejar l'objecte finalitze el mètode sincronitzat, el monitor desbloqueja l'objecte, de manera que ja pot accedir a ell un altre fil.</p>
 <p><strong>Amb aquest mecanisme, únicament hem de preocupar-nos de marcar com sincronitzats els mètodes que vagen a contindre una secció crítica.</strong></p>
 <h3 id="blocs-synchronized">Blocs synchronized</h3>
 <p>A més de poder especificar un mètode com <code>synchronized</code>, podem definir únicament un bloc de codi, de la següent manera:</p>
@@ -624,11 +624,13 @@
 <ul>
 <li>Quan no siga possible definir un mètode com synchronized, per exemple perquè és una funció de llibreria que no està definida com a tal, però hem d'utilitzar-la de forma sincronitzada. Atés que no podem marcar el mètode com sincronitzat, l'emmarcaríem en un bloc synchronized:</li>
 </ul>
-<p><div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">synchronized</span><span class="p">(</span><span class="n">objeto_a_bloquear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">synchronized</span><span class="p">(</span><span class="n">objeto_a_bloquear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Función_No_Sincronizada</span><span class="p">(</span><span class="n">lista_parametros</span><span class="p">);</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
 </span></code></pre></div>
-* Quan desitgem reduir el bloqueig únicament a la secció crítica. En alguns mètodes, la secció crítica serà únicament una part d'aquest, per la qual cosa no necessitarem declarar-ho íntegrament com synchronized. En aquest cas, tancaríem en un bloc synchronized a aquesta secció crítica</p>
+<ul>
+<li>Quan desitgem reduir el bloqueig únicament a la secció crítica. En alguns mètodes, la secció crítica serà únicament una part d'aquest, per la qual cosa no necessitarem declarar-ho íntegrament com synchronized. En aquest cas, tancaríem en un bloc synchronized a aquesta secció crítica</li>
+</ul>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">MiClase</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">ModificadorAcceso</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="nf">NombreMetodo</span><span class="p">(</span><span class="n">argumentos</span><span class="p">){</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="c1">// Lógica del método</span>
@@ -645,9 +647,9 @@
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Com podem apreciar, podem incloure també un bloc synchronized directemente dins del mètode <code>run()</code>, com en qualsevol altre mètode que s'utilitze aquest.</p>
-<h3 id="syncronized-i-estats">Syncronized i estats</h3>
-<p>En l'apartat anterior vam veure el cicle de vida d'un fil, amb els diferents estats que aquest pot prendre. En ell, existia l'estat bloquejat, al qual s'accedia mitjançant la <em>espera/bloquege</em> d'un monitor.</p>
+<p>Com podem apreciar, podem incloure també un bloc synchronized directament dins del mètode <code>run()</code>, com en qualsevol altre mètode que s'utilitze aquest.</p>
+<h3 id="synchronized-i-estats">Synchronized i estats</h3>
+<p>En l'apartat anterior vam veure el cicle de vida d'un fil, amb els diferents estats que aquest pot prendre. En ell, existia l'estat bloquejat, al qual s'accedia mitjançant la <em>espera/bloqueig</em> d'un monitor.</p>
 <p>Centrant-nos en els estats que concerneixen l'ús de monitors, podem representar-los en el següent diagrama:</p>
 <p><a class="glightbox" href="../img/2/estats_blocked.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Estat de bloqueig" src="../img/2/estats_blocked.png" width="500px" /></a></p>
 <p>Com veiem, quan un fil intenta accedir a un mètode o bloc de codi sincronitzat i l'objecte al qual accedirà està bloquejat per un altre fil, el fil passa  a un estat bloquejat, passant a formar part d'una cua de fils bloquejats a l'espera que es desbloquege el monitor. Aquesta cua tindrà una estructura FIFO (First In First Out), per a garantir l'execució de tots els fils.</p>
