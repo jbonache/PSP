@@ -717,12 +717,11 @@ Com a exemple, vegem el següent programa, en el qual disposarem d'un objecte co
 <p>Tot el procés anterior, en el model d'estats d'un fil es veuria de la següent manera:</p>
 <p><a class="glightbox" href="../img/3/estats_wait.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Detall del model d'estats d'un fil" src="../img/3/estats_wait.png" /></a></p>
 <p>Com veiem, un fil que es trobava en execució, passa a estat <em>WAITING</em>, quan invoca al mètode <code>wait()</code>, ja siga un productor o un consumidor. Quan el fil, o fils, que estaven en espera reben l'excepció <code>InterruptedException</code>, bé amb un <code>notity()</code> o amb un <code>notifyAll()</code>, aquests tornen a l'estat d'execució, on tornen a comprovar la disponitilidad de dades.</p>
-<blockquote>
-<p><strong>Exercici</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Exercici</p>
 <p>Partint de la classe d'exemple <code>ProductorConsumidor2</code>, es demana reimplementar aquesta classe utilitzant ara una <strong>pila</strong> d'enters que puga tindre una grandària màxima de 3 elements per a representar l'objecte compartit. Això implica que ara el productor pot afegir fins a 3 elements en l'objecte compartit sense que siguen consumits. </p>
-<p>A més, quan el consumidor consumisca un element, serà l'últim que s'ha afegit, ja que es tracta d'una estructura LIFO (Last In First Out).
-</p>
-</blockquote>
+<p>A més, quan el consumidor consumisca un element, serà l'últim que s'ha afegit, ja que es tracta d'una estructura LIFO (Last In First Out).</p>
+</div>
 
 
 
