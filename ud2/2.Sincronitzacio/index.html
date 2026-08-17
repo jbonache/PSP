@@ -654,8 +654,8 @@
 <p>Com veiem, quan un fil intenta accedir a un mètode o bloc de codi sincronitzat i l'objecte al qual accedirà està bloquejat per un altre fil, el fil passa  a un estat bloquejat, passant a formar part d'una cua de fils bloquejats a l'espera que es desbloquege el monitor. Aquesta cua tindrà una estructura FIFO (First In First Out), per a garantir l'execució de tots els fils.</p>
 <div class="admonition note">
 <p class="admonition-title">Exercici</p>
-<p><strong>Arregla el Launcher mitjançant la sincronització de fils i accés concurrent a la terminal</strong>
-Partim del programa anterior, en què es creen dos fils que executen simultàniament dues ordres del sistema:</p>
+<p><strong>Corregiu el problema de <code>Launcher</code> mitjançant la sincronització de fils i accés concurrent a la terminal</strong></p>
+<p>Partim del programa anterior, en què es creen dos fils que executen simultàniament dues ordres del sistema:</p>
 <ul>
 <li><code>ps aux</code></li>
 <li><code>ls -l /</code></li>
