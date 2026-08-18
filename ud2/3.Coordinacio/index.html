@@ -494,7 +494,7 @@
 <h2 id="introduccio">Introducció</h2>
 <p>La sincronització quan treballem amb múltiples processos és una tasca fonamental per a evitar situacions que puguen portar a inconsistències en els resultats. El treball coordinat dels diferents fils d'execució és indispensable per a no perdre informació en qualsevol procés. </p>
 <p>En programació concurrent existeixen diversos problemes clàssics de sincronització, que van ser dissenyats en el seu moment per a poder abstraure problemes de la vida real. La solució que es planteja a aquests problemes serà extensible a qualsevol problema que s'ajuste als plantejaments del model.</p>
-<p>Per esmentar alguns d'aquests problemes clàssics, tenim el problema dels lectors i escriptors, el probema dels filòsofs comensals, el problema del barber dormilega, o el problema dels productors i consumidors, del qual ens ocuparem en aquest apartat. </p>
+<p>Per esmentar alguns d'aquests problemes clàssics, tenim el problema dels lectors i escriptors, el probema dels filòsofs comensals, el problema del barber dormilega, o el problema dels productors i consumidors, del qual ens ocuparem i estudiatem en aquest apartat. </p>
 <div class="admonition info">
 <p class="admonition-title">Problema dels lectors i escriptors</p>
 <p>Hi ha dos tipus de fils que accedeixen a un <strong>recurs compartit</strong>, com ara un fitxer o una base de dades:</p>
@@ -575,8 +575,8 @@
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>                └─────────────┘
 </span></code></pre></div>
 </div>
-<p>En tots ells, s'aborda la problemàtica dels recursos compartits entre diversos subprocesos des d'una perspectiva diferent, i s'aporten solucions que permeten la seua sincronització. Aquestes solucions poden implementar-se utilitzant diferents mecanismes, com puguen ser semàfors o monitors.</p>
-<p>Anem doncs a abordar aquest problema del productor-consumidor, on tractarem la producció i el consum d'informació per part de diferents fils d'execució de manera coordinada i sincronitzada mitjançant l'ús de monitors.</p>
+<p>Com s'observa, en tots ells, s'aborda la problemàtica dels recursos compartits entre diversos subprocesos des d'una perspectiva diferent, i s'aporten solucions que permeten la seua sincronització. Aquestes solucions poden implementar-se utilitzant diferents mecanismes, com puguen ser semàfors o monitors.</p>
+<p>A continuació abordarem més a fons el problema del productor-consumidor. En ell tractarem la producció i el consum d'informació per part de diferents fils d'execució de manera coordinada i sincronitzada mitjançant l'ús de monitors.</p>
 <h2 id="el-model-productor-consumidor">El model productor-consumidor</h2>
 <p>El problema del model productor-consumidor és un problema clàssic de la sincronització, i suposa un patró comú a diversos tipus d'aplicacions. El plantejament inicial d'aquest cas és el següent: Disposem de dos fils, on un d'ells produeix dades,  i un altre els consumeix. El problema es produeix quan el consumidor i el productor no fan aquestes tasques de manera coordinada.
 Com a exemple, vegem el següent programa, en el qual disposarem d'un objecte compartit, on una classe productora escriu valors que són llegits per una classe consumidora.</p>
