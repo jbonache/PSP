@@ -363,9 +363,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#els-metodes-wait-notify-i-notifyall" class="md-nav__link">
+  <a href="#els-metodes-per-a-coordinar-fils-dexecucio" class="md-nav__link">
     <span class="md-ellipsis">
-      Els mètodes wait(), notify() i notifyAll()
+      Els mètodes per a coordinar fils d'execució
     </span>
   </a>
   
@@ -453,9 +453,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#els-metodes-wait-notify-i-notifyall" class="md-nav__link">
+  <a href="#els-metodes-per-a-coordinar-fils-dexecucio" class="md-nav__link">
     <span class="md-ellipsis">
-      Els mètodes wait(), notify() i notifyAll()
+      Els mètodes per a coordinar fils d'execució
     </span>
   </a>
   
@@ -685,7 +685,7 @@
 </div>
 <p>D'altra banda, cal dir que aquest problema admet múltiples variants i modificacions quant a l'objecte compartit, així com del nombre de productors i consumidors. En aquest cas, conté únicament un enter per a emmagatzemar dades i un booleà que controla si la dada és vàlida o no.</p>
 <p>En altres plantejaments podem trobar estructures de dades més complexes com a llistes, piles o cues per a emmagatzemar la informació de l'objecte compartit, així com l'existència de múltiples objectes productors i consumidors.</p>
-<h2 id="els-metodes-wait-notify-i-notifyall">Els mètodes wait(), notify() i notifyAll()</h2>
+<h2 id="els-metodes-per-a-coordinar-fils-dexecucio">Els mètodes per a coordinar fils d'execució</h2>
 <p>Per a permetre la coordinació entre fils en l'accés a objectes compartits disposem dels mètodes <code>wait()</code>, <code>notify()</code>, i <code>notifyAll()</code></p>
 <table>
 <thead>
@@ -705,13 +705,13 @@
 </tr>
 <tr>
 <td><code>void notifyAll()</code></td>
-<td>Desperta a tot els fils suspesos. Si aquests tornen a accedir a l'objecte compartit, haurem de fer-lo també de manera coordinada.`</td>
+<td>Desperta a tot els fils suspesos. Si aquests tornen a accedir a l'objecte compartit, hauríem de fer-ho també de manera coordinada.`</td>
 </tr>
 </tbody>
 </table>
 <p>Vegem com aplicar aquests mètodes per a coordinar als productors i consumidors</p>
 <ul>
-<li>Quan el productor genera un resultat (fa un <code>set</code>), si l'objecte compartit encara conté un valor que no s'ha consumit (per tant <code>disponible==true</code>), haurà d'esperar que algú el consumisca, per tant haurà de quedar suspés, mitjançant una invocació a <code>wait()</code>, fins que algú llija el valor i el desperte.</li>
+<li>Quan el productor vol generar un resultat (fer un <code>set</code>), si l'objecte compartit encara conté un valor que no s'ha consumit (per tant <code>disponible==true</code>), haurà d'esperar que algú el consumisca, per tant haurà de quedar suspés, mitjançant una invocació a <code>wait()</code>, fins que algú llisca el valor i el desperte.</li>
 </ul>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">disponible</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
@@ -725,7 +725,7 @@
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">notifyAll</span><span class="p">();</span>
 </span></code></pre></div>
 <ul>
-<li>Quan el consumidor haja de consumir un valor (fer un get) de l'objecte compartit, el mètode get ha d'assegurar que hi haja algun valor disponible, de manera que el fil que l'invoque, quedarà suspés en cas que no hi haja dades disponibles:</li>
+<li>Quan el consumidor vol consumir un valor (fer un <code>get</code>) de l'objecte compartit, ha d'assegurar-se que hi haja algun valor disponible, de manera que el fil que l'invoque, quedarà suspés en cas que no hi haja dades disponibles:</li>
 </ul>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">disponible</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
@@ -764,7 +764,7 @@
 </span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
 </span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
-</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">vale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>
 </span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="w">        </span><span class="c1">// Mientras quedan datos nos esperamos</span>
 </span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">disponible</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -778,7 +778,7 @@
 </span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a><span class="w">        </span><span class="c1">// generado por el productor, y notificamos a todos</span>
 </span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a><span class="w">        </span><span class="c1">// los consumidores de la disponibilidad.</span>
 </span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>
-</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vale</span><span class="p">;</span>
+</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
 </span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">disponible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 </span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a><span class="w">        </span><span class="n">notifyAll</span><span class="p">();</span>
 </span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a><span class="w">    </span><span class="p">}</span>
@@ -790,12 +790,24 @@
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>És important apreciar que la disponibilitat de les dades es comprova mitjançant un bucle <em>while</em>, i no mitjançant un condicional <em>if</em>. Això es deu al fet que pot existir més d'un fil en espera, de manera que en rebre la interrupció desperten tots alhora, produint el que es coneix com a <strong><em>condició de carrera</em></strong>, on només el primer que intenta escriure o llegir dades pot fer-ho. Amb una sola comprovació, tots els fils que es despertaren hagueren accedit al mateix temps a l'objecte compartit, però només el primer tindria dades vàlides. Quan fem la comprovació en un bucle, assegurem que només accedisca a la dada el primer que arriba, i la resta tornen a quedar a l'espera.</p>
+<p>És important apreciar que la disponibilitat de les dades es comprova mitjançant un bucle <em>while</em>, i no mitjançant un condicional <em>if</em>. Això es deu al fet que pot existir més d'un fil en espera, de manera que en rebre la interrupció desperten tots alhora, produint el que es coneix com a <strong><em>condició de carrera</em></strong>, on només el primer que intenta escriure o llegir dades pot fer-ho. Amb una comprovació <em>if</em>, tots els fils que es despertaren accedirien al mateix temps a l'objecte compartit, però només el primer tindria dades vàlides i la resta ja no tindrien l'oportunitat de tindre'n. Quan fem la comprovació en un bucle, assegurem que només accedisca a la dada el primer que arriba, i la resta tornen a quedar a l'espera.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>D'altra banda cal remarcar la importància d'usar els méodos <code>wait()</code>, <code>notify()</code> i <code>notifyAll()</code> dins d'un bloc o mètode <code>synchronyzed</code>, ja que en cas contrari, el fil no té l'objecte en conflicte bloquejat en el seu monitor, i es llançaria l'excepció <code>IllegalMonitorStateException</code>. Quan estem en un bloc <code>synchronized</code> sobre un objecte i es llança un <code>notify()</code> o <code>notifyAll()</code>, es desperten aquells fils que estigueren a l'espera del desbloqueig <strong>d'aquest objecte</strong></p>
 </div>
+<p>Ara sí, el resultat del programa és el desitjat:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>El productor produeix: 20
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>El consumidor consumeix: 20
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>El productor produeix: 21
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>El consumidor consumeix: 21
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>El productor produeix: 22
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>El consumidor consumeix: 22
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>El productor produeix: 23
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>El consumidor consumeix: 23
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>El productor produeix: 24
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>El consumidor consumeix: 24
+</span></code></pre></div>
 <h2 id="wait-notify-i-notifyall-i-estats">wait(), notify() i notifyAll() i estats</h2>
 <p>Tot el procés anterior, en el model d'estats d'un fil es veuria de la següent manera:</p>
 <p><a class="glightbox" href="../img/3/estats_wait.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Detall del model d'estats d'un fil" src="../img/3/estats_wait.png" /></a></p>
