@@ -671,10 +671,10 @@
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>El productor produeix: 24
 </span></code></pre></div>
 <p>El <strong><em>comportament desitjat</em></strong> hauria sigut que el fil consumidor anara consumint els números a mesura que el fil productor els anara generant:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>El productor produce: 0
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>El consumidor consume: 0
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>El productor produce: 1
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>El consumidor consume: 1
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>El productor produeix: 20
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>El consumidor consumeix: 20
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>El productor produeix: 21
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>El consumidor consumeix: 21
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>...
 </span></code></pre></div>
 <p>En el cas contrari, on el productor produïra a major velocitat que el consumidor, i atés que en el nostre objecte compartit només cap un objecte, hi hauria valors que es perdrien perquè es generaria el següent valor abans que fóra llegit.</p>
@@ -683,7 +683,8 @@
 <p class="admonition-title">Tip</p>
 <p>En els recursos de la unitat disposes del fitxer <code>ModeloProductorConsumidor.java</code>, amb aquest exemple, en el qual pots provar d'invertir els temps d'espera i veure els resultats.</p>
 </div>
-<p>D'altra banda, cal dir que aquest problema admet múltiples variants i modificacions quant a l'objecte compartit, així com del nombre de productors i consumidors. En aquest cas, conté únicament un enter per a emmagatzemar dades i un booleà que controla si la dada és vàlida o no. En altres plantejaments podem trobar estructures de dades més complexes com a llistes, piles o cues per a emmagatzemar la informació de l'objecte compartit, així com l'existència de múltiples objectes productors i consumidors.</p>
+<p>D'altra banda, cal dir que aquest problema admet múltiples variants i modificacions quant a l'objecte compartit, així com del nombre de productors i consumidors. En aquest cas, conté únicament un enter per a emmagatzemar dades i un booleà que controla si la dada és vàlida o no.</p>
+<p>En altres plantejaments podem trobar estructures de dades més complexes com a llistes, piles o cues per a emmagatzemar la informació de l'objecte compartit, així com l'existència de múltiples objectes productors i consumidors.</p>
 <h2 id="els-metodes-wait-notify-i-notifyall">Els mètodes wait(), notify() i notifyAll()</h2>
 <p>Per a permetre la coordinació entre fils en l'accés a objectes compartits disposem dels mètodes <code>wait()</code>, <code>notify()</code>, i <code>notifyAll()</code></p>
 <table>
