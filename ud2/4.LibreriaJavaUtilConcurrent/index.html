@@ -1400,7 +1400,7 @@
 </span><span id="__span-43-65"><a id="__codelineno-43-65" name="__codelineno-43-65" href="#__codelineno-43-65"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Com hem vist en aquest exemple, la cua actua com a mecanisme de comunicació segur entre els fils.</p>
-<p>En una segona versió de l’exemple vist de <strong>productor-consumidor amb <code>BlockingQueue</code></strong>, mantindrem la mateixa estructura, però introduirem un mètode que provoca una <strong>espera aleatòria d’entre 1 i 3 segons</strong>. Aquest mètode serà utilitzat tant pel productor com pel consumidor, simulant així que cada fil pot tardar un temps variable a realitzar la seua tasca.</p>
+<p>A continuació veure'm una segona versió de <strong>productor-consumidor amb <code>BlockingQueue</code></strong>, on es mantindrà la mateixa estructura, però introduirem un mètode que provoca una <strong>espera aleatòria d’entre 1 i 3 segons</strong>. Aquest mètode serà utilitzat tant pel productor com pel consumidor, simulant així que cada fil pot tardar un temps variable a realitzar la seua tasca.</p>
 <p>D’aquesta manera, el comportament del programa serà menys previsible i podrem observar millor el funcionament de la <code>BlockingQueue</code>. El productor anirà obtenint les dades de SWAPI i les introduirà en una cua amb una capacitat màxima de <strong>3 elements</strong>, mentre que el consumidor les anirà extraient i processant.</p>
 <p>Depenent dels temps d’espera, es poden produir dues situacions importants:</p>
 <ul>
