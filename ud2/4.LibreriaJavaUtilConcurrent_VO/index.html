@@ -1,0 +1,756 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>4. La biblioteca java.util.concurrent - Programació multifil</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/material-just.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#la-llibreria-javautilconcurrent" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href=".." title="Programació multifil" class="md-header__button md-logo" aria-label="Programació multifil" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programació multifil
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. La biblioteca java.util.concurrent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Programació multifil" class="md-nav__button md-logo" aria-label="Programació multifil" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Programació multifil
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.Threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Fils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.Sincronitzacio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Sincronització
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.Coordinacio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Coordinació entre fils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.LibreriaJavaUtilConcurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. La biblioteca java.util.concurrent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-llibreria-javautilconcurrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      La llibreria java.util.concurrent
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La llibreria java.util.concurrent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-interficie-callable" class="md-nav__link">
+    <span class="md-ellipsis">
+      La interfície Callable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#futuretask" class="md-nav__link">
+    <span class="md-ellipsis">
+      FutureTask
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lapi-executorservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      L'API ExecutorService
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L&#39;API ExecutorService">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#future" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assignacio-de-tasques-a-lexecutorservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assignació de tasques a l'executorService
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalitzacio-del-servei" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finalització del servei
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cues-concurrents-blockingqueue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cues concurrents: BlockingQueue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fils-virtuals-java-21-i-posteriors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fils virtuals (Java 21 i posteriors)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>4. La biblioteca java.util.concurrent</h1>
+
+<p>Des dels inicis de Java la programació multifil ha sigut un dels aspectes fonamentals del llenguatge, amb la interfície <code>Runnable</code> i la classe <code>Thread</code> com a nucli.</p>
+<p>Des de Java 5, a més tenim a la nostra disposició la llibreria <code>java.util.concurrent</code>, que ofereix un conjunt de classes i interfícies orientades a gestionar la programació concurrent d'una forma més senzilla i òptima.</p>
+<p>En aquest apartat veurem una xicoteta introducció a aquesta llibreria. Concretament, veurem la interfície <code>Callable</code>, molt similar a Runnable, però que ens permet utilitzar valors de retorn. </p>
+<p>D'altra banda, l'<code>API ExecutorService</code> ens permetrà separar les tasques de creació de threads, la seua execució i la seua administració, encapsulant la funcionalitat i millorant el rendiment.</p>
+<p>I finalment, veurem la interfície <code>BlockingQueue</code>, que permet gestionar cues de manera que els seus accessos puguen ser bloquejants, la qual cosa ens serà de gran utilitat per a abordar els diferents problemes de sincronització i coordinació, com per exemple el del productor-consumidor, sense la necessitat d'utilitzar monitors.</p>
+<h2 id="la-llibreria-javautilconcurrent">La llibreria java.util.concurrent</h2>
+<p>La llibreria <code>java.util.concurrent</code> ofereix un conjunt molt ampli de classes i interfícies orientades a gestionar la programació concurrent d'una forma més senzilla i òptima.</p>
+<p>Entre totes elles, es troben l'API   <code>ExecutorService</code> i la interfície <code>Callable</code>. La primera s'encarrega de separar les tasques de creació de threads, la seua execució i la seua administració, encapsulant la funcionalitat i millorant el rendiment, mentre que la interfície <code>Callable</code> ens resol el problema dels threads amb els valors de retorn.</p>
+<p>D'altra banda, la llibreria també presenta la interfície <code>BlockingQueue</code> i diverses classes que la implementen amb diferents estructures de dades, amb la característica comuna que els accessos poden arribar a ser bloquejants si la llista està buida o ha arribat al topall de la seua capacitat. Això ens serà de gran utilitat per a abordar diferents problemes de sincronització sense la necessitat d'utilitzar monitors en l'accés a objectes compartits.</p>
+<h3 id="la-interficie-callable">La interfície Callable</h3>
+<p>La interfície <code>Callable</code> és una versió millorada de la interfície <code>Runnable</code> introduïda a Java 1.5, que permet retornar un valor en finalitzar la seua execució.</p>
+<p>Quan utilitzem la interfície <code>Runnable</code>, disposem d'un mètode <code>run()</code> que no accepta paràmetres ni retorna cap valor. Això no és un problema, sempre que no necessitem proporcionar ni obtindre dades del <em>Thread</em>. En canvi, quan hem necessitat proporcionar valors i obtindre resultats de l'execució d'un fil, hem optat per la comunicació mitjançant objectes compartits.</p>
+<p>Per part seua, la interfície genèrica <code>Callable</code> proporciona el mètode <code>call()</code>, que retorna un valor del tipus genèric. La sintaxi general d'una classe que implemente aquesta interfície serà la següent:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">claseCallable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">TipoGenerico</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="c1">// Constructor</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="o">[</span><span class="kd">public</span><span class="w"> </span><span class="nf">claseCallable</span><span class="p">(</span><span class="n">args</span><span class="p">){...}</span><span class="o">]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// Método call</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">TipoGenerico</span><span class="w"> </span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InvalidParamaterException</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="p">...</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">valor_retorno</span><span class="p">;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Com a principal diferència respecte a <code>Runnable</code>, podem veure com en la definició de la classe hem d'indicar ja un tipus de dades genèric, que serà el mateix que el del valor de retorn del mètode call, el qual, com veiem, utilitza ara un return per a retornar aquest valor.</p>
+<h3 id="futuretask">FutureTask</h3>
+<p>Amb l'anterior definició, podríem utilitzar el mètode call directament:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">claseCallable</span><span class="w"> </span><span class="n">miCallable</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">claseCallable</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">TipoGenerico</span><span class="w"> </span><span class="n">valor</span><span class="o">=</span><span class="n">miCallable</span><span class="p">.</span><span class="na">call</span><span class="p">();</span>
+</span></code></pre></div>
+<p>Però amb això no estaríem executant el mètode de manera asíncrona. Una primera aproximació a això seria utilitzar directament la classe <code>FutureTask</code>, introduïda a Java 5 i que es pot utilitzar per a fer tasques asíncrones, ja que implementa la interfície <code>Runnable</code>, i per tant, pot llançar-se com un fil.</p>
+<p>La forma de fa això seria mitjançant la creació d'un objecte de tipus <code>FutureTask</code>, de manera genèrica, a partir de l'objecte creat de la classe <code>Callable</code></p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">claseCallable</span><span class="w"> </span><span class="n">miCallable</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">claseCallable</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">FutureTask</span><span class="o">&lt;</span><span class="n">TipoGenerigo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">miFutureTask</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">FutureTask</span><span class="o">&lt;</span><span class="n">TipoGenerico</span><span class="o">&gt;</span><span class="p">(</span><span class="n">miCallable</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Aquest tipus genèric serà el mateix que hàgem definit per a la nostra classe <code>Callable</code>. Atés que <code>FutureTask</code> implementa <code>Runnable</code>, podem crear ara un thread a partir d'aquesta classe i llançar-ho:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Thread</span><span class="w"> </span><span class="n">miThread</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">miFutureTask</span><span class="p">);</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">miThread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</span></code></pre></div>
+<p>Amb això el programa principal espera al fet que finalitzen els fils que ha generat. Una vegada haja finalitzat <em>FutureTask</em>, podrem accedir al valor retornat pel mètode call mitjançant el mètode get:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">TipoGenerico</span><span class="w"> </span><span class="n">resultado</span><span class="o">=</span><span class="n">miFutureTask</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+</span></code></pre></div>
+<!--
+>
+> **Exercici 4.1.**
+>
+> Es demana realitzar l'exemple del sumatori entre dos números utilitzant tants fils d'execució com processadors tinga disponible el nostre ordinador, definint per a això el mètode de `Suma` com `Callable`, i utilitzant la classe `FutureTask`.
+>
+>
+-->
+
+<p>Encara que, tal com hem vist és possible utilitzar la interfície <code>Callable</code> d'aquesta manera, el més habitual és utilitzar-la al costat de l'API <code>ExecutorService</code>, com veurem a continuació.</p>
+<h2 id="lapi-executorservice">L'API ExecutorService</h2>
+<p><code>ExecutorService</code> és una API de Java que ens permet simplificar l'execució de tasques asíncrones. Per a això, ens ofereix un conjunt de fils preparats per a assignar-los tasques.</p>
+<p>La forma més senzilla per a crear un <code>ExecutorService</code> és utilitzant la classe <code>Executors</code>, la qual proporciona diversos mètodes de factoria i utilitats per a la creació de múltiples APIs d'execució asíncrona.</p>
+<p>Per exemple, el mètode de factoria <code>newFixedThreadPool</code>, crea un servei d'execució asíncrona amb un conjunt de threads de longitud fixa. Per a crear un servei d'aquest tipus que pose a la nostra disposició fins a 10 fils d'execució faríem:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">ExecutorService</span><span class="w"> </span><span class="n">servicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newFixedThreadPool</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></code></pre></div>
+<p>A part d'aquest mètode, disposem de molts altres com <code>newCachedThreadPool()</code>, que genera els fils a mesura que es van necessitant. Podem consultar la llista de mètodes en la <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Executors.html">documentació oficial de la classe <code>Executors</code></a>.</p>
+<p>La manera de treballar amb aquesta API és relativament simple, ja que solament requereix d'instàncies d'objectes de tipus <code>Runnable</code> o <code>Callable</code> i ella s'encarrega de la resta de tasques.</p>
+<p>Així doncs, una vegada disposem del servei <code>ExecutorService</code> instanciado,  tenim a la nostra disposició diferents mètodes per a assignar-li tasques. Però abans d'abordar aquests mètodes, veurem la interfície <code>Future</code>, per a entendre'ls millor.</p>
+<h3 id="future">Future</h3>
+<p>La interfície <code>Future</code> definida en el paquet <code>java.utill.concurrent</code>, representa el resultat d'una operació asíncrona. El valor de retorn, del tipus genèric indicat, no l'obtindrem de manera immediata, sinó que s'obtindrà en el moment en què finalitze l'execució de la tasca asíncrona. En aquest moment, l'objecte <code>Future</code>, tindrà disponible aquest valor de retorn.</p>
+<p>La interfície <code>Future</code>, proporcionarà perquè els mecanismes per a saber si ja es disposa del resultat, per a esperar a tindre resultat i per a consultar aquest resultat, així com per a cancel·lar la funció asíncrona si encara no ha acabat.
+Vegem en la següent taula els mètodes que ens proporciona aquesta interfície:</p>
+<table>
+<thead>
+<tr>
+<th>Mètode</th>
+<th>Descripció</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>boolean isDone()</code></td>
+<td>Retorna cert si la tasca ha acabat.</td>
+</tr>
+<tr>
+<td><code>TipoGenérico get()</code></td>
+<td>Retorna el valor retornat per la tasca, sempre que aquest estiga disponible. En cas de no estar disponible, espera al fet que ho estiga.</td>
+</tr>
+<tr>
+<td><code>TipoGenérico get(long t, TimeUnit u)</code></td>
+<td>Retorna el valor retornat per la tasca, sempre que aquest estiga disponible. En cas de no estar disponible, espera com a molt el temps t indicat en unitats de temps <code>u</code>.</td>
+</tr>
+<tr>
+<td><code>boolean cancel(boolean interrupcion)</code></td>
+<td>Intenta cancel·lar una tasca que està en execució. El booleà que li proporcionem indica si ha d'interrompre's per a cancel·lar la tasca.</td>
+</tr>
+<tr>
+<td><code>boolean isCancelled()</code></td>
+<td>Retorna cert si la tasca ha sigut cancel·lada abans de completar-se</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assignacio-de-tasques-a-lexecutorservice">Assignació de tasques a l'executorService</h3>
+<p>Ara que ja coneixem la interfície <code>Future</code>, examinarem diferents mètodes per a assignar tasques en el <code>ExecutorService</code> </p>
+<table>
+<thead>
+<tr>
+<th>Mètode</th>
+<th>Descripció</th>
+<th>Ús</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>void execute()</code></td>
+<td>Mètode heretat de la interfície <code>Executor</code>, que simplement executa la tasca indicada, peo sense la possibilitat d'obtindre el seu resultat o estat.</td>
+<td><code>ExecutorService s=...;</code> \newline <code>s.execute(tareaRunnable);</code></td>
+</tr>
+<tr>
+<td><code>Future&lt;T&gt; submit()</code></td>
+<td>Envia una tasca, bé de tipus Callable o Runnable al servei, retornant un tipus Future genèric T.</td>
+<td><code>ExecutorService s=...;</code> \newline <code>Future&lt;T&gt; resultado = s.submit(tarea);</code></td>
+</tr>
+<tr>
+<td><code>Future&lt;T&gt; invokeAny()</code></td>
+<td>Assigna una col·lecció de tasques al servei, i retorna el resultat de qualsevol d'elles.</td>
+<td><code>ExecutorService s=...;</code></td>
+</tr>
+<tr>
+<td>...\newline <code>Future&lt;T&gt; resultado = s.invokeAny(ListaTareas);</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>List &lt;Future&lt;T&gt;&gt; InvokeAll()</code></td>
+<td>Assigna una col·lecció de tasques al servei, executant-les totes i retornant una llista de Futures amb els resultats</td>
+<td><code>ExecutorService s=...;</code> \newline <code>...</code> \newline <code>List&lt;Future&lt;String&gt;&gt; resultados = s.invokeAll(ListaTareas);</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="finalitzacio-del-servei">Finalització del servei</h3>
+<p>Una vegada deixem d'utilitzar el servei i hàgem obtingut tots els resultats, utilitzarem el mètode shutdown per a finalitzar el servei:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">servicio</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span>
+</span></code></pre></div>
+<!--
+>
+> **Exercici 4.2**
+>
+> Reprenem el cas del càlcul de la suma de tots els números compresos entre dos índexs donats. En l'exercici 4.1 hem realitzat una implementació d'aquest utilitzant la interfície `Callable` per a la classe `Suma` i utilitzant `FutureTask` en la classe principal.
+>
+> Es demana ara, partint de la mateixa classe `Suma`, que implementa la interfície `Callable`, realitzar una implementació de la solució utilitzant l'API `ExecutorService` en la classe principal per a la gestió dels diferents fils.
+>
+
+-->
+
+<h2 id="cues-concurrents-blockingqueue">Cues concurrents: BlockingQueue</h2>
+<p>Abans de centrar-nos en les cues concurrents, hem de recordar què és una cua. Igual que les llistes i les piles, es tracta d'una estructura de dades complexa. La principal característica de les cues és que aquestes tenen una estructura <code>FIFO</code> (<em>First In – First Out</em>). El concepte és similar al de fer cua, en el supermercat, en el caixer del banc, on el primer que arriba és el primer a ser atés, i la resta de clients van incorporant-se al final de la cua.</p>
+<p>A Java aquest comportament l'ofereix la interfície <em>Queue</em>, que posseeix diverses classes que la implementen, com <code>ArrayQueue</code>, <code>ArrayDeque</code> o <code>AbstractQueue</code>, entre altres.</p>
+<p>D'altra banda, la interfície <code>BlockingQueue</code> ofereix un comportament similar, amb la diferència que a més aquest comportament ofereix mecanismes d'accés segurs en operacions concurrents (<em>thread-safe</em>), la qual cosa ens serà de gran utilitat a l'hora d'abordar problemes de sincronització, com el dels productors-consumidors. Mitjançant aquesta interfície, els fils productors hauran d'esperar a produir si la cua està plena, i els consumidors esperar a consumir mentre la cua estiga buida. Tot el comportament que generàvem mitjançant monitors en l'objecte compartit, ens el gestionarà ara la cua.</p>
+<p>Aquesta interfície, aporta dos mètodes a les cues: <code>put</code> i <code>take</code>, que serien els equivalents a <code>add</code> i <code>remove</code>, però amb la particularitat que les operacions es realitzen de manera segura.</p>
+<p>Vegem les diferents implementacions d'aquesta interfície en la següent taula:</p>
+<table>
+<thead>
+<tr>
+<th>Classe</th>
+<th>Descripció</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ArrayBlockingQueue</code></td>
+<td>Implementa una cua mitjançant un array, per la qual cosa tindrà una longitud fixa. Les operacions de put i take asseguraran que no se sobreescriguen les entrades.</td>
+</tr>
+<tr>
+<td><code>LinkedBlockingQueue</code></td>
+<td>Implementa una cua mitjançant una llista enllaçada, on cada element de la llista és un node nou, amb el que, en principi podria créixer indefinidament (fins a arribar a <code>Integer.MAX_VALUE</code>). El seu constructor admet un enter per a especificar el nombre d'elements màxim que pot emmagatzemar. Les operacions de put i take asseguraran que no se sobreescriguen les entrades.</td>
+</tr>
+<tr>
+<td><code>PriorityBlockingQueue</code></td>
+<td>Implementa una cua mitjançant un <em>heap binari</em> basat en un array, la qual cosa permet consumir els elements en un ordre específic.</td>
+</tr>
+<tr>
+<td><code>DelayQueue</code></td>
+<td>Implementa una cua  que conté elements que implementen la interfície <code>Delayed</code>. Els objectes que implementen aquesta interfície requereixen d'un retard (<em>delay</em>) per a operar sobre ells. Aquestes cues són útils per exemple quan un consumidor únicament pot consumir elements després d'un temps.</td>
+</tr>
+<tr>
+<td><code>LinkedTransferQueue</code></td>
+<td>Inclou el mètode <code>transfer</code> que permet a un productor esperar que es consumisca un item, de manera que els consumidors puguen manejar el flux de missatges produïts.</td>
+</tr>
+<tr>
+<td><code>SynchronousQueue</code></td>
+<td>Conté com a molt un element, de manera que representa una forma senzilla d'intercanviar dades entre dos fils.</td>
+</tr>
+<tr>
+<td><code>ConcurrentLinkedQueue</code></td>
+<td>Es tracta d'una <em>cua no bloquejant</em>, apta quan no necessitem que les operacions esperen. No implementa <code>BlockingQueue</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fils-virtuals-java-21-i-posteriors">Fils virtuals (Java 21 i posteriors)</h2>
+<p>Des de Java 21, els <strong>fils virtuals</strong> formen part estable de la plataforma. Continuen sent objectes <code>Thread</code>, però la JVM els planifica sobre un nombre reduït de fils del sistema operatiu. Són especialment adequats per a aplicacions amb moltes tasques concurrents que passen gran part del temps esperant operacions d'entrada/eixida, com ara servidors, peticions HTTP o consultes a bases de dades.</p>
+<p>Els fils virtuals no fan que una tasca calcule més ràpid: milloren l'escalabilitat i el rendiment global (<em>throughput</em>) quan hi ha moltes esperes bloquejants. Per a càrregues intensives de CPU continuen sent adequats els fils de plataforma i els executors dimensionats segons els nuclis disponibles.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">Thread</span><span class="w"> </span><span class="n">tasca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">ofVirtual</span><span class="p">().</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;consulta&quot;</span><span class="p">).</span><span class="na">start</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Executant en &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">});</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">tasca</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+</span></code></pre></div>
+<p>També podem crear un executor que assigne un fil virtual nou a cada tasca:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newVirtualThreadPerTaskExecutor</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">Future</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resultat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">executor</span><span class="p">.</span><span class="na">submit</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">operacioBloquejant</span><span class="p">());</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">resultat</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>No hem de crear un <em>pool</em> de fils virtuals: el model recomanat és <strong>un fil virtual per tasca</strong>. Si cal limitar l'accés concurrent a un recurs escàs, usarem un mecanisme explícit com <code>Semaphore</code>.</p>
+<blockquote>
+<p><strong>Compatibilitat:</strong> els exemples anteriors amb <code>Thread</code>, <code>Runnable</code>, <code>Callable</code>, <code>Future</code> i executors de fils de plataforma continuen sent vàlids. Els fils virtuals amplien l'API i no substitueixen la sincronització, la interrupció ni l'exclusió mútua.</p>
+</blockquote>
+<!--
+> 
+> **Exercici 4.2**
+>
+> Es demana realitzar una adaptació del problema del productor-consumidor plantejat en l'apartat anterior de la unitat, però ara utilitzant una cua concurrent (`BlockingQueue`), de manera que el comportament que presente siga de tipus FIFO. És a dir, els elements de consumiran en el mateix ordre que es produeixen. El resultat haurà de ser el mateix que quan estàvem implementant l'objecte compartit mitjançant una llista.
+>
+> Per a aquest exemple, crearem i consumirem 15 elements sobre una cua de 3 fils com a màxim.
+>
+>
+-->
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
