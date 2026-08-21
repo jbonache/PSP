@@ -879,7 +879,7 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">resultat</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Però <strong>això no és una execució asíncrona</strong>. El fil principal executa <code>call()</code> i espera que la petició HTTP acabe.</p>
-<p>Important: <code>Callable</code> ens permet definir una tasca que retorna un resultat, però per si sola no decideix en quin fil ni que s'executarà de manera asíncrona. Necedssitarem a l'amic <code>FutureTask</code>.</p>
+<p>Important: <code>Callable</code> ens permet definir una tasca que retorna un resultat, però per si sola no decideix en quin fil ni que s'executarà de manera asíncrona. Necessitarem a l'amic <code>FutureTask</code>.</p>
 <hr />
 <h3 id="futuretask">FutureTask</h3>
 <p>Una primera manera d'executar un <code>Callable</code> de manera asíncrona és utilitzar <code>FutureTask</code>.</p>
