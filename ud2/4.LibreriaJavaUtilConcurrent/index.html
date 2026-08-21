@@ -524,15 +524,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fils-virtuals-java-21-i-posteriors" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fils virtuals (Java 21 i posteriors)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#resum-del-recorregut" class="md-nav__link">
     <span class="md-ellipsis">
       Resum del recorregut
@@ -729,15 +720,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fils-virtuals-java-21-i-posteriors" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fils virtuals (Java 21 i posteriors)
-    </span>
-  </a>
   
 </li>
       
@@ -1581,12 +1563,18 @@
 </tbody>
 </table>
 <hr />
-<p>&lt;!--</p>
-<h2 id="fils-virtuals-java-21-i-posteriors">Fils virtuals (Java 21 i posteriors)</h2>
-<p>Des de Java 21, els <strong>fils virtuals</strong> formen part estable de la plataforma.</p>
-<p>Són especialment adequats per a aplicacions amb moltes tasques concurrents que passen bona part del temps esperant operacions d'entrada/eixida, com ara peticions HTTP.</p>
-<p>Les consultes a SWAPI són un bon exemple d'aquest tipus de tasca: el programa envia una petició, espera una resposta i després continua treballant.</p>
-<p>Podem crear un fil virtual per executar una consulta:</p>
+<!--
+
+# Fils virtuals (Java 21 i posteriors)
+
+Des de Java 21, els **fils virtuals** formen part estable de la plataforma.
+
+Són especialment adequats per a aplicacions amb moltes tasques concurrents que passen bona part del temps esperant operacions d'entrada/eixida, com ara peticions HTTP.
+
+Les consultes a SWAPI són un bon exemple d'aquest tipus de tasca: el programa envia una petició, espera una resposta i després continua treballant.
+
+Podem crear un fil virtual per executar una consulta:
+
 <div class="language-java highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">Thread</span><span class="w"> </span><span class="n">tasca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">ofVirtual</span><span class="p">()</span>
 </span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">        </span><span class="p">.</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;consulta-swapi&quot;</span><span class="p">)</span>
 </span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="w">        </span><span class="p">.</span><span class="na">start</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -1608,7 +1596,9 @@
 </span><span id="__span-45-19"><a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a>
 </span><span id="__span-45-20"><a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a><span class="n">tasca</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
 </span></code></pre></div>
-<p>També podem crear un executor que assigne un fil virtual nou a cada tasca:</p>
+
+També podem crear un executor que assigne un fil virtual nou a cada tasca:
+
 <div class="language-java highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span>
 </span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">        </span><span class="n">Executors</span><span class="p">.</span><span class="na">newVirtualThreadPerTaskExecutor</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
@@ -1622,8 +1612,11 @@
 </span><span id="__span-46-11"><a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="w">    </span><span class="p">);</span>
 </span><span id="__span-46-12"><a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>En aquest cas no creem un <em>pool</em> de fils virtuals. El model és <strong>un fil virtual per tasca</strong>.</p>
-<p>Això resulta especialment interessant quan tenim moltes consultes independents:</p>
+
+En aquest cas no creem un *pool* de fils virtuals. El model és **un fil virtual per tasca**.
+
+Això resulta especialment interessant quan tenim moltes consultes independents:
+
 <div class="language-java highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span>
 </span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">        </span><span class="n">Executors</span><span class="p">.</span><span class="na">newVirtualThreadPerTaskExecutor</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>
@@ -1657,11 +1650,14 @@
 </span><span id="__span-47-31"><a id="__codelineno-47-31" name="__codelineno-47-31" href="#__codelineno-47-31"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-47-32"><a id="__codelineno-47-32" name="__codelineno-47-32" href="#__codelineno-47-32"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Els fils virtuals <strong>no fan que una petició HTTP individual siga més ràpida</strong>. El seu avantatge és que permeten gestionar un nombre elevat de tasques concurrents amb esperes d'entrada/eixida.</p>
-<blockquote>
-<p><strong>Compatibilitat:</strong> els exemples anteriors amb <code>Thread</code>, <code>Runnable</code>, <code>Callable</code>, <code>Future</code> i <code>ExecutorService</code> continuen sent vàlids en Java modern. Els fils virtuals amplien les possibilitats de concurrència i són especialment interessants per a tasques amb molta espera d'I/O.</p>
-</blockquote>
-<hr />
+
+Els fils virtuals **no fan que una petició HTTP individual siga més ràpida**. El seu avantatge és que permeten gestionar un nombre elevat de tasques concurrents amb esperes d'entrada/eixida.
+
+> **Compatibilitat:** els exemples anteriors amb `Thread`, `Runnable`, `Callable`, `Future` i `ExecutorService` continuen sent vàlids en Java modern. Els fils virtuals amplien les possibilitats de concurrència i són especialment interessants per a tasques amb molta espera d'I/O.
+
+---
+-->
+
 <h2 id="resum-del-recorregut">Resum del recorregut</h2>
 <p>Al llarg d'aquest apartat hem utilitzat sempre el mateix problema: <strong>consultar informació de Star Wars mitjançant una API HTTP</strong>.</p>
 <p>A partir d'aquest problema hem anat introduint les diferents abstraccions:</p>
