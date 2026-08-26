@@ -1,0 +1,1255 @@
+
+<!doctype html>
+<html lang="ca" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../4.LibreriaJavaUtilConcurrent/">
+      
+      
+      
+      <link rel="icon" href="../../img/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Pràctica 2. Supermercat - Programació multifil</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/material-just.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practica-2-sistema-de-preparacio-de-comandes-dun-supermercat" class="md-skip">
+          Salta el contingut
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Capçalera">
+    <a href="../.." title="Programació multifil" class="md-header__button md-logo" aria-label="Programació multifil" data-md-component="logo">
+      
+  <img src="../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programació multifil
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pràctica 2. Supermercat
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Neteja" aria-label="Neteja" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicialitzant cerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegació" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Programació multifil" class="md-nav__button md-logo" aria-label="Programació multifil" data-md-component="logo">
+      
+  <img src="../../img/logo.svg" alt="logo">
+
+    </a>
+    Programació multifil
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://jbonache.github.io/PSP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Índex Curs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inici
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1.Threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Fils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Sincronitzacio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Sincronització
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.Coordinacio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Coordinació entre fils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.LibreriaJavaUtilConcurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. La biblioteca java.util.concurrent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Pràctica 2. Supermercat
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pràctica 2. Supermercat
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#practica-2-sistema-de-preparacio-de-comandes-dun-supermercat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pràctica 2: Sistema de preparació de comandes d'un supermercat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pràctica 2: Sistema de preparació de comandes d&#39;un supermercat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-objectius" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Objectius
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-model-del-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Model del problema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-productor" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. El productor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-el-consumidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. El consumidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-zona-de-preparacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. La zona de preparació
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-quan-la-zona-esta-plena" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Quan la zona està plena
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-quan-la-zona-esta-buida" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Quan la zona està buida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ordre-de-les-comandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Ordre de les comandes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-finalitzacio-dels-productors" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Finalització dels productors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-el-programa-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. El programa principal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-coordinacio-entre-fils" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Coordinació entre fils
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-resultat-esperat" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Resultat esperat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-que-sha-dentregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      17. Què s'ha d'entregar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#practica-2-sistema-de-preparacio-de-comandes-dun-supermercat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pràctica 2: Sistema de preparació de comandes d'un supermercat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pràctica 2: Sistema de preparació de comandes d&#39;un supermercat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-objectius" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Objectius
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-model-del-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Model del problema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-productor" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. El productor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-el-consumidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. El consumidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-zona-de-preparacio" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. La zona de preparació
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-quan-la-zona-esta-plena" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Quan la zona està plena
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-quan-la-zona-esta-buida" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Quan la zona està buida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ordre-de-les-comandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Ordre de les comandes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-finalitzacio-dels-productors" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Finalització dels productors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-el-programa-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. El programa principal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-coordinacio-entre-fils" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. Coordinació entre fils
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-resultat-esperat" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. Resultat esperat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-que-sha-dentregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      17. Què s'ha d'entregar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+    <!-- Contingut per a altres pàgines -->
+    
+                  
+
+
+
+  <h1>Pràctica 2. Supermercat</h1>
+
+<h2 id="practica-2-sistema-de-preparacio-de-comandes-dun-supermercat">Pràctica 2: Sistema de preparació de comandes d'un supermercat</h2>
+<h3 id="1-context">1. Context</h3>
+<p>Un supermercat disposa d'una aplicació que permet als seus clients realitzar comandes en línia.</p>
+<p>Cada vegada que un client confirma una comanda, aquesta entra en una <strong>zona de preparació</strong> on queda pendent fins que un dels treballadors del supermercat la recull i la prepara.</p>
+<p>El funcionament del sistema és concurrent:</p>
+<ul>
+<li>Diversos clients poden realitzar comandes al mateix temps.</li>
+<li>Diversos treballadors poden preparar comandes simultàniament.</li>
+<li>La zona de preparació té una <strong>capacitat limitada</strong>.</li>
+<li>Un client no pot deixar una comanda a la zona si aquesta està plena.</li>
+<li>Un treballador no pot retirar una comanda si no n'hi ha cap disponible.</li>
+<li>Quan una situació canvia, els fils que estan esperant han de poder continuar la seua execució.</li>
+</ul>
+<p>En aquesta pràctica, els <strong>clients seran els productors</strong> i els <strong>treballadors seran els consumidors</strong>.</p>
+<hr />
+<h3 id="2-objectius">2. Objectius</h3>
+<p>En finalitzar la pràctica hauràs de ser capaç de:</p>
+<ul>
+<li>Crear i gestionar fils d'execució en Java.</li>
+<li>Utilitzar la interfície <code>Runnable</code>.</li>
+<li>Compartir un recurs entre diversos fils.</li>
+<li>Identificar i protegir una secció crítica.</li>
+<li>Utilitzar <code>synchronized</code>.</li>
+<li>Utilitzar <code>wait()</code> per bloquejar un fil quan no pot continuar.</li>
+<li>Utilitzar <code>notifyAll()</code> per avisar els fils que estan esperant.</li>
+<li>Treballar amb un buffer de capacitat limitada.</li>
+<li>Coordinar diversos productors i consumidors.</li>
+<li>Utilitzar <code>join()</code> per esperar la finalització dels fils.</li>
+<li>Comprendre què ocorre quan el buffer està ple o buit.</li>
+<li>Garantir que totes les comandes es processen correctament.</li>
+</ul>
+<hr />
+<h2 id="3-model-del-problema">3. Model del problema</h2>
+<p>El sistema està format per tres tipus d'elements:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>             PRODUCTORS
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>            (clients)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>          ┌─────────────┐
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>          │  Client 1   │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>          │  Client 2   │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>          │  Client 3   │
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>          └──────┬──────┘
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                 │
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                 │ noves comandes
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                             ▼
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>       ┌────────────────────┐
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>       │  ZONA PREPARACIÓ   │
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>       │                    │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>       │ [C1][C2][C3][C4]   │
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>       │                    │
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>       │ capacitat màxima 5 │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       └─────────┬──────────┘
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                 │
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                 │ comandes
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                             ▼
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>          ┌─────────────┐
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>          │ Treballador │
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>          │ Treballador │
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>          └─────────────┘
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>             CONSUMIDORS
+</span></code></pre></div>
+<p>La <code>ZonaPreparacio</code> és el <strong>recurs compartit</strong> entre tots els fils.</p>
+<hr />
+<h2 id="4-el-productor">4. El productor</h2>
+<p>Cada productor representa un client que realitza diverses comandes.</p>
+<p>En el projecte proporcionat ja tens preparada la classe <code>Productor</code>, però hauràs d'implementar el mètode <code>run()</code>.</p>
+<p>Cada productor haurà de:</p>
+<ol>
+<li>Generar el nombre de comandes que se li ha indicat.</li>
+<li>Crear cada objecte <code>Comanda</code>.</li>
+<li>Assignar-li un identificador.</li>
+<li>Assignar-li el client corresponent.</li>
+<li>Assignar-li un nombre aleatori de productes.</li>
+<li>Mostrar per pantalla la comanda generada.</li>
+<li>Introduir la comanda en la <code>ZonaPreparacio</code>.</li>
+<li>Esperar un temps aleatori abans de generar la següent comanda.</li>
+<li>Gestionar correctament les possibles interrupcions.</li>
+<li>Informar quan haja finalitzat.</li>
+</ol>
+<h4 id="productors-configurats">Productors configurats</h4>
+<p>El programa principal haurà de crear tres productors:</p>
+<table>
+<thead>
+<tr>
+<th>Fil</th>
+<th>Productor</th>
+<th style="text-align: right;">Nombre de comandes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Client-1</code></td>
+<td>Productor 1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td><code>Client-2</code></td>
+<td>Productor 2</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td><code>Client-3</code></td>
+<td>Productor 3</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+<p>Per tant, en total es generaran:</p>
+<p><strong>3 + 4 + 5 = 12 comandes</strong>, però en podrien generar les que vulguren, sols és un exemple</p>
+<hr />
+<h2 id="5-el-consumidor">5. El consumidor</h2>
+<p>Cada consumidor representa un treballador del supermercat encarregat de preparar les comandes.</p>
+<p>En el projecte proporcionat ja tens preparada la classe <code>Consumidor</code>, però hauràs d'implementar el mètode <code>run()</code>.</p>
+<p>Cada consumidor haurà de:</p>
+<ol>
+<li>Intentar retirar una comanda de la zona.</li>
+<li>Si no hi ha comandes disponibles, esperar.</li>
+<li>Quan obtinga una comanda, comprovar si és <code>null</code>.</li>
+<li>Si és <code>null</code>, significa que no queden comandes i que els productors ja han finalitzat.</li>
+<li>Si obté una comanda, simular-ne la preparació.</li>
+<li>Mostrar per pantalla el procés de preparació.</li>
+<li>Esperar un temps aleatori durant la preparació.</li>
+<li>Mostrar que la comanda ha estat preparada.</li>
+<li>Continuar processant comandes fins que no en queden.</li>
+</ol>
+<p>Hi haurà <strong>2 treballadors</strong>:</p>
+<ul>
+<li><code>Treballador-1</code></li>
+<li><code>Treballador-2</code></li>
+</ul>
+<hr />
+<h2 id="6-la-zona-de-preparacio">6. La zona de preparació</h2>
+<p>La classe <code>ZonaPreparacio</code> representa el <strong>buffer compartit</strong>.</p>
+<p>La seua capacitat màxima serà de:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>5 comandes
+</span></code></pre></div>
+<p>En el projecte trobaràs els atributs i el constructor ja implementats.</p>
+<p>També trobaràs preparades les definicions dels tres mètodes principals:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">afegirComanda</span><span class="p">(</span><span class="n">Comanda</span><span class="w"> </span><span class="n">comanda</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span>
+</span></code></pre></div>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">Comanda</span><span class="w"> </span><span class="nf">retirarComanda</span><span class="p">()</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span>
+</span></code></pre></div>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">finalitzarProductors</span><span class="p">()</span>
+</span></code></pre></div>
+<p>La teua tasca serà implementar-los seguint les indicacions dels <code>TODO</code> que trobaràs en el codi.</p>
+<hr />
+<h2 id="7-quan-la-zona-esta-plena">7. Quan la zona està plena</h2>
+<p>Imagina que la zona de preparació ja conté cinc comandes:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[ C1 ][ C2 ][ C3 ][ C4 ][ C5 ]
+</span></code></pre></div>
+<p>Un productor intenta afegir una nova comanda.</p>
+<p>No pot fer-ho perquè la zona està plena.</p>
+<p>Per tant, el productor haurà de quedar <strong>esperant</strong> fins que algun consumidor retire una comanda.</p>
+<p>Quan això ocórrega, haurà de poder continuar.</p>
+<p>Per implementar aquesta situació hauràs d'utilitzar els mecanismes de coordinació entre fils estudiats en la unitat.</p>
+<blockquote>
+<p><strong>Important:</strong> la comprovació de la condició d'espera s'ha de fer amb <code>while</code>, no amb <code>if</code>.</p>
+</blockquote>
+<hr />
+<h2 id="8-quan-la-zona-esta-buida">8. Quan la zona està buida</h2>
+<p>Ara imagina la situació contrària:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[                         ]
+</span></code></pre></div>
+<p>Un treballador intenta retirar una comanda però no n'hi ha cap disponible.</p>
+<p>En aquest cas, el treballador haurà de quedar <strong>esperant</strong>.</p>
+<p>Quan algun productor introduïsca una nova comanda, els fils que estiguen esperant hauran de poder tornar a comprovar la situació.</p>
+<p>De nou, hauràs d'utilitzar els mecanismes de coordinació entre fils.</p>
+<hr />
+<h2 id="9-ordre-de-les-comandes">9. Ordre de les comandes</h2>
+<p>Les comandes s'han de gestionar en ordre <strong>FIFO</strong>.</p>
+<p>FIFO significa:</p>
+<blockquote>
+<p><strong>First In, First Out</strong></p>
+</blockquote>
+<p>És a dir, la primera comanda que entra a la zona ha de ser la primera que isca.</p>
+<p>Per exemple:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Entrada:
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>C1 → C2 → C3 → C4
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Eixida:
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>C1 → C2 → C3 → C4
+</span></code></pre></div>
+<p>No es pot retirar una comanda situada al mig de la cua mentre hi haja comandes anteriors pendents.</p>
+<hr />
+<h2 id="10-finalitzacio-dels-productors">10. Finalització dels productors</h2>
+<p>Hi ha un problema que cal solucionar.</p>
+<p>Els productors generen un nombre finit de comandes.</p>
+<p>Per tant, arriba un moment en què <strong>ja no es generaran més comandes</strong>.</p>
+<p>Els consumidors, però, no saben automàticament que els productors han acabat.</p>
+<p>Per solucionar-ho, la zona disposa de la variable:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">productorsFinalitzats</span><span class="p">;</span>
+</span></code></pre></div>
+<p>i del mètode:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">finalitzarProductors</span><span class="p">()</span>
+</span></code></pre></div>
+<p>El programa principal haurà d'avisar la zona quan tots els productors hagen finalitzat.</p>
+<p>A partir d'aquest moment:</p>
+<ul>
+<li>si encara queden comandes, els consumidors les han de preparar;</li>
+<li>si no queda cap comanda, els consumidors han de finalitzar.</li>
+</ul>
+<p>El mètode <code>retirarComanda()</code> utilitzarà el valor <code>null</code> per indicar aquesta situació.</p>
+<hr />
+<h2 id="11-el-programa-principal">11. El programa principal</h2>
+<p>La classe <code>Main</code> conté inicialment la creació de la zona:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">ZonaPreparacio</span><span class="w"> </span><span class="n">zona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ZonaPreparacio</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></code></pre></div>
+<p>La resta del programa hauràs d'implementar-la.</p>
+<p>Els <code>TODO</code> del fitxer t'indicaran les tasques que has de realitzar.</p>
+<p>En particular, hauràs de:</p>
+<ol>
+<li>Crear els tres fils productors.</li>
+<li>Crear els dos fils consumidors.</li>
+<li>Assignar un nom a cada fil.</li>
+<li>Iniciar tots els fils.</li>
+<li>Esperar que finalitzen els productors utilitzant <code>join()</code>.</li>
+<li>Informar la zona que els productors han finalitzat.</li>
+<li>Esperar que finalitzen els consumidors.</li>
+<li>Mostrar el missatge final del programa.</li>
+</ol>
+<hr />
+<h2 id="12-coordinacio-entre-fils">12. Coordinació entre fils</h2>
+<p>En aquesta pràctica hauràs d'utilitzar els mecanismes de sincronització de Java.</p>
+<p>Recorda el significat dels principals mètodes:</p>
+<h4 id="synchronized"><code>synchronized</code></h4>
+<p>Permet protegir l'accés al recurs compartit.</p>
+<hr />
+<h4 id="wait"><code>wait()</code></h4>
+<p>Un fil utilitzarà <code>wait()</code> quan <strong>no puga continuar perquè la situació actual no ho permet</strong>.</p>
+<p>Exemples:</p>
+<ul>
+<li>Un productor intenta afegir una comanda però la zona està plena.</li>
+<li>Un consumidor intenta retirar una comanda però la zona està buida i encara poden arribar-ne més.</li>
+</ul>
+<hr />
+<h4 id="notifyall"><code>notifyAll()</code></h4>
+<p>S'utilitzarà quan una operació haja modificat l'estat de la zona i puga permetre que altres fils continuen.</p>
+<p>Per exemple:</p>
+<ul>
+<li>Un productor afegeix una comanda → pot haver-hi consumidors esperant.</li>
+<li>Un consumidor retira una comanda → pot haver-hi productors esperant.</li>
+<li>Els productors finalitzen → pot haver-hi consumidors esperant que ja no rebran més comandes.</li>
+</ul>
+<hr />
+<h4 id="join"><code>join()</code></h4>
+<p>El fil principal utilitzarà <code>join()</code> per esperar que altres fils finalitzen.</p>
+<hr />
+<h2 id="13-resultat-esperat">13. Resultat esperat</h2>
+<p>El resultat exacte dependrà de l'execució concurrent i dels temps aleatoris, per la qual cosa <strong>no has d'esperar sempre el mateix ordre dels missatges</strong>.</p>
+<p>Un possible resultat podria ser:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[Client-1] Genera Comanda{id=100, client=&#39;Client-1&#39;, productes=4}
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>[Client-2] Genera Comanda{id=200, client=&#39;Client-2&#39;, productes=7}
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>[Client-3] Genera Comanda{id=300, client=&#39;Client-3&#39;, productes=2}
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>[Treballador-1] Retira comanda 100
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>[Treballador-1] Preparant comanda 100
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>[Treballador-2] Retira comanda 200
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>[Treballador-2] Preparant comanda 200
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>[Client-1] Genera Comanda{id=101, client=&#39;Client-1&#39;, productes=6}
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>...
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>[SISTEMA] Ja no arribaran més comandes.
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>[Treballador-1] Comanda 304 preparada.
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>[Treballador-2] Comanda 204 preparada.
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>Sistema finalitzat.
+</span></code></pre></div>
+<p><strong>L'ordre concret pot canviar en cada execució.</strong></p>
+<p>Això és una conseqüència natural de l'execució concurrent dels fils.</p>
+<!--
+---
+
+# 14. Condicions que ha de complir el programa
+
+El programa serà correcte si compleix totes aquestes condicions:
+
+* [ ] Hi ha 3 fils productors.
+* [ ] Hi ha 2 fils consumidors.
+* [ ] Tots comparteixen la mateixa `ZonaPreparacio`.
+* [ ] La zona no conté mai més de 5 comandes.
+* [ ] Un productor espera quan la zona està plena.
+* [ ] Un consumidor espera quan la zona està buida.
+* [ ] Les comandes es retiren en ordre FIFO.
+* [ ] No es perd cap comanda.
+* [ ] No es processa cap comanda dues vegades.
+* [ ] Els productors finalitzen correctament.
+* [ ] La zona és informada quan ja no arribaran més comandes.
+* [ ] Els consumidors processen les comandes que queden pendents.
+* [ ] Els consumidors finalitzen quan ja no queda res per processar.
+* [ ] El programa principal espera correctament els fils amb `join()`.
+* [ ] No es produeixen errors per accés concurrent al recurs compartit.
+
+---
+
+# 15. Preguntes de reflexió o de validació per a fer a l'alumnat
+
+Una vegada el programa funcione, respon les preguntes següents:
+
+### 1. Identificació dels elements
+
+a. Qui són els productors?
+
+b. Qui són els consumidors?
+
+c. Quin és el recurs compartit?
+
+d. Quin és el buffer?
+
+e. Quina és la capacitat màxima del buffer?
+
+---
+
+### 2. Buffer ple
+
+Què passaria si tots els productors generaren comandes molt ràpidament i els consumidors tardaren molt a preparar-les?
+
+Qui quedaria esperant?
+
+Per què?
+
+---
+
+### 3. Buffer buit
+
+Què passaria si els consumidors prepararen les comandes molt ràpidament i els productors generaren comandes molt lentament?
+
+Qui quedaria esperant?
+
+Per què?
+
+---
+
+### 4. `wait()` i `sleep()`
+
+Explica la diferència entre:
+
+<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">wait</span><span class="p">();</span>
+</span></code></pre></div>
+
+i
+
+<div class="language-java highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></div>
+
+Per què no són equivalents?
+
+---
+
+### 5. `while` en lloc d'`if`
+
+Per què les condicions de `wait()` s'han de comprovar amb `while`?
+
+Què podria passar si utilitzàrem simplement:
+
+<div class="language-java highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">condicio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="n">wait</span><span class="p">();</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">}</span>
+</span></code></pre></div>
+
+---
+
+### 6. `notifyAll()`
+
+Quina funció té `notifyAll()` en aquesta pràctica?
+
+Indica almenys dues situacions en què és necessari utilitzar-lo.
+
+---
+
+### 7. `join()`
+
+Per què el `Main` ha d'esperar els productors abans de cridar:
+
+<div class="language-java highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">zona</span><span class="p">.</span><span class="na">finalitzarProductors</span><span class="p">();</span>
+</span></code></pre></div>
+
+---
+
+### 8. Execucions diferents
+
+Executa el programa diverses vegades.
+
+Observes exactament el mateix ordre dels missatges?
+
+Per què?
+
+---
+
+# 16. Ampliació (pot valdre per a l'examen)
+
+Una vegada el programa funcione correctament, modifica'l per estudiar com afecta el comportament del sistema canviar:
+
+* el nombre de productors;
+* el nombre de consumidors;
+* la capacitat de la zona;
+* el temps que tarda un productor a generar una comanda;
+* el temps que tarda un consumidor a preparar-la.
+
+Per exemple:
+
+### Experiment A
+
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>3 productors
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>2 consumidors
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>capacitat = 5
+</span></code></pre></div>
+
+### Experiment B
+
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>2 productors
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>5 consumidors
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>capacitat = 5
+</span></code></pre></div>
+
+### Experiment C
+
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>5 productors
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>2 consumidors
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>capacitat = 3
+</span></code></pre></div>
+
+Per a cada experiment, observa:
+
+* quan apareix l'espera dels productors;
+* quan apareix l'espera dels consumidors;
+* com evoluciona l'ocupació de la zona;
+* si canvia el temps total d'execució.
+
+---
+-->
+
+<h2 id="17-que-sha-dentregar">17. Què s'ha d'entregar</h2>
+<p>Cal lliurar per aules el projecte Java que se vos proporciona, completament implementat i funcional.</p>
+<p>El programa haurà de poder executar-se sense errors i haurà de complir totes les condicions indicades en aquest enunciat.</p>
+<!--
+---
+
+# 18. Recordatori
+
+No intentes solucionar el problema eliminant la concurrència.
+
+L'objectiu de la pràctica és precisament **coordinar diversos fils que comparteixen un recurs limitat**.
+
+La clau del problema és entendre aquesta situació:
+
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>             PRODUCTOR
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>                 │
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>                 ▼
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>        ┌─────────────────┐
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>        │     BUFFER      │
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>        │                 │
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>        │  ple → WAIT     │
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>        │  buit →         │
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        │       WAIT      │
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>        └─────────────────┘
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>                 │
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>                 ▼
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>             CONSUMIDOR
+</span></code></pre></div>
+
+El repte consisteix a aconseguir que els fils **esperen quan toca, es desperten quan toca i finalitzen correctament**.
+-->
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
