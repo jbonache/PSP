@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../../4.Processos_Python/">
+      
       
       
       <link rel="icon" href="../../img/logo.svg">
@@ -378,6 +380,117 @@
   
 
     
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Pràctica 1. MyShell
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pràctica 1. MyShell
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Taula de continguts">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Taula de continguts
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-projecte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura del projecte
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura del projecte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-1-funcionalitat-basica-5p" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 1. Funcionalitat bàsica. (5p)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2-suport-de-canonades-5p" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2. Suport de canonades. (5p)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claus-i-ajudes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Claus i ajudes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-3-myshell-en-python-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 3. MyShell en Python [Opcional]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -497,11 +610,18 @@
 <p>I el següent funcionament:</p>
 <ul>
 <li>Mostrarà un prompt <code># MyShell&gt;</code>, i romandrà a l'espera que introduïm alguna ordre.</li>
-<li>Quan s'introdueix alguna ordre, llança un procés que executa aquesta, capturant el resultat, i mostrant-lo per pantalla, tenint en compte els següents aspectes:<ul>
+<li>
+<p>Quan s'introdueix alguna ordre, llança un procés que executa aquesta, capturant el resultat, i mostrant-lo per pantalla, tenint en compte els següents aspectes:</p>
+<ul>
 <li>L'eixida estándard del procés es mostra per defecte en color verd.</li>
 <li>L'eixida d'error del procés, de mostrarà per defecte en color roig.</li>
-<li>Algunes ordres de tipus <em>builtin</em> (aquelles interpretades directament per bash) <a href="http://manpages.ubuntu.com/manpages/bionic/man7/bash-builtins.7.html">^1</a>, no donaran error, però tampoc s'executaran. No és l'objectiu d'aquesta pràctica la implementació d'aquestes funcionalitats, sinò la gestió de processos, per la qual cosa aquest comportament es dóna per correcte.</li>
-<li>L'aplicació finalitzarà quan detecte l'ordre <code>quit</code> com a entrada.</li>
+<li>
+<p>Algunes ordres de tipus <em>builtin</em> (aquelles interpretades directament per bash) <a href="http://manpages.ubuntu.com/manpages/bionic/man7/bash-builtins.7.html">^1</a>, no donaran error, però tampoc s'executaran. </p>
+<p>No és l'objectiu d'aquesta pràctica la implementació d'aquestes funcionalitats, sinò la gestió de processos, per la qual cosa aquest comportament es dóna per correcte.</p>
+</li>
+<li>
+<p>L'aplicació finalitzarà quan detecte l'ordre <code>quit</code> com a entrada.</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -528,14 +648,13 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">linea</span><span class="o">!=</span><span class="s">&quot;quit&quot;</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-</div>
-<p><strong>Possibles errors amb l'split</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Possibles errors amb l'split</p>
 <ul>
 <li>Quan utilitzeu el mètode <code>split</code> per a separar ordres, tingueu en compte que el símbol <code>|</code> és un caràcter especial, per la qual cosa ha d'escapar-se.</li>
 <li>El resultat del <code>split</code> quan separem per canonades pot retornar-nos espais en blanc al principi o al final de cada ordre, per la qual cosa és possible que hàgem d'eliminar-los</li>
 </ul>
+</div>
 <h3 id="part-3-myshell-en-python-opcional">Part 3. MyShell en Python [Opcional]</h3>
 <p>Com a part opcional, crea un script MyShell en python amb la mateixa funcionalitat que a Java</p>
 
