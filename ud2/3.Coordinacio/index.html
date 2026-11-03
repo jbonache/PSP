@@ -494,7 +494,7 @@
 <h2 id="introduccio">Introducció</h2>
 <p>La sincronització quan treballem amb múltiples processos és una tasca fonamental per a evitar situacions que puguen portar a inconsistències en els resultats. El treball coordinat dels diferents fils d'execució és indispensable per a no perdre informació en qualsevol procés. </p>
 <p>En programació concurrent existeixen diversos problemes clàssics de sincronització, que van ser dissenyats en el seu moment per a poder abstraure problemes de la vida real. La solució que es planteja a aquests problemes serà extensible a qualsevol problema que s'ajuste als plantejaments del model.</p>
-<p>Per esmentar alguns d'aquests problemes clàssics, tenim el problema dels lectors i escriptors, el probema dels filòsofs comensals, el problema del barber dormilega, o el problema dels productors i consumidors, del qual ens ocuparem i estudiatem en aquest apartat. </p>
+<p>Per esmentar alguns d'aquests problemes clàssics, tenim el problema dels lectors i escriptors, el probema dels filòsofs comensals, el problema del barber dormilega, o el problema dels productors i consumidors, del qual ens ocuparem i estudiarem en aquest apartat. </p>
 <div class="admonition info">
 <p class="admonition-title">Problema dels lectors i escriptors</p>
 <p>Hi ha dos tipus de fils que accedeixen a un <strong>recurs compartit</strong>, com ara un fitxer o una base de dades:</p>
@@ -681,7 +681,7 @@
 <p>La solució natural a aquest problema consistirà en el fet que el productor haja d'esperar que el consumidor consumisca les dades abans de produir nous. De la mateixa manera, el consumidor haurà d'esperar  que les dades s'hagen produït per a poder consumir-los.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>En els recursos de la unitat disposes del fitxer <code>ModeloProductorConsumidor.java</code>, amb aquest exemple, en el qual pots provar d'invertir els temps d'espera i veure els resultats.</p>
+<p>En els recursos de la unitat disposes de l'arxiu <code>ModeloP-C.zip</code>, amb les classes d'aquest exemple, en el qual pots provar d'invertir els temps d'espera i veure els resultats.</p>
 </div>
 <p>D'altra banda, cal dir que aquest problema admet múltiples variants i modificacions quant a l'objecte compartit, així com del nombre de productors i consumidors. En aquest cas, conté únicament un enter per a emmagatzemar dades i un booleà que controla si la dada és vàlida o no.</p>
 <p>En altres plantejaments podem trobar estructures de dades més complexes com a llistes, piles o cues per a emmagatzemar la informació de l'objecte compartit, així com l'existència de múltiples objectes productors i consumidors.</p>
@@ -786,7 +786,7 @@
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Disposes d'aquest codi complet de l'objecte compartit i l'exemple del productor consumidor aplicant ja aquesta solució en l'arxiu <code>ModeloProductorConsumidor2.java</code>.</p>
+<p>Disposes d'aquest codi complet de l'objecte compartit i l'exemple del productor consumidor aplicant ja aquesta solució en l'arxiu <code>ModelP-C2.zip</code>.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -813,7 +813,7 @@
 <p><a class="glightbox" href="../img/3/estats_wait.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Detall del model d'estats d'un fil" src="../img/3/estats_wait.png" /></a></p>
 <p>Com veiem, un fil que es trobava en execució, passa a estat <em>WAITING</em>, quan invoca al mètode <code>wait()</code>, ja siga un productor o un consumidor. Quan el fil, o fils, que estaven en espera reben l'excepció <code>InterruptedException</code>, bé amb un <code>notity()</code> o amb un <code>notifyAll()</code>, aquests tornen a l'estat d'execució, on tornen a comprovar la disponitilidad de dades.</p>
 <div class="admonition note">
-<p class="admonition-title">Exercici</p>
+<p class="admonition-title">Exercici 4 (Productor-Consumidor LIFO)</p>
 <p>Partint de la classe d'exemple <code>ProductorConsumidor2</code>, es demana reimplementar aquesta classe utilitzant ara una <strong>pila</strong> d'enters que puga tindre una grandària màxima de 3 elements per a representar l'objecte compartit. Això implica que ara el productor pot afegir fins a 3 elements en l'objecte compartit sense que siguen consumits. </p>
 <p>A més, quan el consumidor consumisca un element, serà l'últim que s'ha afegit, ja que es tracta d'una estructura LIFO (Last In First Out).</p>
 </div>
